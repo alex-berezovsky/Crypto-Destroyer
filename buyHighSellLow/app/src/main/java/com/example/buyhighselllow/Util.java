@@ -2,7 +2,7 @@ package com.example.buyhighselllow;
 
 import java.util.InputMismatchException;
 
-public class Util {
+public final class Util {
 
     /*
     This method sanitizes the name input for the start menu when you enter your name. It checks for null,
