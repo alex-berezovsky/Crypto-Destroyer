@@ -7,45 +7,15 @@
   android:layout_height="match_parent"
   tools:context=".startMenu">
 
-  <TextView
-    android:id="@+id/difficultyLabel2"
-    android:layout_width="409dp"
-    android:layout_height="34dp"
-    android:layout_weight="1"
-    android:fontFamily="sans-serif-black"
-    android:textAlignment="center"
-    android:textSize="24sp"
-    tools:layout_editor_absoluteX="1dp"
-    tools:layout_editor_absoluteY="167dp"
-    tools:text="Choose a Name"/>
-  <com.google.android.material.textfield.TextInputEditText
-    android:id="@+id/nameInput"
-    android:layout_width="342dp"
-    android:layout_height="48dp"
-    android:hint="Enter your name"
-    android:inputType="textPersonName"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.507"
-    app:layout_constraintStart_toStartOf="parent"
-    tools:layout_editor_absoluteY="201dp"/>
-  <TextView
-    android:id="@+id/difficultyLabel"
-    android:layout_width="409dp"
-    android:layout_height="34dp"
-    android:layout_weight="1"
-    android:fontFamily="sans-serif-black"
-    android:text="TextView"
-    android:textAlignment="center"
-    android:textSize="24sp"
-    tools:layout_editor_absoluteX="1dp"
-    tools:layout_editor_absoluteY="315dp"
-    tools:text="Choose a Difficulty"/>
   <LinearLayout
+    android:id="@+id/linearLayout"
     android:layout_width="250dp"
     android:layout_height="185dp"
+    android:layout_marginBottom="30dp"
     android:orientation="vertical"
-    tools:layout_editor_absoluteX="80dp"
-    tools:layout_editor_absoluteY="356dp">
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
     <Button
       android:id="@+id/easyButton"
       android:layout_width="match_parent"
@@ -65,4 +35,39 @@
       android:layout_weight="1"
       android:text="Hard"/>
   </LinearLayout>
+  <TextView
+    android:id="@+id/difficultyLabel"
+    android:layout_width="409dp"
+    android:layout_height="34dp"
+    android:layout_weight="1"
+    android:fontFamily="sans-serif-black"
+    android:text="Choose a Difficulty"
+    android:textAlignment="center"
+    android:textSize="24sp"
+    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:text="Choose a Difficulty"/>
+  <TextView
+    android:id="@+id/difficultyLabel2"
+    android:layout_width="409dp"
+    android:layout_height="34dp"
+    android:layout_weight="1"
+    android:fontFamily="sans-serif-black"
+    android:text="Choose a Name"
+    android:textAlignment="center"
+    android:textSize="24sp"
+    app:layout_constraintBottom_toTopOf="@+id/nameInput"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"/>
+  <com.google.android.material.textfield.TextInputEditText
+    android:id="@+id/nameInput"
+    android:layout_width="342dp"
+    android:layout_height="48dp"
+    android:layout_marginBottom="40dp"
+    android:hint="Enter your name"
+    android:inputType="textPersonName"
+    app:layout_constraintBottom_toTopOf="@+id/difficultyLabel"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
