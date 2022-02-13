@@ -1,7 +1,6 @@
 package com.example.buyhighselllow;
 
 import android.content.Intent;
-import android.view.Window;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
