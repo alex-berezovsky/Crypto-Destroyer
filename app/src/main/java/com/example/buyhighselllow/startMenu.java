@@ -1,5 +1,6 @@
 package com.example.buyhighselllow;
 
+import android.content.Intent;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,5 +17,14 @@ public class startMenu extends AppCompatActivity {
         Button easyButton = findViewById(R.id.easyButton);
         Button stdButton = findViewById(R.id.stdButton);
         Button hardButton = findViewById(R.id.hardButton);
+
+        easyButton.setOnClickListener(v -> moveToGame());
+        stdButton.setOnClickListener(v -> moveToGame());
+        hardButton.setOnClickListener(v -> moveToGame());
+    }
+
+    private void moveToGame() {
+        Intent intent = new Intent(startMenu.this, GameScreen.class);
+        startActivity(intent);
     }
 }
