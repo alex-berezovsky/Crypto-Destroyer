@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class startMenu extends AppCompatActivity {
+public class StartMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class startMenu extends AppCompatActivity {
     }
 
     private void moveToGame() {
-        Intent intent = new Intent(startMenu.this, gameScreen.class);
+        Intent intent = new Intent(StartMenu.this, GameScreen.class);
         startActivity(intent);
     }
 }
