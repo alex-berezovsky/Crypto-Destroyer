@@ -24,7 +24,7 @@ public class startMenu extends AppCompatActivity {
     }
 
     private void moveToGame() {
-        Intent intent = new Intent(startMenu.this, GameScreen.class);
+        Intent intent = new Intent(startMenu.this, gameScreen.class);
         startActivity(intent);
     }
 }
