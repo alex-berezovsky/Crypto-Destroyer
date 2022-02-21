@@ -1,6 +1,7 @@
 package com.example.buyhighselllow;
 
 import android.content.Intent;
+import android.text.Editable;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,10 +19,10 @@ public class StartMenu extends AppCompatActivity {
         Button stdButton = findViewById(R.id.stdButton);
         Button hardButton = findViewById(R.id.hardButton);
 
-        easyButton.setOnClickListener(view -> moveToGame(nameInput.getEditableText().toString()));
-        stdButton.setOnClickListener(view -> moveToGame(nameInput.getEditableText().toString()));
-        hardButton.setOnClickListener(view -> moveToGame(nameInput.getEditableText().toString()));
-
+        Editable name = nameInput.getEditableText();
+        easyButton.setOnClickListener(view -> moveToGame(name.toString(), 0));
+        stdButton.setOnClickListener(view -> moveToGame(name.toString(), 1));
+        hardButton.setOnClickListener(view -> moveToGame(name.toString(), 2));
 
     }
 
@@ -29,11 +30,13 @@ public class StartMenu extends AppCompatActivity {
      * Transitions from name & difficulty selection screen to game activity
      * @param name nameInput
      */
-    private void moveToGame(String name) {
+    private void moveToGame(String name, int difficulty) {
 
         if (Util.sanitizeNameInput(name, getApplicationContext())) {
 
             Intent intent = new Intent(StartMenu.this, GameScreen.class);
+            intent.putExtra("name", name);
+            intent.putExtra("difficulty", difficulty);
             startActivity(intent);
 
         }
