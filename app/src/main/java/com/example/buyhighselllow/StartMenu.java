@@ -1,10 +1,10 @@
 package com.example.buyhighselllow;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class StartMenu extends AppCompatActivity {
@@ -28,6 +28,7 @@ public class StartMenu extends AppCompatActivity {
 
     /**
      * Transitions from name & difficulty selection screen to game activity
+     *
      * @param name nameInput
      */
     private void moveToGame(String name, int difficulty) {
