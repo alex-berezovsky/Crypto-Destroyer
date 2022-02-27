@@ -1,3 +1,6 @@
+# Checkstyle files
+/app/src/cs2340_checks.xml
+/app/src/run_checkstyle.py
 
 # Created by https://www.toptal.com/developers/gitignore/api/java,android,androidstudio,intellij,visualstudio,visualstudiocode,git,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,android,androidstudio,intellij,visualstudio,visualstudiocode,git,windows,macos
