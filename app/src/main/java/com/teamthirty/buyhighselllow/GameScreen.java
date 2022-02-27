@@ -12,7 +12,7 @@ public class GameScreen extends AppCompatActivity {
         setContentView(R.layout.activity_game_screen);
         Bundle extras = getIntent().getExtras();
         String playerName = extras.getString("name");
-        int difficulty = extras.getInt("difficulty");
+        Difficulty difficulty = (Difficulty) extras.get("difficulty");
 
         TextView playerNameText = findViewById(R.id.playerName);
         playerNameText.setText(playerName);
@@ -26,15 +26,15 @@ public class GameScreen extends AppCompatActivity {
         int cash = 0;
         int monumentHealth = 0;
         switch (difficulty) {
-        case 2: // hard difficulty
+        case HARD: // hard difficulty
             cash = 600;
             monumentHealth = 60;
             break;
-        case 1: // medium difficulty
+        case STANDARD: // medium difficulty
             cash = 800;
             monumentHealth = 80;
             break;
-        case 0: // easy difficulty
+        case EASY: // easy difficulty
         default:
             // default is easy mode
             cash = 1000;

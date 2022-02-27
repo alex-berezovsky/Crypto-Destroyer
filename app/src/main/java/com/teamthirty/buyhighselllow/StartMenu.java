@@ -20,19 +20,18 @@ public class StartMenu extends AppCompatActivity {
         Button hardButton = findViewById(R.id.hardButton);
 
         Editable name = nameInput.getEditableText();
-        easyButton.setOnClickListener(view -> moveToGame(name.toString(), 0));
-        stdButton.setOnClickListener(view -> moveToGame(name.toString(), 1));
-        hardButton.setOnClickListener(view -> moveToGame(name.toString(), 2));
+        easyButton.setOnClickListener(view -> moveToGame(name.toString(), Difficulty.EASY));
+        stdButton.setOnClickListener(view -> moveToGame(name.toString(), Difficulty.STANDARD));
+        hardButton.setOnClickListener(view -> moveToGame(name.toString(), Difficulty.HARD));
 
     }
 
     /**
      * Transitions from name & difficulty selection screen to game activity
-     *
-     * @param name username
-     * @param difficulty difficulty: 0 for easy, 1 for standard, 2 for hard
+     *  @param name       username
+     * @param difficulty difficulty, 0 for easy, 1 for standard, 2 for hard
      */
-    private void moveToGame(String name, int difficulty) {
+    private void moveToGame(String name, Difficulty difficulty) {
 
         if (Util.sanitizeNameInput(name, getApplicationContext())) {
 
