@@ -1,4 +1,4 @@
-package com.example.buyhighselllow;
+package com.teamthirty.buyhighselllow;
 
 import android.content.Intent;
 import android.os.Bundle;

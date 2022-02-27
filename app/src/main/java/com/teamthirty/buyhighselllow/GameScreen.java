@@ -1,4 +1,4 @@
-package com.example.buyhighselllow;
+package com.teamthirty.buyhighselllow;
 
 import android.os.Bundle;
 import android.widget.TextView;
