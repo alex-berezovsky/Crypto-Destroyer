@@ -6,12 +6,13 @@ import android.widget.Toast;
 public final class Util {
 
     /**
-     * This method sanitizes the name input for the start menu when you enter your name. It checks for null,
-     * empty, and whitespace only inputs and displays an appropriate message to follow, returning
-     * false if the name does not follow the proper format and true if it does
+     * This method sanitizes the name input for the start menu when you enter your name.
+     * It checks for null, empty, and whitespace only inputs
      *
      * @param input   the string you are checking
      * @param context the context of the application
+     *
+     * @return true if name follows proper formatting, false otherwise
      */
     public static boolean sanitizeNameInput(String input, Context context) {
 
@@ -23,8 +24,8 @@ public final class Util {
             toast.show();
             return false;
 
-        } else if (input.equals("") ||
-            input.trim().isEmpty()) { //empty and whitespace only input check
+        } else if (input.equals("")
+            || input.trim().isEmpty()) { //empty and whitespace only input check
 
             String errorMessage =
                 "Invalid Name: Your name cannot be empty or consist of only spaces";
