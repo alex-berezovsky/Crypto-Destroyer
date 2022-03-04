@@ -1,8 +1,10 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Screens;
 
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.teamthirty.buyhighselllow.Utilities.Difficulty;
+import com.teamthirty.buyhighselllow.R;
 
 public class GameScreen extends AppCompatActivity {
     @Override

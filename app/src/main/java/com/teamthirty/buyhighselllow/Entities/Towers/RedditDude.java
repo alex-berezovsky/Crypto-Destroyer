@@ -1,5 +1,6 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Entities.Towers;
 
+import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
 
 public class RedditDude extends Tower{
@@ -37,6 +38,14 @@ public class RedditDude extends Tower{
     @Override
     public void upgradeCostIncrease() {
         upgradeCost *= 10;
+    }
+
+    /**
+     * Increases the current range by 10
+     */
+    @Override
+    public void rangeIncrease() {
+        range += 10;
     }
 
     /**

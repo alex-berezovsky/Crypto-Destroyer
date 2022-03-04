@@ -1,13 +1,17 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Entities.Towers;
 
+import com.teamthirty.buyhighselllow.Components.*;
+import com.teamthirty.buyhighselllow.Entities.Entity;
+import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
 
-public abstract class Tower extends Entity implements LevelComponent, ProjectileComponent{
+public abstract class Tower extends Entity implements LevelComponent, ProjectileComponent {
     protected Pair<Integer, Integer> position;
     protected int level;
     protected int fireRate;
     protected int damage;
     protected int upgradeCost;
+    protected int range;
 
     /**
      * Increments level by 1
@@ -24,22 +28,25 @@ public abstract class Tower extends Entity implements LevelComponent, Projectile
      * To be implemented by each tower individually to increase fire rate
      */
     @Override
-    public void fireRateIncrease() {
-    }
+    public abstract void fireRateIncrease();
 
     /**
      * To be implemented by each tower individually to increase damage output
      */
     @Override
-    public void damageIncrease() {
-    }
+    public abstract void damageIncrease();
 
     /**
      * To be implemented by each tower individually to increase the upgrade cost
      */
     @Override
-    public void upgradeCostIncrease() {
-    }
+    public abstract void upgradeCostIncrease();
+
+    /**
+     * To be implemented by each tower individually to increase the range
+     */
+    @Override
+    public abstract void rangeIncrease();
 
     /**
      * To be implemented by each tower individually to create a unique projectile

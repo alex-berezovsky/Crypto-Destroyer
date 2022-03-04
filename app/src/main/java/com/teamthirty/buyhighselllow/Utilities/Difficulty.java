@@ -1,4 +1,4 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Utilities;
 
 public enum Difficulty {
     EASY,

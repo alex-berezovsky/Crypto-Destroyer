@@ -1,6 +1,8 @@
 package com.teamthirty.buyhighselllow;
 
 import androidx.core.util.Pair;
+import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
+import com.teamthirty.buyhighselllow.Entities.Towers.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -59,7 +61,7 @@ public class TowerTests {
         assertEquals(10, proj.getDamage());
 
         proj.updatePosition();
-        assertEquals(30, proj.position.first.intValue());
-        assertEquals(35, proj.position.second.intValue());
+        assertEquals(30, proj.getPosition().first.intValue());
+        assertEquals(35, proj.getPosition().second.intValue());
     }
 }

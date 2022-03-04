@@ -1,6 +1,6 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Components;
 
-import androidx.core.util.Pair;
+import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 
 public interface ProjectileComponent extends IComponent{
     /**

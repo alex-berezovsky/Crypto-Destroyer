@@ -1,4 +1,4 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Components;
 
 public interface TransformComponent extends IComponent{
     /**

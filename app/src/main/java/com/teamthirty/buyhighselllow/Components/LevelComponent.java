@@ -1,4 +1,4 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Components;
 
 public interface LevelComponent extends IComponent {
     /**
@@ -20,4 +20,9 @@ public interface LevelComponent extends IComponent {
      * Increases the upgrade cost of the tower
      */
     public void upgradeCostIncrease();
+
+    /**
+     * Increases the range of the tower
+     */
+    public void rangeIncrease();
 }

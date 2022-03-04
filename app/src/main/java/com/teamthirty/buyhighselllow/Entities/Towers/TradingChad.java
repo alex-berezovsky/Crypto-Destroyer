@@ -1,5 +1,6 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Entities.Towers;
 
+import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
 
 public class TradingChad extends Tower {
@@ -37,6 +38,14 @@ public class TradingChad extends Tower {
     @Override
     public void upgradeCostIncrease() {
         upgradeCost *= 5;
+    }
+
+    /**
+     * Increases the current range by 5
+     */
+    @Override
+    public void rangeIncrease() {
+        range += 5;
     }
 
     /**

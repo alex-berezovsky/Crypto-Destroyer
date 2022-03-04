@@ -1,5 +1,6 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Entities;
 
+import com.teamthirty.buyhighselllow.Components.*;
 import java.util.List;
 
 public class  Entity {

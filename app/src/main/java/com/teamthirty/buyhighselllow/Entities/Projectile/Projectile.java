@@ -1,11 +1,13 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Entities.Projectile;
 
+import com.teamthirty.buyhighselllow.Components.*;
+import com.teamthirty.buyhighselllow.Entities.Entity;
 import androidx.core.util.Pair;
 
-public class Projectile extends Entity implements TransformComponent{
+public class Projectile extends Entity implements TransformComponent {
     Pair<Integer, Integer> position;
     int damage;
-    int speed;
+    final int speed = 20;
 
     /**
      * Constructor for a projectile
@@ -15,7 +17,6 @@ public class Projectile extends Entity implements TransformComponent{
     public Projectile (Pair<Integer, Integer> startingPosition, int damage) {
         this.position = startingPosition;
         this.damage = damage;
-        speed = 20;
     }
 
     /**
