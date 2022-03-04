@@ -2,41 +2,41 @@ package com.teamthirty.buyhighselllow;
 
 import androidx.core.util.Pair;
 
-public class TradingChad extends Tower {
+public class RedditDude extends Tower{
     /**
-     * Creates a new TradingChad tower
+     * Creates a new RedditDude tower
      * @param position of tower on the screen
      */
-    public TradingChad (Pair<Integer, Integer> position) {
+    public RedditDude(Pair<Integer, Integer> position) {
         this.position = position;
         level = 1;
-        fireRate = 10;
+        fireRate = 20;
         damage = 10;
-        upgradeCost = 100;
+        upgradeCost = 250;
     }
 
     /**
-     * Adds 5 to the current fire rate
+     * Adds 10 to the current fire rate
      */
     @Override
     public void fireRateIncrease() {
-        fireRate += 5;
+        fireRate += 10;
     }
 
     /**
-     * Multiplies the current damage by 2
+     * Multiplies the current damage by 4
      */
     @Override
     public void damageIncrease() {
-        damage *= 2;
+        damage *= 4;
     }
 
     /**
-     * Multiplies the current upgrade cost by 5
+     * Multiplies the current upgrade cost by 10
      */
     @Override
     public void upgradeCostIncrease() {
-        upgradeCost *= 5;
+        upgradeCost *= 10;
     }
 
     /**

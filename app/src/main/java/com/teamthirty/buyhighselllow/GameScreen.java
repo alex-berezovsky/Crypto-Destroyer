@@ -5,10 +5,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameScreen extends AppCompatActivity {
-    private Difficulty difficulty;
-    private int cash;
-    private int tradingchadCost;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,9 +12,7 @@ public class GameScreen extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String playerName = extras.getString("name");
 
-        difficulty = (Difficulty) extras.get("difficulty");
-        tradingchadCost = difficulty == Difficulty.EASY ? 50 : (difficulty == Difficulty.STANDARD
-            ? 100 : 200);
+        Difficulty difficulty = (Difficulty) extras.get("difficulty");
 
         TextView playerNameText = findViewById(R.id.playerName);
         playerNameText.setText(playerName);
@@ -29,7 +23,7 @@ public class GameScreen extends AppCompatActivity {
 
         TextView monumentHealthText = findViewById(R.id.monumentHealth);
         TextView playerCashText = findViewById(R.id.playerCash);
-        cash = 0;
+        int cash = 0;
         int monumentHealth = 0;
         switch (difficulty) {
         case HARD: // hard difficulty

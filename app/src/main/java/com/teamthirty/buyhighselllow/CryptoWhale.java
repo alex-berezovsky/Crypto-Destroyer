@@ -2,41 +2,41 @@ package com.teamthirty.buyhighselllow;
 
 import androidx.core.util.Pair;
 
-public class TradingChad extends Tower {
+public class CryptoWhale extends Tower{
     /**
-     * Creates a new TradingChad tower
+     * Creates a new CryptoWhale Tower
      * @param position of tower on the screen
      */
-    public TradingChad (Pair<Integer, Integer> position) {
+    public CryptoWhale(Pair<Integer, Integer> position) {
         this.position = position;
         level = 1;
-        fireRate = 10;
-        damage = 10;
-        upgradeCost = 100;
+        fireRate = 30;
+        damage = 15;
+        upgradeCost = 450;
     }
 
     /**
-     * Adds 5 to the current fire rate
+     * Adds 20 to the current fire rate
      */
     @Override
     public void fireRateIncrease() {
-        fireRate += 5;
+        fireRate += 20;
     }
 
     /**
-     * Multiplies the current damage by 2
+     * Multiplies the current damage by 16
      */
     @Override
     public void damageIncrease() {
-        damage *= 2;
+        damage *= 16;
     }
 
     /**
-     * Multiplies the current upgrade cost by 5
+     * Multiplies the current upgrade cost by 12
      */
     @Override
     public void upgradeCostIncrease() {
-        upgradeCost *= 5;
+        upgradeCost *= 12;
     }
 
     /**
