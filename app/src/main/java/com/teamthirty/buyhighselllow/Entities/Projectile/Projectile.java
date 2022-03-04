@@ -5,28 +5,26 @@ import com.teamthirty.buyhighselllow.Entities.Entity;
 import androidx.core.util.Pair;
 
 public class Projectile extends Entity implements TransformComponent {
-    Pair<Integer, Integer> position;
-    int damage;
-    final int speed = 20;
+    protected Pair<Integer, Integer> position;
+    protected int damage;
+    protected final int speed = 20;
 
     /**
      * Constructor for a projectile
      * @param startingPosition the starting location of the projectile
      * @param damage the amount of damage done by the projectile
      */
-    public Projectile (Pair<Integer, Integer> startingPosition, int damage) {
+    public Projectile(Pair<Integer, Integer> startingPosition, int damage) {
         this.position = startingPosition;
         this.damage = damage;
     }
 
     /**
      * Updates the position of the projectile
-     * @return the new position of the projectile
      */
     @Override
     public void updatePosition() {
-        Pair<Integer, Integer> newPosition = new Pair<>(position.first + speed, position.second + speed);
-        position = newPosition;
+        position = new Pair<>(position.first + speed, position.second + speed);
     }
 
     /**

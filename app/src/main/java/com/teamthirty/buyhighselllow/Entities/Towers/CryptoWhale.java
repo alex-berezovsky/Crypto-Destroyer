@@ -3,7 +3,7 @@ package com.teamthirty.buyhighselllow.Entities.Towers;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
 
-public class CryptoWhale extends Tower{
+public class CryptoWhale extends Tower {
     /**
      * Creates a new CryptoWhale Tower
      * @param position of tower on the screen

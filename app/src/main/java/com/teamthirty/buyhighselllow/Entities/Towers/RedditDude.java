@@ -3,7 +3,7 @@ package com.teamthirty.buyhighselllow.Entities.Towers;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
 
-public class RedditDude extends Tower{
+public class RedditDude extends Tower {
     /**
      * Creates a new RedditDude tower
      * @param position of tower on the screen

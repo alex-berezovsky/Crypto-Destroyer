@@ -8,7 +8,7 @@ public class TradingChad extends Tower {
      * Creates a new TradingChad tower
      * @param position of tower on the screen
      */
-    public TradingChad (Pair<Integer, Integer> position) {
+    public TradingChad(Pair<Integer, Integer> position) {
         this.position = position;
         level = 1;
         fireRate = 10;
