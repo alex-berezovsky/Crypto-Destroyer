@@ -55,11 +55,11 @@ public class TowerTests {
         Projectile proj = chad.generateProjectile();
         assertEquals(10, proj.getPosition().first.intValue());
         assertEquals(15, proj.getPosition().second.intValue());
-        assertEquals(10, proj.getSpeed());
+        assertEquals(20, proj.getSpeed());
         assertEquals(10, proj.getDamage());
 
         proj.updatePosition();
-        assertEquals(20, proj.position.first.intValue());
-        assertEquals(25, proj.position.second.intValue());
+        assertEquals(30, proj.position.first.intValue());
+        assertEquals(35, proj.position.second.intValue());
     }
 }
