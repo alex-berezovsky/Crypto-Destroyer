@@ -2,7 +2,7 @@ package com.teamthirty.buyhighselllow;
 
 import androidx.core.util.Pair;
 
-public class Projectile extends Entity implements PositionComponent{
+public class Projectile extends Entity implements TransformComponent{
     Pair<Integer, Integer> position;
     int damage;
     int speed;

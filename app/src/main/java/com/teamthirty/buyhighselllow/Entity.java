@@ -2,7 +2,7 @@ package com.teamthirty.buyhighselllow;
 
 import java.util.List;
 
-public class Entity {
+public class  Entity {
     protected long id;
     protected List<IComponent> components;
 
