@@ -1,6 +1,9 @@
 package com.teamthirty.buyhighselllow;
 
 import android.graphics.Rect;
+import androidx.core.util.Pair;
+
+import java.util.HashMap;
 
 public class TileView {
 
@@ -10,6 +13,7 @@ public class TileView {
     private int columns;
     private int tileCount;
     private Tile[][] tiles;
+    private HashMap<Pair<Integer, Integer>, Integer> occupied;
 
     /**
      * Tileview constructor which makes all the tiles for unit placement on the game screen.
@@ -29,6 +33,8 @@ public class TileView {
 
     public TileView() {
 
+        tiles = new Tile[rows][columns];
+        occupied = new HashMap<>();
         rows = 12;
         columns = 12;
         tileWidth = 720 / columns;
@@ -59,13 +65,8 @@ public class TileView {
 
     //do we make a hashmap object instead and check "if x,y contained in map(where map takes in
     //key value pairs of (x,y) -> 0 or 1 depending on whether it's placeable. (much faster!?)
-    /**
-     *
-     * @param x coordinate of location you want to place tower at
-     * @param y coordinate of location you want to place tower at
-     * @return boolean(whether it is placeable or not)
-     */
 
+    /*
     public boolean isPlaceable(int x, int y) {
 
         for (int i = 0; i < tiles.length; i++) {
@@ -88,6 +89,28 @@ public class TileView {
         }
 
         return true;
+
+    }
+
+     */
+
+    public HashMap<Pair<Integer, Integer>, Integer> getOccupied() {
+
+        return occupied;
+
+    }
+
+    public boolean isPlaceable(Pair<Integer, Integer> state) {
+
+        if (occupied.containsKey(state)) {
+
+            return false;
+
+        } else {
+
+            return true;
+
+        }
 
     }
 

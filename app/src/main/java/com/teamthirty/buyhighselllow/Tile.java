@@ -29,4 +29,11 @@ public class Tile {
     public boolean isOccupied() {
         return occupied;
     }
+
+    /*
+    public pair getCenter(){
+
+        return (rectangle.exactCenterX, rectangle.exactCenterY);
+
+    } */
 }
