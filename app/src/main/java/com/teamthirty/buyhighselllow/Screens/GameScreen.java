@@ -1,17 +1,19 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Screens;
 
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.teamthirty.buyhighselllow.Utilities.Difficulty;
+import com.teamthirty.buyhighselllow.R;
 
 public class GameScreen extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         Bundle extras = getIntent().getExtras();
         String playerName = extras.getString("name");
+
         Difficulty difficulty = (Difficulty) extras.get("difficulty");
 
         TextView playerNameText = findViewById(R.id.playerName);

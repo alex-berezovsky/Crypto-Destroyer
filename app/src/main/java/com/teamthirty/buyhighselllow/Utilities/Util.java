@@ -1,4 +1,4 @@
-package com.teamthirty.buyhighselllow;
+package com.teamthirty.buyhighselllow.Utilities;
 
 import android.content.Context;
 import android.widget.Toast;
