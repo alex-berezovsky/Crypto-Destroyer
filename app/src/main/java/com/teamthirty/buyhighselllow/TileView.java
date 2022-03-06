@@ -48,10 +48,7 @@ public class TileView {
                 tiles[i][j] = new Tile(false, rectangle);
 
             }
-
         }
-
-
     }
 
     public int getTileCount() {
