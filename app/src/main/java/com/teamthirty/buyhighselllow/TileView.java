@@ -100,9 +100,9 @@ public class TileView {
 
     }
 
-    public boolean isPlaceable(Pair<Integer, Integer> state) {
+    public boolean isPlaceable(Pair<Integer, Integer> position) {
 
-        return occupied.containsKey(state);
+        return occupied.containsKey(position);
 
     }
 
