@@ -11,13 +11,13 @@
     android:theme="@style/Theme.BuyHighSellLow">
     <activity
       android:exported="true"
-      android:name="com.teamthirty.buyhighselllow.GameScreen"/>
+      android:name="com.teamthirty.buyhighselllow.Screens.GameScreen"/>
     <activity
       android:exported="true"
-      android:name="com.teamthirty.buyhighselllow.StartMenu"/>
+      android:name="com.teamthirty.buyhighselllow.Screens.StartMenu"/>
     <activity
       android:exported="true"
-      android:name="com.teamthirty.buyhighselllow.MainActivity">
+      android:name="com.teamthirty.buyhighselllow.Screens.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
