@@ -33,7 +33,8 @@ public class PlayerSystem extends System {
         } else {
             return false;
         }
-        if (initialCost > money) {
+        if (initialCost < money) {
+            money -= initialCost;
             placeTower(tower);
             return true;
         } else {
