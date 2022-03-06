@@ -102,15 +102,7 @@ public class TileView {
 
     public boolean isPlaceable(Pair<Integer, Integer> state) {
 
-        if (occupied.containsKey(state)) {
-
-            return false;
-
-        } else {
-
-            return true;
-
-        }
+        return occupied.containsKey(state);
 
     }
 
