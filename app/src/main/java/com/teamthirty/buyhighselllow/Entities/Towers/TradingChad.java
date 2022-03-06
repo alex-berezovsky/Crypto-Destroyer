@@ -4,6 +4,7 @@ import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
 
 public class TradingChad extends Tower {
+    protected final int initialCost = 10;
     /**
      * Creates a new TradingChad tower
      * @param position of tower on the screen
