@@ -55,4 +55,40 @@ public class TileView {
         return tileCount;
     }
 
+    //Will move this method into a different class, just making here so we have it
+
+    //do we make a hashmap object instead and check "if x,y contained in map(where map takes in
+    //key value pairs of (x,y) -> 0 or 1 depending on whether it's placeable. (much faster!?)
+    /**
+     *
+     * @param x coordinate of location you want to place tower at
+     * @param y coordinate of location you want to place tower at
+     * @return boolean(whether it is placeable or not)
+     */
+
+    public boolean isPlaceable(int x, int y) {
+
+        for (int i = 0; i < tiles.length; i++) {
+
+            for (int j = 0; j < tiles[i].length; j++) {
+
+                if (tiles[i][j].getRectangle().exactCenterX() == x
+                    && tiles[i][j].getRectangle().exactCenterY() == y) {
+
+                    if (tiles[i][j].isOccupied()) {
+
+                        return false;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return true;
+
+    }
+
 }
