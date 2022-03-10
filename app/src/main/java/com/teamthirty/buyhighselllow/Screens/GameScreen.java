@@ -31,8 +31,9 @@ public class GameScreen extends AppCompatActivity {
         Button redditDude = findViewById(R.id.RedditDude);
         Button tradingChad = findViewById(R.id.TradingChad);
         Button cryptoWhale = findViewById(R.id.CryptoWhale);
-
+        // THIS IS HARD-CODED AND NEEDS TO GO
         path = new ArrayList<>();
+        path.add(new Pair<>(3, 8));
         path.add(new Pair<>(3, 7));
         path.add(new Pair<>(3, 6));
         path.add(new Pair<>(3, 5));
@@ -83,7 +84,6 @@ public class GameScreen extends AppCompatActivity {
         // Layout object representing the map
         GridLayout mapLayout = findViewById(R.id.map);
         Button[][] mapArray = new Button[mapLayout.getRowCount()][mapLayout.getColumnCount()];
-
         for (int i = 0; i < mapLayout.getRowCount(); i++) {
             for (int j = 0; j < mapLayout.getColumnCount(); j++) {
                 Pair<Integer, Integer> temp = new Pair<>(i, j);
@@ -91,7 +91,7 @@ public class GameScreen extends AppCompatActivity {
                     mapArray[i][j] = makeMapButton(mapLayout, this, Color.GREEN, i, j);
                     mapLayout.addView(mapArray[i][j]);
                 } else {
-                    mapArray[i][j] = makeMapButton(mapLayout, this, Color.RED, i, j);
+                    mapArray[i][j] = makeMapButton(mapLayout, this, Color.GRAY, i, j);
                     mapLayout.addView(mapArray[i][j]);
                 }
             }
@@ -102,16 +102,14 @@ public class GameScreen extends AppCompatActivity {
     private Button makeMapButton(GridLayout mapLayout, Context context, int color, int row,
                                  int column) {
         GridLayout.LayoutParams buttonParams = new GridLayout.LayoutParams();
-        buttonParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
-        buttonParams.width = GridLayout.LayoutParams.WRAP_CONTENT;
-        buttonParams.rowSpec = GridLayout.spec(row, 1, 1);
-        buttonParams.columnSpec = GridLayout.spec(column, 1, 1);
+        buttonParams.height = 0;
+        buttonParams.width = 0;
+        buttonParams.rowSpec = GridLayout.spec(row, (float) 1);
+        buttonParams.columnSpec = GridLayout.spec(column, (float) 1);
 
         //Buttons on the grid that handle tower press placement
         Button button = new Button(context);
         button.setBackgroundColor(color);
-        button.setHeight(mapLayout.getHeight() / mapLayout.getRowCount());
-        button.setWidth(mapLayout.getWidth() / mapLayout.getColumnCount());
         button.setLayoutParams(buttonParams);
 
         return button;
