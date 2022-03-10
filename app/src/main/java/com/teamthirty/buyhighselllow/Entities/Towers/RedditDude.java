@@ -4,6 +4,7 @@ import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
 
 public class RedditDude extends Tower {
+    protected final int initialCost = 10;
     /**
      * Creates a new RedditDude tower
      * @param position of tower on the screen
