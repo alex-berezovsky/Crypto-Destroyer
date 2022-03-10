@@ -1,6 +1,7 @@
 package com.teamthirty.buyhighselllow;
 
 import android.graphics.Rect;
+import androidx.core.util.Pair;
 
 public class Tile {
 
@@ -30,10 +31,9 @@ public class Tile {
         return occupied;
     }
 
-    /*
-    public pair getCenter(){
+    public Pair<Integer, Integer> getCenter() {
 
-        return (rectangle.exactCenterX, rectangle.exactCenterY);
+        return new Pair<>(rectangle.centerX(), rectangle.centerY());
 
-    } */
+    }
 }

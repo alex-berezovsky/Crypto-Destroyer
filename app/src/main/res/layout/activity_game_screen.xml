@@ -1,73 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".gameScreen">
-
-  <TextView
-    android:id="@+id/playerName"
-    android:layout_width="88dp"
-    android:layout_height="35dp"
-    android:text="TextView"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.047"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.019"/>
-  <TextView
-    android:id="@+id/playerCash"
-    android:layout_width="120dp"
-    android:layout_height="32dp"
-    android:text="TextView"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.054"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.076"/>
-  <ImageView
-    android:id="@+id/imageView"
-    android:layout_width="109dp"
-    android:layout_height="103dp"
-    android:src="@mipmap/ic_launcher_round"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.782"/>
-  <TextView
-    android:id="@+id/mapPlaceholder"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="TextView"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.498"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.282"/>
-  <TextView
-    android:id="@+id/monumentHealth"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="TextView"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.498"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.837"/>
-  <androidx.gridlayout.widget.GridLayout
-          android:layout_width="720dp"
-          android:layout_height="408dp" app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="1dp"
-          app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-          android:layout_marginStart="1dp" android:layout_marginBottom="1dp"
-          app:layout_constraintHorizontal_bias="0.333" app:rowCount="12" app:columnCount="12">
-
-  </androidx.gridlayout.widget.GridLayout>
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".gameScreen" android:layout_weight="1">
+  <LinearLayout
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" android:gravity="center">
+    <androidx.gridlayout.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:columnCount="9" app:rowCount="7"
+            android:id="@+id/map"
+            android:layout_weight="4" app:orientation="horizontal" android:layout_gravity="center"
+            android:background="#A17B4C"/>
+    <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="?android:attr/listDivider"
+    />
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" android:layout_weight="1">
+      <LinearLayout
+              android:orientation="vertical"
+              android:layout_height="match_parent" android:layout_weight=".75" android:layout_width="0dp">
+        <TextView
+                android:id="@+id/playerName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="TextView"
+                android:textSize="14sp"
+                android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
+                android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+        <TextView
+                android:id="@+id/monumentHealth"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="TextView"
+                android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
+                android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+        <TextView
+                android:id="@+id/playerCash"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="TextView"
+                android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
+                android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+      </LinearLayout>
+      <Button
+              android:id="@+id/TradingChad"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:text="TradingChad"
+              android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
+              android:layout_marginRight="4dp"/>
+      <Button
+              android:id="@+id/RedditDude"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:text="RedditDude"
+              android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
+              android:layout_marginRight="4dp"/>
+      <Button
+              android:id="@+id/CryptoWhale"
+              android:layout_width="0dp"
+              android:text="CryptoWhale"
+              android:layout_weight="1" android:layout_height="wrap_content"
+              android:layout_gravity="center" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+    </LinearLayout>
+  </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
