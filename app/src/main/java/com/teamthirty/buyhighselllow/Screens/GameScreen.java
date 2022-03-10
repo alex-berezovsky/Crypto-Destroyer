@@ -11,7 +11,7 @@ import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import androidx.core.util.Pair;
-
+import android.view.Gravity;
 import java.util.ArrayList;
 
 public class GameScreen extends AppCompatActivity {
@@ -104,8 +104,8 @@ public class GameScreen extends AppCompatActivity {
         GridLayout.LayoutParams buttonParams = new GridLayout.LayoutParams();
         buttonParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
         buttonParams.width = GridLayout.LayoutParams.WRAP_CONTENT;
-        buttonParams.rowSpec = GridLayout.spec(row);
-        buttonParams.columnSpec = GridLayout.spec(column);
+        buttonParams.rowSpec = GridLayout.spec(row, 1, 1);
+        buttonParams.columnSpec = GridLayout.spec(column, 1, 1);
 
         //Buttons on the grid that handle tower press placement
         Button button = new Button(context);
