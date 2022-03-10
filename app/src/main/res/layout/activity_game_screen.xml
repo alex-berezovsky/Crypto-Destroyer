@@ -12,28 +12,34 @@
           android:layout_height="match_parent">
     <androidx.gridlayout.widget.GridLayout
             android:layout_width="match_parent"
-            android:layout_height="324dp"
+            android:layout_height="0dp"
             app:columnCount="8" app:rowCount="7"
             android:id="@+id/map"
+            android:layout_weight="4"/>
+    <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="?android:attr/listDivider"
     />
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp" android:layout_weight="1">
       <LinearLayout
               android:orientation="vertical"
-              android:layout_height="match_parent" android:layout_weight=".75" android:layout_width="0">
+              android:layout_height="match_parent" android:layout_weight=".75" android:layout_width="0dp">
         <TextView
                 android:id="@+id/monumentHealth"
                 android:layout_width="match_parent"
-                android:layout_height="0"
+                android:layout_height="0dp"
                 android:text="TextView"
                 android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
                 android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
         <TextView
                 android:id="@+id/playerName"
                 android:layout_width="match_parent"
-                android:layout_height="0"
+                android:layout_height="0dp"
                 android:text="TextView"
                 android:textSize="14sp"
                 android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
@@ -41,28 +47,28 @@
         <TextView
                 android:id="@+id/playerCash"
                 android:layout_width="match_parent"
-                android:layout_height="0"
+                android:layout_height="0dp"
                 android:text="TextView"
                 android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
                 android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
       </LinearLayout>
       <Button
               android:id="@+id/TradingChad"
-              android:layout_width="0"
+              android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:text="TradingChad"
               android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
               android:layout_marginRight="4dp"/>
       <Button
               android:id="@+id/RedditDude"
-              android:layout_width="0"
+              android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:text="RedditDude"
               android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
               android:layout_marginRight="4dp"/>
       <Button
               android:id="@+id/CryptoWhale"
-              android:layout_width="0"
+              android:layout_width="0dp"
               android:text="CryptoWhale"
               android:layout_weight="1" android:layout_height="wrap_content"
               android:layout_gravity="center" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
