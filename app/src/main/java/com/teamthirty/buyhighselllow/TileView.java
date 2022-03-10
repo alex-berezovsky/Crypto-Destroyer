@@ -9,8 +9,8 @@ public class TileView {
 
     private int tileWidth;
     private int tileHeight;
-    private int rows;
-    private int columns;
+    private final int ROWS = 12;
+    private final int COLUMNS = 12;
     private int tileCount;
     private Tile[][] tiles;
     private HashMap<Pair<Integer, Integer>, Integer> occupied;
@@ -32,24 +32,21 @@ public class TileView {
      */
 
     public TileView() {
-
-        tiles = new Tile[rows][columns];
+        tiles = new Tile[ROWS][COLUMNS];
         occupied = new HashMap<>();
-        rows = 12;
-        columns = 12;
-        tileWidth = 720 / columns;
-        tileHeight = 408 / rows;
-        tileCount = rows * columns;
+        tileWidth = 720 / COLUMNS;
+        tileHeight = 408 / ROWS;
+        tileCount = ROWS * COLUMNS;
 
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < ROWS; i++) {
 
-            int top = rows * tileHeight;
-            int bottom = (rows + 1) * (tileHeight);
+            int top = ROWS * tileHeight;
+            int bottom = (ROWS + 1) * (tileHeight);
 
-            for (int j = 0; j < columns; j++) {
+            for (int j = 0; j < COLUMNS; j++) {
 
-                int left = columns * tileWidth;
-                int right = (columns + 1) * tileWidth;
+                int left = COLUMNS * tileWidth;
+                int right = (COLUMNS + 1) * tileWidth;
                 Rect rectangle = new Rect(left, top, right, bottom);
                 tiles[i][j] = new Tile(false, rectangle);
 
