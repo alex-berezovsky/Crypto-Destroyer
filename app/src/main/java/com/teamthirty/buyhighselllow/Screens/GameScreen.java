@@ -3,7 +3,7 @@ package com.teamthirty.buyhighselllow.Screens;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.GridLayout;
+import androidx.gridlayout.widget.GridLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
