@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".gameScreen">
-
   <TextView
           android:id="@+id/playerCash"
           android:layout_width="130dp"
@@ -72,8 +71,7 @@
           android:layout_width="724dp"
           android:layout_height="324dp" app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-          app:columnCount="8" app:rowCount="6" app:layout_constraintBottom_toBottomOf="@+id/divider"
-          android:id="@+id/map">
-
-  </androidx.gridlayout.widget.GridLayout>
+          app:columnCount="8" app:rowCount="7" app:layout_constraintBottom_toBottomOf="@+id/divider"
+          android:id="@+id/map" app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintVertical_bias="0.857"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.teamthirty.buyhighselllow.Screens;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,8 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
+import androidx.core.util.Pair;
+
+import java.util.ArrayList;
 
 public class GameScreen extends AppCompatActivity {
+    GridLayout mapLayout;
+    ArrayList<Pair<Integer, Integer>> path;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,26 +26,22 @@ public class GameScreen extends AppCompatActivity {
         String playerName = extras.getString("name");
         Difficulty difficulty = (Difficulty) extras.get("difficulty");
         TowerType towerType = null;
-        // Layout object representing the map
-        GridLayout mapLayout = findViewById(R.id.map);
-        GridLayout.LayoutParams oneOneParams = new GridLayout.LayoutParams();
-        oneOneParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
-        oneOneParams.width = GridLayout.LayoutParams.WRAP_CONTENT;
-        oneOneParams.rowSpec = GridLayout.spec(1);
-        oneOneParams.columnSpec = GridLayout.spec(1);
-
-        //Buttons on the grid that handle tower press placement
-        Button oneOne = new Button(this);
-        oneOne.setBackgroundColor(Color.CYAN);
-        oneOne.setHeight(mapLayout.getHeight() / mapLayout.getRowCount());
-        oneOne.setWidth(mapLayout.getWidth() / mapLayout.getColumnCount());
-        oneOne.setLayoutParams(oneOneParams);
-        mapLayout.addView(oneOne);
 
         // User interface buttons
         Button redditDude = findViewById(R.id.RedditDude);
         Button tradingChad = findViewById(R.id.TradingChad);
         Button cryptoWhale = findViewById(R.id.CryptoWhale);
+
+        path = new ArrayList<>();
+        path.add(new Pair<>(3, 7));
+        path.add(new Pair<>(3, 6));
+        path.add(new Pair<>(3, 5));
+        path.add(new Pair<>(3, 4));
+        path.add(new Pair<>(3, 3));
+        path.add(new Pair<>(3, 2));
+        path.add(new Pair<>(3, 1));
+        path.add(new Pair<>(3, 0));
+        makeMap();
 
         redditDude.setOnClickListener(view -> setTowerType(towerType, TowerType.RedditDude));
         tradingChad.setOnClickListener(view -> setTowerType(towerType, TowerType.TradingChad));
@@ -74,5 +77,43 @@ public class GameScreen extends AppCompatActivity {
 
     private void setTowerType(TowerType towerType, TowerType newType){
         towerType = newType;
+    }
+
+    private void makeMap() {
+        // Layout object representing the map
+        GridLayout mapLayout = findViewById(R.id.map);
+        Button[][] mapArray = new Button[mapLayout.getRowCount()][mapLayout.getColumnCount()];
+
+        for (int i = 0; i < mapLayout.getRowCount(); i++) {
+            for (int j = 0; j < mapLayout.getColumnCount(); j++) {
+                Pair<Integer, Integer> temp = new Pair<>(i, j);
+                if (!path.contains(temp)) {
+                    mapArray[i][j] = makeMapButton(mapLayout, this, Color.GREEN, i, j);
+                    mapLayout.addView(mapArray[i][j]);
+                } else {
+                    mapArray[i][j] = makeMapButton(mapLayout, this, Color.RED, i, j);
+                    mapLayout.addView(mapArray[i][j]);
+                }
+            }
+        }
+
+    }
+
+    private Button makeMapButton(GridLayout mapLayout, Context context, int color, int row,
+                                 int column) {
+        GridLayout.LayoutParams buttonParams = new GridLayout.LayoutParams();
+        buttonParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
+        buttonParams.width = GridLayout.LayoutParams.WRAP_CONTENT;
+        buttonParams.rowSpec = GridLayout.spec(row);
+        buttonParams.columnSpec = GridLayout.spec(column);
+
+        //Buttons on the grid that handle tower press placement
+        Button button = new Button(context);
+        button.setBackgroundColor(color);
+        button.setHeight(mapLayout.getHeight() / mapLayout.getRowCount());
+        button.setWidth(mapLayout.getWidth() / mapLayout.getColumnCount());
+        button.setLayoutParams(buttonParams);
+
+        return button;
     }
 }
