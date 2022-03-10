@@ -1,10 +1,13 @@
 package com.teamthirty.buyhighselllow.Screens;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.teamthirty.buyhighselllow.TileView;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.R;
+import com.teamthirty.buyhighselllow.Utilities.TowerType;
 
 public class GameScreen extends AppCompatActivity {
     @Override
@@ -15,6 +18,16 @@ public class GameScreen extends AppCompatActivity {
         String playerName = extras.getString("name");
 
         Difficulty difficulty = (Difficulty) extras.get("difficulty");
+
+        TowerType towerType = null;
+
+        Button redditDude = findViewById(R.id.RedditDude);
+        Button tradingChad = findViewById(R.id.TradingChad);
+        Button cryptoWhale = findViewById(R.id.CryptoWhale);
+
+        redditDude.setOnClickListener(view -> setTowerType(towerType, TowerType.RedditDude));
+        tradingChad.setOnClickListener(view -> setTowerType(towerType, TowerType.TradingChad));
+        cryptoWhale.setOnClickListener(view -> setTowerType(towerType, TowerType.CryptoWhale));
 
         TextView playerNameText = findViewById(R.id.playerName);
         playerNameText.setText(playerName);
@@ -46,5 +59,9 @@ public class GameScreen extends AppCompatActivity {
         monumentHealthText.setText("Monument HP: " + monumentHealth);
         playerCashText.setText("Player Cash: " + cash);
         playerCashText.setTextSize(15);
+    }
+
+    private void setTowerType(TowerType towerType, TowerType newType){
+        towerType = newType;
     }
 }

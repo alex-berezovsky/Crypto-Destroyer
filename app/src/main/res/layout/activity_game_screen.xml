@@ -67,7 +67,37 @@
           app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="1dp"
           app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
           android:layout_marginStart="1dp" android:layout_marginBottom="1dp"
-          app:layout_constraintHorizontal_bias="0.333" app:rowCount="12" app:columnCount="12">
-
-  </androidx.gridlayout.widget.GridLayout>
+          app:layout_constraintHorizontal_bias="0.333" app:rowCount="12" app:columnCount="12"/>
+  <Button
+    android:id="@+id/RedditDude"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="RedditDude"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.2"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.050000012"/>
+  <Button
+    android:id="@+id/TradingChad"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="TradingChad"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.050000012"/>
+  <Button
+    android:id="@+id/CryptoWhale"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="CryptoWhale"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.8"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.050000012"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
