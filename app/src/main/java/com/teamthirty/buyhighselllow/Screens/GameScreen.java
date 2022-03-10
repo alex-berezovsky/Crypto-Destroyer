@@ -30,7 +30,6 @@ public class GameScreen extends AppCompatActivity {
 
         TextView playerNameText = findViewById(R.id.playerName);
         playerNameText.setText(playerName);
-        playerNameText.setTextSize(30);
 
         TextView mapPlaceholderText = findViewById(R.id.mapPlaceholder);
         mapPlaceholderText.setText("Map/Path goes here");
