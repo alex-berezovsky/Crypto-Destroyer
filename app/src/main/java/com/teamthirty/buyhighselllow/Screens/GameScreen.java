@@ -11,12 +11,11 @@ import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import androidx.core.util.Pair;
-import android.view.Gravity;
 import java.util.ArrayList;
 
 public class GameScreen extends AppCompatActivity {
-    GridLayout mapLayout;
-    ArrayList<Pair<Integer, Integer>> path;
+    private GridLayout mapLayout;
+    private ArrayList<Pair<Integer, Integer>> path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class GameScreen extends AppCompatActivity {
         playerCashText.setTextSize(15);
     }
 
-    private void setTowerType(TowerType towerType, TowerType newType){
+    private void setTowerType(TowerType towerType, TowerType newType) {
         towerType = newType;
     }
 
