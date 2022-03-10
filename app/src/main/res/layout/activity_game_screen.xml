@@ -34,26 +34,6 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintBottom_toTopOf="@+id/playerCash" app:layout_constraintTop_toBottomOf="@+id/divider"
           app:layout_constraintVertical_bias="1.0"/>
-  <ImageView
-          android:id="@+id/imageView"
-          android:layout_width="109dp"
-          android:layout_height="103dp"
-          android:src="@mipmap/ic_launcher_round"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintVertical_bias="0.253" app:layout_constraintHorizontal_bias="0.464"/>
-  <TextView
-          android:id="@+id/mapPlaceholder"
-          android:layout_width="79dp"
-          android:layout_height="21dp"
-          android:text="TextView"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.461"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          android:layout_marginTop="204dp"/>
   <Button
           android:id="@+id/RedditDude"
           android:layout_width="wrap_content"
@@ -88,4 +68,12 @@
           app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="250dp"
           app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
   />
+  <androidx.gridlayout.widget.GridLayout
+          android:layout_width="724dp"
+          android:layout_height="324dp" app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+          app:columnCount="8" app:rowCount="6" app:layout_constraintBottom_toBottomOf="@+id/divider"
+          android:id="@+id/map">
+
+  </androidx.gridlayout.widget.GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
 package com.teamthirty.buyhighselllow.Screens;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
@@ -15,11 +17,25 @@ public class GameScreen extends AppCompatActivity {
         setContentView(R.layout.activity_game_screen);
         Bundle extras = getIntent().getExtras();
         String playerName = extras.getString("name");
-
         Difficulty difficulty = (Difficulty) extras.get("difficulty");
-
         TowerType towerType = null;
+        // Layout object representing the map
+        GridLayout mapLayout = findViewById(R.id.map);
+        GridLayout.LayoutParams oneOneParams = new GridLayout.LayoutParams();
+        oneOneParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
+        oneOneParams.width = GridLayout.LayoutParams.WRAP_CONTENT;
+        oneOneParams.rowSpec = GridLayout.spec(1);
+        oneOneParams.columnSpec = GridLayout.spec(1);
 
+        //Buttons on the grid that handle tower press placement
+        Button oneOne = new Button(this);
+        oneOne.setBackgroundColor(Color.CYAN);
+        oneOne.setHeight(mapLayout.getHeight() / mapLayout.getRowCount());
+        oneOne.setWidth(mapLayout.getWidth() / mapLayout.getColumnCount());
+        oneOne.setLayoutParams(oneOneParams);
+        mapLayout.addView(oneOne);
+
+        // User interface buttons
         Button redditDude = findViewById(R.id.RedditDude);
         Button tradingChad = findViewById(R.id.TradingChad);
         Button cryptoWhale = findViewById(R.id.CryptoWhale);
@@ -30,9 +46,6 @@ public class GameScreen extends AppCompatActivity {
 
         TextView playerNameText = findViewById(R.id.playerName);
         playerNameText.setText(playerName);
-
-        TextView mapPlaceholderText = findViewById(R.id.mapPlaceholder);
-        mapPlaceholderText.setText("Map/Path goes here");
 
         TextView monumentHealthText = findViewById(R.id.monumentHealth);
         TextView playerCashText = findViewById(R.id.playerCash);
