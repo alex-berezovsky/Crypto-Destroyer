@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 import androidx.gridlayout.widget.GridLayout;
@@ -19,6 +18,7 @@ import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Systems.PlayerSystem;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
+import com.teamthirty.buyhighselllow.Utilities.Util;
 
 import java.util.ArrayList;
 
@@ -162,23 +162,14 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         Pair<Integer, Integer> towerLocation = new Pair<>(row, column);
 
         if (path.contains(towerLocation)) {
-            String errorMessage = "Cannot place tower on path!";
-            int popUpDuration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, errorMessage, popUpDuration);
-            toast.show();
+            Util.displayError(this, "Cannot place tower on path!");
         } else {
             if (towerType == null) {
-                String errorMessage = "Select a tower type to place!";
-                int popUpDuration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(this, errorMessage, popUpDuration);
-                toast.show();
+                Util.displayError(this, "Select a tower type to place!");
             } else {
                 if (((ColorDrawable) mapArray[row][column].getBackground()).getColor()
                     != (Color.GREEN)) {
-                    String errorMessage = "Cannot place tower on top of another tower!";
-                    int popUpDuration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(this, errorMessage, popUpDuration);
-                    toast.show();
+                    Util.displayError(this, "Cannot place tower on top of another tower!");
                 } else {
                     if (towerType.equals(TowerType.RedditDude)) {
                         tower = new RedditDude(towerLocation);
@@ -205,4 +196,5 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             }
         }
     }
+
 }

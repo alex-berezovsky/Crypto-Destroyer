@@ -38,4 +38,10 @@ public final class Util {
 
         return true;
     }
+
+    public static void displayError(Context context, String errorMessage) {
+        int popUpDuration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, errorMessage, popUpDuration);
+        toast.show();
+    }
 }
