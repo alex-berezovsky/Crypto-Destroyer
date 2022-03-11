@@ -10,7 +10,7 @@ public class System {
     /**
      * Default constructor for a system
      */
-    public System() {}
+    public System() { }
 
     /**
      * System constructor that takes in a list of entities
