@@ -16,24 +16,14 @@ public final class Util {
      */
     public static boolean sanitizeNameInput(String input, Context context) {
 
-        if (input == null) { //null input check
-
-            String errorMessage = "Invalid Name: You cannot input null values for your name";
-            int popUpDuration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, errorMessage, popUpDuration);
-            toast.show();
+        if (input == null) {
+            //null input check
+            displayError(context, "Invalid Name: You cannot input null values for your name");
             return false;
-
-        } else if (input.equals("")
-            || input.trim().isEmpty()) { //empty and whitespace only input check
-
-            String errorMessage =
-                "Invalid Name: Your name cannot be empty or consist of only spaces";
-            int popUpDuration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, errorMessage, popUpDuration);
-            toast.show();
+        } else if (input.equals("") || input.trim().isEmpty()) {
+            //empty and whitespace only input check
+            displayError(context, "Invalid Name: Your name cannot be empty");
             return false;
-
         }
 
         return true;
