@@ -5,6 +5,7 @@ import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 public interface ProjectileComponent extends IComponent {
     /**
      * Creates a new projectile
+     *
      * @return the projectile created
      */
     public Projectile generateProjectile();

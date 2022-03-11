@@ -9,8 +9,8 @@ public class TileView {
 
     private int tileWidth;
     private int tileHeight;
-    private final int ROWS = 12;
-    private final int COLUMNS = 12;
+    private final int rows = 12;
+    private final int columns = 12;
     private int tileCount;
     private Tile[][] tiles;
     private HashMap<Pair<Integer, Integer>, Integer> occupied;
@@ -22,31 +22,31 @@ public class TileView {
      * tileWidth = width of gridlayout(in dp) / columns
      * tileHeight = height of gridlayout(in dp) / rows
      * titleCount = number of rows * number of columns  - might not need this variable
-     *
+     * <p>
      * tiles[][] = 2D array that stores tiles which have 2 attributes, occupied(boolean) and
      * Rectangle(Rect)
      * Loops through all rows and columns and creates a tile with a rectangle of appropriate coords
-     *
+     * <p>
      * We can check if a tile is occupied by looping through all towers and comparing their state
      * coords with Tile's coords(there are methods for it for Rects)
      */
 
     public TileView() {
-        tiles = new Tile[ROWS][COLUMNS];
+        tiles = new Tile[rows][columns];
         occupied = new HashMap<>();
-        tileWidth = 720 / COLUMNS;
-        tileHeight = 408 / ROWS;
-        tileCount = ROWS * COLUMNS;
+        tileWidth = 720 / columns;
+        tileHeight = 408 / rows;
+        tileCount = rows * columns;
 
-        for (int i = 0; i < ROWS; i++) {
+        for (int i = 0; i < rows; i++) {
 
-            int top = ROWS * tileHeight;
-            int bottom = (ROWS + 1) * (tileHeight);
+            int top = rows * tileHeight;
+            int bottom = (rows + 1) * (tileHeight);
 
-            for (int j = 0; j < COLUMNS; j++) {
+            for (int j = 0; j < columns; j++) {
 
-                int left = COLUMNS * tileWidth;
-                int right = (COLUMNS + 1) * tileWidth;
+                int left = columns * tileWidth;
+                int right = (columns + 1) * tileWidth;
                 Rect rectangle = new Rect(left, top, right, bottom);
                 tiles[i][j] = new Tile(false, rectangle);
 

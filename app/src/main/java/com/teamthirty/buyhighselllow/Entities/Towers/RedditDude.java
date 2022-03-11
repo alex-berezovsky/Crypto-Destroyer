@@ -1,12 +1,14 @@
 package com.teamthirty.buyhighselllow.Entities.Towers;
 
-import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
+import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 
 public class RedditDude extends Tower {
     protected final int initialCost = 10;
+
     /**
      * Creates a new RedditDude tower
+     *
      * @param position of tower on the screen
      */
     public RedditDude(Pair<Integer, Integer> position) {
@@ -51,6 +53,7 @@ public class RedditDude extends Tower {
 
     /**
      * Creates a new projectile
+     *
      * @return created projectile
      */
     @Override
