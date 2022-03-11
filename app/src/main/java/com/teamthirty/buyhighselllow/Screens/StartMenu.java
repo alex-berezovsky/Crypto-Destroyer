@@ -37,7 +37,7 @@ public class StartMenu extends AppCompatActivity {
      */
     private void moveToGame(String name, Difficulty difficulty) {
 
-        if (Util.sanitizeNameInput(name, getApplicationContext())) {
+        if (Util.sanitizeNameInput(getApplicationContext(), name)) {
 
             Intent intent = new Intent(StartMenu.this, GameScreen.class);
             intent.putExtra("name", name);

@@ -9,12 +9,12 @@ public final class Util {
      * This method sanitizes the name input for the start menu when you enter your name.
      * It checks for null, empty, and whitespace only inputs
      *
-     * @param input   the string you are checking
      * @param context the context of the application
      *
+     * @param input   the string you are checking
      * @return true if name follows proper formatting, false otherwise
      */
-    public static boolean sanitizeNameInput(String input, Context context) {
+    public static boolean sanitizeNameInput(Context context, String input) {
 
         if (input == null) {
             //null input check
