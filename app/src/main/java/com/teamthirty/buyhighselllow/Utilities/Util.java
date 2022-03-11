@@ -30,8 +30,10 @@ public final class Util {
     }
 
     public static void displayError(Context context, String errorMessage) {
-        int popUpDuration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, errorMessage, popUpDuration);
-        toast.show();
+        if (context != null) {
+            int popUpDuration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, errorMessage, popUpDuration);
+            toast.show();
+        }
     }
 }
