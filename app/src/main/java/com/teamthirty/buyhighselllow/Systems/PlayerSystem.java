@@ -6,6 +6,7 @@ import com.teamthirty.buyhighselllow.Entities.Entity;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
+import com.teamthirty.buyhighselllow.Utilities.Util;
 
 import java.util.List;
 
@@ -53,10 +54,7 @@ public class PlayerSystem extends System {
             placeTower(tower);
             return true;
         } else {
-            String errorMessage = "Cannot afford tower!";
-            int popUpDuration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, errorMessage, popUpDuration);
-            toast.show();
+            Util.displayError(context, "Cannot afford tower!");
             return false;
         }
     }
