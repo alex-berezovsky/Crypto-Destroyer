@@ -8,8 +8,65 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TowerTests {
+
     /**
-     * Tests that all values of TradingChad tower are instantiated correctly
+     * Tests if projectile behaves correctly
+     */
+    @Test
+    public void projectileCryptoWhale() {
+        Pair<Integer, Integer> location = new Pair<>(10, 15);
+        CryptoWhale whale = new CryptoWhale(location);
+
+        Projectile proj = whale.generateProjectile();
+        assertEquals(10, proj.getPosition().first.intValue());
+        assertEquals(15, proj.getPosition().second.intValue());
+        assertEquals(20, proj.getSpeed());
+        assertEquals(15, proj.getDamage());
+
+        proj.updatePosition();
+        assertEquals(30, proj.getPosition().first.intValue());
+        assertEquals(35, proj.getPosition().second.intValue());
+    }
+    /**
+     * Tests that all values of a cryptoWhale tower are instantiated correctly
+     */
+    @Test
+    public void cryptoWhaleInstantiation() {
+        Pair<Integer, Integer> location = new Pair<>(10, 15);
+        CryptoWhale whale = new CryptoWhale(location);
+
+        assertEquals(1, whale.getLevel());
+        assertEquals(10, whale.getPosition().first.intValue());
+        assertEquals(15, whale.getPosition().second.intValue());
+        assertEquals(30, whale.getFireRate());
+        assertEquals(15, whale.getDamage());
+        assertEquals(450, whale.getUpgradeCost());
+    }
+
+    /**
+     * Tests that the values of a TradingChad scale correctly with the level
+     */
+    @Test
+    public void levelUpCryptoWhale() {
+        Pair<Integer, Integer> location = new Pair<>(10, 15);
+        CryptoWhale whale = new CryptoWhale(location);
+
+        whale.levelUp();
+        assertEquals(2, whale.getLevel());
+        assertEquals(50, whale.getFireRate());
+        assertEquals(240, whale.getDamage());
+        assertEquals(5400, whale.getUpgradeCost());
+
+        whale.levelUp();
+        assertEquals(3, whale.getLevel());
+        assertEquals(70, whale.getFireRate());
+        assertEquals(3840, whale.getDamage());
+        assertEquals(64800, whale.getUpgradeCost());
+
+    }
+
+    /**
+     * Tests that all values of a TradingChad tower are instantiated correctly
      */
     @Test
     public void tradingChadInstantiation() {
@@ -25,7 +82,7 @@ public class TowerTests {
     }
 
     /**
-     * Tests that the values of TradingChad scale correctly with the level
+     * Tests that the values of a TradingChad scale correctly with the level
      */
     @Test
     public void levelUpTradingChad() {
