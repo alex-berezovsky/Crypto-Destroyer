@@ -1,11 +1,12 @@
 package com.teamthirty.buyhighselllow.Entities.Towers;
 
-import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import androidx.core.util.Pair;
+import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 
 public class CryptoWhale extends Tower {
     /**
      * Creates a new CryptoWhale Tower
+     *
      * @param position of tower on the screen
      */
     public CryptoWhale(Pair<Integer, Integer> position) {
@@ -50,6 +51,7 @@ public class CryptoWhale extends Tower {
 
     /**
      * Creates a new projectile
+     *
      * @return created projectile
      */
     @Override

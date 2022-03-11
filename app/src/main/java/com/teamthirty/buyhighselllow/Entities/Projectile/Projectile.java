@@ -1,8 +1,8 @@
 package com.teamthirty.buyhighselllow.Entities.Projectile;
 
-import com.teamthirty.buyhighselllow.Components.*;
-import com.teamthirty.buyhighselllow.Entities.Entity;
 import androidx.core.util.Pair;
+import com.teamthirty.buyhighselllow.Components.TransformComponent;
+import com.teamthirty.buyhighselllow.Entities.Entity;
 
 public class Projectile extends Entity implements TransformComponent {
     protected Pair<Integer, Integer> position;
@@ -11,8 +11,9 @@ public class Projectile extends Entity implements TransformComponent {
 
     /**
      * Constructor for a projectile
+     *
      * @param startingPosition the starting location of the projectile
-     * @param damage the amount of damage done by the projectile
+     * @param damage           the amount of damage done by the projectile
      */
     public Projectile(Pair<Integer, Integer> startingPosition, int damage) {
         this.position = startingPosition;
@@ -29,6 +30,7 @@ public class Projectile extends Entity implements TransformComponent {
 
     /**
      * Returns the position of the projectile
+     *
      * @return position of projectile
      */
     public Pair<Integer, Integer> getPosition() {
@@ -37,6 +39,7 @@ public class Projectile extends Entity implements TransformComponent {
 
     /**
      * Returns the amount of damage the projectile does
+     *
      * @return amount of damage projectile does
      */
     public int getDamage() {
@@ -45,6 +48,7 @@ public class Projectile extends Entity implements TransformComponent {
 
     /**
      * Return the speed of the projectile
+     *
      * @return speed of the projectile
      */
     public int getSpeed() {

@@ -1,9 +1,10 @@
 package com.teamthirty.buyhighselllow.Entities.Towers;
 
-import com.teamthirty.buyhighselllow.Components.*;
+import androidx.core.util.Pair;
+import com.teamthirty.buyhighselllow.Components.LevelComponent;
+import com.teamthirty.buyhighselllow.Components.ProjectileComponent;
 import com.teamthirty.buyhighselllow.Entities.Entity;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
-import androidx.core.util.Pair;
 
 public abstract class Tower extends Entity implements LevelComponent, ProjectileComponent {
     protected Pair<Integer, Integer> position;
@@ -50,6 +51,7 @@ public abstract class Tower extends Entity implements LevelComponent, Projectile
 
     /**
      * To be implemented by each tower individually to create a unique projectile
+     *
      * @return the created projectile
      */
     @Override
@@ -59,6 +61,7 @@ public abstract class Tower extends Entity implements LevelComponent, Projectile
 
     /**
      * Returns the location of the tower
+     *
      * @return location of tower
      */
     public Pair<Integer, Integer> getPosition() {
@@ -67,6 +70,7 @@ public abstract class Tower extends Entity implements LevelComponent, Projectile
 
     /**
      * Returns the level of the tower
+     *
      * @return level of tower
      */
     public int getLevel() {
@@ -75,6 +79,7 @@ public abstract class Tower extends Entity implements LevelComponent, Projectile
 
     /**
      * Returns the fire rate of the tower
+     *
      * @return fire rate of tower
      */
     public int getFireRate() {
@@ -83,6 +88,7 @@ public abstract class Tower extends Entity implements LevelComponent, Projectile
 
     /**
      * Returns the damage output of the tower
+     *
      * @return damage output of tower
      */
     public int getDamage() {
@@ -91,6 +97,7 @@ public abstract class Tower extends Entity implements LevelComponent, Projectile
 
     /**
      * Returns the upgrade cost of the tower
+     *
      * @return upgrade cost of the tower
      */
     public int getUpgradeCost() {

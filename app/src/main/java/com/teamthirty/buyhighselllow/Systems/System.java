@@ -1,6 +1,7 @@
 package com.teamthirty.buyhighselllow.Systems;
 
-import com.teamthirty.buyhighselllow.Entities.*;
+import com.teamthirty.buyhighselllow.Entities.Entity;
+
 import java.util.List;
 
 public class System {
@@ -9,15 +10,20 @@ public class System {
     /**
      * Default constructor for a system
      */
-    public System() { }
-    /** System constructor that takes in a list of entities
+    public System() {}
+
+    /**
+     * System constructor that takes in a list of entities
+     *
      * @param entityList list of entities system is responsible for
      */
     public System(List<Entity> entityList) {
         this.entityList = entityList;
     }
+
     /**
      * adds entities to the entity list
+     *
      * @param entity the entity to be added
      */
     public void addEntity(Entity entity) {
@@ -26,6 +32,7 @@ public class System {
 
     /**
      * removes entities from the system list
+     *
      * @param entity the entity to be removed
      */
     public void removeEntity(Entity entity) {

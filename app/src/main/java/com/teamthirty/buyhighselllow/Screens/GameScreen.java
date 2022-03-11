@@ -6,16 +6,20 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import androidx.gridlayout.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.teamthirty.buyhighselllow.Entities.Towers.*;
+import androidx.core.util.Pair;
+import androidx.gridlayout.widget.GridLayout;
+import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
+import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
+import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
+import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
+import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Systems.PlayerSystem;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
-import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
-import androidx.core.util.Pair;
+
 import java.util.ArrayList;
 
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {

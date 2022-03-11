@@ -31,7 +31,8 @@ public class StartMenu extends AppCompatActivity {
 
     /**
      * Transitions from name & difficulty selection screen to game activity
-     *  @param name       username
+     *
+     * @param name       username
      * @param difficulty difficulty, 0 for easy, 1 for standard, 2 for hard
      */
     private void moveToGame(String name, Difficulty difficulty) {
