@@ -1,7 +1,6 @@
 package com.teamthirty.buyhighselllow.Systems;
 
 import android.content.Context;
-import android.widget.Toast;
 import com.teamthirty.buyhighselllow.Entities.Entity;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
