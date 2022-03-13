@@ -7,6 +7,7 @@ import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerSystem extends System {
@@ -33,7 +34,7 @@ public class PlayerSystem extends System {
         }
     }
 
-    public PlayerSystem(List<Entity> entityList) {
+    public PlayerSystem(ArrayList<Entity> entityList) {
         super(entityList);
     }
 
