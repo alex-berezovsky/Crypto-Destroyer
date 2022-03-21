@@ -2,10 +2,10 @@ package com.teamthirty.buyhighselllow.Systems;
 
 import com.teamthirty.buyhighselllow.Entities.Entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class System {
-    protected List<Entity> entityList;
+    protected ArrayList<Entity> entityList;
 
     /**
      * Default constructor for a system
@@ -17,7 +17,7 @@ public class System {
      *
      * @param entityList list of entities system is responsible for
      */
-    public System(List<Entity> entityList) {
+    public System(ArrayList<Entity> entityList) {
         this.entityList = entityList;
     }
 

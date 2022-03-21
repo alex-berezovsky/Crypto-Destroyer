@@ -107,10 +107,10 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             for (int j = 0; j < mapLayout.getColumnCount(); j++) {
                 Pair<Integer, Integer> temp = new Pair<>(i, j);
                 if (!path.contains(temp)) {
-                    mapArray[i][j] = makeMapButton(mapLayout, this, Color.GREEN, i, j);
+                    mapArray[i][j] = makeMapButton(this, Color.GREEN, i, j);
                     mapLayout.addView(mapArray[i][j]);
                 } else {
-                    mapArray[i][j] = makeMapButton(mapLayout, this, Color.GRAY, i, j);
+                    mapArray[i][j] = makeMapButton(this, Color.GRAY, i, j);
                     mapLayout.addView(mapArray[i][j]);
                 }
             }
@@ -121,7 +121,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         mapArray[monumentRow][monumentColumn].setBackgroundColor(Color.MAGENTA);
     }
 
-    private Button makeMapButton(GridLayout mapLayout, Context context, int color, int row,
+    private Button makeMapButton(Context context, int color, int row,
                                  int column) {
         GridLayout.LayoutParams buttonParams = new GridLayout.LayoutParams();
         buttonParams.height = 0;
@@ -146,21 +146,11 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        String id = v.getId() + "";
-        int row;
-        int column;
+        Pair<Integer, Integer> towerLocation = Util.towerLocation(v.getId());
+        int row = towerLocation.first;
+        int column = towerLocation.second;
 
-        if (id.contains("999")) {
-            row = 0;
-            column = Integer.parseInt(id.substring(3));
-        } else {
-            int endOfRowIndex = id.indexOf('0');
-            row = Integer.parseInt(id.substring(0, endOfRowIndex));
-            column = Integer.parseInt(id.substring(endOfRowIndex + 3));
-        }
         Tower tower = null;
-        Pair<Integer, Integer> towerLocation = new Pair<>(row, column);
-
         if (path.contains(towerLocation)) {
             Util.displayError(this, "Cannot place tower on path!");
         } else {
@@ -196,5 +186,4 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             }
         }
     }
-
 }

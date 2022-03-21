@@ -2,6 +2,7 @@ package com.teamthirty.buyhighselllow.Utilities;
 
 import android.content.Context;
 import android.widget.Toast;
+import androidx.core.util.Pair;
 
 public final class Util {
 
@@ -35,5 +36,27 @@ public final class Util {
             Toast toast = Toast.makeText(context, errorMessage, popUpDuration);
             toast.show();
         }
+    }
+
+
+    /**
+     * Returns button location in grid based on id
+     * @param id of button
+     * @return button location
+     */
+    public static Pair<Integer, Integer> towerLocation(int id) {
+        String idString = id + "";
+        int row;
+        int column;
+
+        if (idString.contains("999")) {
+            row = 0;
+            column = Integer.parseInt(idString.substring(3));
+        } else {
+            int endOfRowIndex = idString.indexOf('0');
+            row = Integer.parseInt(idString.substring(0, endOfRowIndex));
+            column = Integer.parseInt(idString.substring(endOfRowIndex + 3));
+        }
+        return new Pair<>(row, column);
     }
 }
