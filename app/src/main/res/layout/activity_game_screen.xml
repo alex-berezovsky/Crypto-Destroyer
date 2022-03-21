@@ -54,17 +54,17 @@
                 android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
       </LinearLayout>
       <Button
-              android:id="@+id/TradingChad"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:text="TradingChad"
-              android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
-              android:layout_marginRight="4dp"/>
-      <Button
               android:id="@+id/RedditDude"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:text="RedditDude"
+              android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
+              android:layout_marginRight="4dp"/>
+      <Button
+              android:id="@+id/TradingChad"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:text="TradingChad"
               android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
               android:layout_marginRight="4dp"/>
       <Button

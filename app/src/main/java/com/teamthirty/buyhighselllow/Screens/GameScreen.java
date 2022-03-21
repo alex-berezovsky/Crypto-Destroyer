@@ -170,18 +170,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     }
 
                     //playerSystem.addEntity(tower);
-                    boolean towerBought = playerSystem.buyTower(tower, towerType, this);
-                    if (towerBought) {
-                        if (towerType.equals(TowerType.RedditDude)) {
-                            mapArray[row][column].setBackgroundColor(Color.YELLOW);
-                        } else if (towerType.equals(TowerType.TradingChad)) {
-                            mapArray[row][column].setBackgroundColor(Color.BLUE);
-                        } else if (towerType.equals(TowerType.CryptoWhale)) {
-                            mapArray[row][column].setBackgroundColor(Color.BLACK);
-                        }
-                        TextView playerCashText = findViewById(R.id.playerCash);
-                        playerCashText.setText("Player Cash: " + playerSystem.getMoney());
-                    }
+                    playerSystem.buyTower(towerType, this, mapArray, row, column, this);
                 }
             }
         }

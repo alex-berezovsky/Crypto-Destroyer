@@ -1,14 +1,18 @@
 package com.teamthirty.buyhighselllow.Systems;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.widget.Button;
+import android.widget.TextView;
 import com.teamthirty.buyhighselllow.Entities.Entity;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
+import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerSystem extends System {
     // tower cost constants
@@ -38,20 +42,21 @@ public class PlayerSystem extends System {
         super(entityList);
     }
 
-    public boolean buyTower(Tower tower, TowerType type, Context context) {
+    public boolean buyTower(TowerType towerType, Context context, Button[][] mapArray, int row,
+                            int column, Activity activity) {
         int initialCost;
-        if (type.equals(TowerType.TradingChad)) {
+        if (towerType.equals(TowerType.TradingChad)) {
             initialCost = tradingChadCost;
-        } else if (type == TowerType.RedditDude) {
+        } else if (towerType == TowerType.RedditDude) {
             initialCost = redditDudeCost;
-        } else if (type == TowerType.CryptoWhale) {
+        } else if (towerType == TowerType.CryptoWhale) {
             initialCost = cryptoWhaleCost;
         } else {
             return false;
         }
         if (initialCost <= money) {
             money -= initialCost;
-            placeTower(tower);
+            placeTower(towerType, mapArray, row, column, activity);
             return true;
         } else {
             Util.displayError(context, "Cannot afford tower!");
@@ -59,8 +64,17 @@ public class PlayerSystem extends System {
         }
     }
 
-    private void placeTower(Tower tower) {
-
+    private void placeTower(TowerType towerType, Button[][] mapArray, int row, int column,
+                            Activity activity) {
+        if (towerType.equals(TowerType.RedditDude)) {
+            mapArray[row][column].setBackgroundColor(Color.YELLOW);
+        } else if (towerType.equals(TowerType.TradingChad)) {
+            mapArray[row][column].setBackgroundColor(Color.BLUE);
+        } else if (towerType.equals(TowerType.CryptoWhale)) {
+            mapArray[row][column].setBackgroundColor(Color.BLACK);
+        }
+        TextView playerCashText = activity.findViewById(R.id.playerCash);
+        playerCashText.setText("Player Cash: " + getMoney());
     }
 
     public int getMoney() {
