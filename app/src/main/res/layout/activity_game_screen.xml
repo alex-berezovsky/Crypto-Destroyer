@@ -92,11 +92,21 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="5" android:gravity="center">
+          <TextView
+                  android:text="Round: 1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" android:id="@+id/roundText" android:layout_weight="1"
+                  android:layout_marginLeft="4dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" android:layout_weight="1">
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_weight="16">
+                android:layout_height="match_parent" android:layout_weight="5" android:gravity="center">
           <Button
                   android:text="▶"
                   android:layout_width="wrap_content"
