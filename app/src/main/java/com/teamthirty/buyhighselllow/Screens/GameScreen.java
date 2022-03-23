@@ -197,47 +197,46 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             unspawnedList.add(new Etherium());
             unspawnedList.add(new BitCoin());
         }
-        
-        while (!isRoundOver) {
-            Timer timer = new Timer();
-            TimerTask updateEnemyPosition = new TimerTask() {
-                @Override
-                public void run() {
-                    if (!spawnedList.isEmpty()) {
-                        for (Enemy enemy : spawnedList) {
-                            boolean atEnd = enemy.updatePosition(path);
 
-                            if (atEnd) {
-                                spawnedList.remove(enemy);
-                            } else {
-                                Pair<Integer, Integer> position = enemy.getPosition();
-                                int row = position.first;
-                                int column = position.second;
+        Timer timer = new Timer();
+        TimerTask updateEnemyPosition = new TimerTask() {
+            @Override
+            public void run() {
+                if (!spawnedList.isEmpty()) {
+                    for (Enemy enemy : spawnedList) {
+                        boolean atEnd = enemy.updatePosition(path);
 
-                                if (enemy instanceof DogeCoin) {
-                                    mapArray[row][column].setBackgroundColor(Color.WHITE);
-                                } else if (enemy instanceof Etherium) {
-                                    mapArray[row][column].setBackgroundColor(Color.CYAN);
-                                } else if (enemy instanceof BitCoin) {
-                                    mapArray[row][column].setBackgroundColor(Color.GRAY);
-                                }
+                        if (atEnd) {
+                            spawnedList.remove(enemy);
+                        } else {
+                            Pair<Integer, Integer> position = enemy.getPosition();
+                            int row = position.first;
+                            int column = position.second;
+
+                            if (enemy instanceof DogeCoin) {
+                                mapArray[row][column].setBackgroundColor(Color.WHITE);
+                            } else if (enemy instanceof Etherium) {
+                                mapArray[row][column].setBackgroundColor(Color.CYAN);
+                            } else if (enemy instanceof BitCoin) {
+                                mapArray[row][column].setBackgroundColor(Color.GRAY);
                             }
                         }
                     }
-                    if (!unspawnedList.isEmpty()) {
-                        spawnedList.add(unspawnedList.remove(0));
-                        spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
-                    }
-
-                    if (spawnedList.isEmpty()) {
-                        isRoundOver = true;
-                    }
                 }
-            };
+                if (!unspawnedList.isEmpty()) {
+                    spawnedList.add(unspawnedList.remove(0));
+                    spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
+                }
 
-            timer.schedule(updateEnemyPosition, 1000);
-            timer.cancel();
-            timer.purge();
-        }
+                if (spawnedList.isEmpty()) {
+                    isRoundOver = true;
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(updateEnemyPosition, 1000, 1000);
+//        while (!isRoundOver) {
+//
+//        }
     }
 }
