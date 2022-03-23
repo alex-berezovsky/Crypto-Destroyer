@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.widget.Button;
 import android.widget.TextView;
 import com.teamthirty.buyhighselllow.Entities.Entity;
-import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
 import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;

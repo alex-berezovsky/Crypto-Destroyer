@@ -35,11 +35,12 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private TowerType towerType;
     private PlayerSystem playerSystem;
     private int roundCounter = 1;
-    private boolean isRoundOver = true;
-    ArrayList<Enemy> unspawnedList = new ArrayList<>();
-    ArrayList<Enemy> spawnedList = new ArrayList<>();
-    int cash = 0;
-    int monumentHealth = 0;
+    private ArrayList<Enemy> unspawnedList = new ArrayList<>();
+    private ArrayList<Enemy> spawnedList = new ArrayList<>();
+    private int cash = 0;
+    private int monumentHealth = 0;
+    private TextView monumentHealthText;
+    private TextView roundCounterText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +75,9 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
         TextView playerNameText = findViewById(R.id.playerName);
         playerNameText.setText(playerName);
+        monumentHealthText = findViewById(R.id.monumentHealth);
+        roundCounterText = findViewById(R.id.roundText);
 
-        TextView monumentHealthText = findViewById(R.id.monumentHealth);
         TextView playerCashText = findViewById(R.id.playerCash);
         switch (difficulty) {
         case HARD: // hard difficulty
@@ -96,6 +98,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         playerSystem.setMoney(cash);
 
         monumentHealthText.setText("Monument HP: " + monumentHealth);
+        roundCounterText.setText("Round: " + roundCounter);
         playerCashText.setText("Player Cash: " + cash);
         playerCashText.setTextSize(15);
 
@@ -105,7 +108,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             }
         }
 
-        playButton.setOnClickListener(view -> startCombat(roundCounter));
+        playButton.setOnClickListener(view -> startCombat());
     }
 
     private void setTowerType(TowerType newType) {
@@ -190,10 +193,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     // Imma be honest, we got no clue why this works but it do
-    public void startCombat(int round) {
-        isRoundOver = false;
-
-        if (round == 1) {
+    public void startCombat() {
+        if (roundCounter == 1) {
             unspawnedList.add(new DogeCoin());
             unspawnedList.add(new Etherium());
             unspawnedList.add(new BitCoin());
@@ -227,11 +228,14 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
 
                     if (enemy instanceof DogeCoin) {
-                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(Color.WHITE);
+                        mapArray[path.get(0).first][path.get(0).second].
+                            setBackgroundColor(Color.WHITE);
                     } else if (enemy instanceof Etherium) {
-                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(Color.CYAN);
+                        mapArray[path.get(0).first][path.get(0).second].
+                            setBackgroundColor(Color.CYAN);
                     } else if (enemy instanceof BitCoin) {
-                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(Color.DKGRAY);
+                        mapArray[path.get(0).first][path.get(0).second].
+                            setBackgroundColor(Color.DKGRAY);
                     }
                 }
 
@@ -258,12 +262,18 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                             spawnedList.remove(enemy);
                             i--;
                             monumentHealth -= enemy.getDamage();
+                            monumentHealthText.setText("Monument HP: " + monumentHealth);
                         }
                     }
                 } else {
                     timer.purge();
                     timer.cancel();
-                    mapArray[path.get(path.size() - 2).first][path.get(path.size() - 2).second].setBackgroundColor(Color.GRAY);
+                    mapArray[path.get(path.size() - 2).first][path.get(path.size() - 2).second].
+                        setBackgroundColor(Color.GRAY);
+                    roundCounter++;
+
+                    // FIGURE OUT WHY THIS CRASHES THE APP
+                    //roundCounterText.setText("Round: " + roundCounter);
                 }
             }
         };

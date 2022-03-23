@@ -1,7 +1,6 @@
 package com.teamthirty.buyhighselllow.Entities.Enemies;
 
 import androidx.core.util.Pair;
-import com.teamthirty.buyhighselllow.Components.TransformComponent;
 import com.teamthirty.buyhighselllow.Entities.Entity;
 
 import java.util.ArrayList;
