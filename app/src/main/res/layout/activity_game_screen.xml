@@ -6,73 +6,119 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".gameScreen" android:layout_weight="1">
-  <LinearLayout
-          android:orientation="vertical"
+  <RelativeLayout
           android:layout_width="match_parent"
-          android:layout_height="match_parent" android:gravity="center">
-    <androidx.gridlayout.widget.GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:columnCount="9" app:rowCount="7"
-            android:id="@+id/map"
-            android:layout_weight="4" app:orientation="horizontal" android:layout_gravity="center"
-            android:background="#A17B4C"/>
-    <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="?android:attr/listDivider"
-    />
+          android:layout_height="match_parent" app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent">
+
     <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp" android:layout_weight="1">
+            android:layout_height="match_parent" android:gravity="center" android:id="@+id/linearLayout2">
+      <androidx.gridlayout.widget.GridLayout
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              app:columnCount="9" app:rowCount="7"
+              android:id="@+id/map"
+              android:layout_weight="4" app:orientation="horizontal" android:layout_gravity="center"
+              android:background="#A17B4C">
+      </androidx.gridlayout.widget.GridLayout>
+      <View
+              android:id="@+id/divider"
+              android:layout_width="match_parent"
+              android:layout_height="4dp"
+              android:background="?android:attr/listDivider"
+      />
+      <LinearLayout
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="0dp" android:layout_weight="1">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="match_parent" android:layout_weight=".75" android:layout_width="0dp">
+          <TextView
+                  android:id="@+id/playerName"
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:text="TextView"
+                  android:textSize="14sp"
+                  android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
+                  android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+          <TextView
+                  android:id="@+id/monumentHealth"
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:text="TextView"
+                  android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
+                  android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+          <TextView
+                  android:id="@+id/playerCash"
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:text="TextView"
+                  android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
+                  android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+        </LinearLayout>
+        <Button
+                android:id="@+id/RedditDude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="RedditDude"
+                android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"/>
+        <Button
+                android:id="@+id/TradingChad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="TradingChad"
+                android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"/>
+        <Button
+                android:id="@+id/CryptoWhale"
+                android:layout_width="0dp"
+                android:text="CryptoWhale"
+                android:layout_weight="1" android:layout_height="wrap_content"
+                android:layout_gravity="center" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+      </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+      <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:layout_weight="8">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="5" android:gravity="center">
+          <TextView
+                  android:text="TextView"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" android:id="@+id/roundText" android:layout_weight="1"
+                  android:layout_marginLeft="4dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="1">
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="5" android:gravity="center">
+          <Button
+                  android:text="▶"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" android:id="@+id/playButton"
+                  android:gravity="center" android:layout_marginRight="4dp"/>
+        </LinearLayout>
+      </LinearLayout>
       <LinearLayout
               android:orientation="vertical"
-              android:layout_height="match_parent" android:layout_weight=".75" android:layout_width="0dp">
-        <TextView
-                android:id="@+id/playerName"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="TextView"
-                android:textSize="14sp"
-                android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
-                android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-        <TextView
-                android:id="@+id/monumentHealth"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="TextView"
-                android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
-                android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-        <TextView
-                android:id="@+id/playerCash"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="TextView"
-                android:layout_weight="1" android:layout_gravity="center" android:textAlignment="gravity"
-                android:gravity="center|left" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:layout_weight="1">
       </LinearLayout>
-      <Button
-              android:id="@+id/TradingChad"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:text="TradingChad"
-              android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
-              android:layout_marginRight="4dp"/>
-      <Button
-              android:id="@+id/RedditDude"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:text="RedditDude"
-              android:layout_weight="1" android:layout_gravity="center" android:layout_marginLeft="4dp"
-              android:layout_marginRight="4dp"/>
-      <Button
-              android:id="@+id/CryptoWhale"
-              android:layout_width="0dp"
-              android:text="CryptoWhale"
-              android:layout_weight="1" android:layout_height="wrap_content"
-              android:layout_gravity="center" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
     </LinearLayout>
-  </LinearLayout>
+  </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

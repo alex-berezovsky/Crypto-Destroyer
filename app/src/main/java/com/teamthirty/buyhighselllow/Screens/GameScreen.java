@@ -10,6 +10,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 import androidx.gridlayout.widget.GridLayout;
+import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
+import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
@@ -21,6 +25,8 @@ import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
     private GridLayout mapLayout;
@@ -28,6 +34,13 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private Button[][] mapArray;
     private TowerType towerType;
     private PlayerSystem playerSystem;
+    private int roundCounter = 1;
+    private ArrayList<Enemy> unspawnedList = new ArrayList<>();
+    private ArrayList<Enemy> spawnedList = new ArrayList<>();
+    private int cash = 0;
+    private int monumentHealth = 0;
+    private TextView monumentHealthText;
+    private TextView roundCounterText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +55,18 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         Button redditDude = findViewById(R.id.RedditDude);
         Button tradingChad = findViewById(R.id.TradingChad);
         Button cryptoWhale = findViewById(R.id.CryptoWhale);
+        Button playButton = findViewById(R.id.playButton);
         // THIS IS HARD-CODED AND NEEDS TO GO
         path = new ArrayList<>();
-        path.add(new Pair<>(3, 8));
-        path.add(new Pair<>(3, 7));
-        path.add(new Pair<>(3, 6));
-        path.add(new Pair<>(3, 5));
-        path.add(new Pair<>(3, 4));
-        path.add(new Pair<>(3, 3));
-        path.add(new Pair<>(3, 2));
-        path.add(new Pair<>(3, 1));
         path.add(new Pair<>(3, 0));
+        path.add(new Pair<>(3, 1));
+        path.add(new Pair<>(3, 2));
+        path.add(new Pair<>(3, 3));
+        path.add(new Pair<>(3, 4));
+        path.add(new Pair<>(3, 5));
+        path.add(new Pair<>(3, 6));
+        path.add(new Pair<>(3, 7));
+        path.add(new Pair<>(3, 8));
         makeMap();
 
         redditDude.setOnClickListener(view -> setTowerType(TowerType.RedditDude));
@@ -61,11 +75,10 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
         TextView playerNameText = findViewById(R.id.playerName);
         playerNameText.setText(playerName);
+        monumentHealthText = findViewById(R.id.monumentHealth);
+        roundCounterText = findViewById(R.id.roundText);
 
-        TextView monumentHealthText = findViewById(R.id.monumentHealth);
         TextView playerCashText = findViewById(R.id.playerCash);
-        int cash = 0;
-        int monumentHealth = 0;
         switch (difficulty) {
         case HARD: // hard difficulty
             cash = 600;
@@ -85,6 +98,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         playerSystem.setMoney(cash);
 
         monumentHealthText.setText("Monument HP: " + monumentHealth);
+        roundCounterText.setText("Round: " + roundCounter);
         playerCashText.setText("Player Cash: " + cash);
         playerCashText.setTextSize(15);
 
@@ -93,6 +107,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                 button.setOnClickListener(this);
             }
         }
+
+        playButton.setOnClickListener(view -> startCombat());
     }
 
     private void setTowerType(TowerType newType) {
@@ -115,7 +131,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                 }
             }
         }
-        Pair<Integer, Integer> monumentLocation = path.get(0);
+        Pair<Integer, Integer> monumentLocation = path.get(path.size() - 1);
         int monumentRow = monumentLocation.first;
         int monumentColumn = monumentLocation.second;
         mapArray[monumentRow][monumentColumn].setBackgroundColor(Color.MAGENTA);
@@ -170,20 +186,98 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     }
 
                     //playerSystem.addEntity(tower);
-                    boolean towerBought = playerSystem.buyTower(tower, towerType, this);
-                    if (towerBought) {
-                        if (towerType.equals(TowerType.RedditDude)) {
-                            mapArray[row][column].setBackgroundColor(Color.YELLOW);
-                        } else if (towerType.equals(TowerType.TradingChad)) {
-                            mapArray[row][column].setBackgroundColor(Color.BLUE);
-                        } else if (towerType.equals(TowerType.CryptoWhale)) {
-                            mapArray[row][column].setBackgroundColor(Color.BLACK);
-                        }
-                        TextView playerCashText = findViewById(R.id.playerCash);
-                        playerCashText.setText("Player Cash: " + playerSystem.getMoney());
-                    }
+                    playerSystem.buyTower(towerType, this, mapArray, row, column, this);
                 }
             }
         }
+    }
+
+    // Imma be honest, we got no clue why this works but it do
+    public void startCombat() {
+        if (roundCounter == 1) {
+            unspawnedList.add(new DogeCoin());
+            unspawnedList.add(new Etherium());
+            unspawnedList.add(new BitCoin());
+            unspawnedList.add(new DogeCoin());
+        }
+
+        Timer timer = new Timer();
+        TimerTask updateEnemyPosition = new TimerTask() {
+            @Override
+            public void run() {
+                // Checks if each tile is occupied by an enemy. If not occupied, set to grey
+                for (int i = 0; i < path.size() - 1; i++) {
+                    Pair<Integer, Integer> location = path.get(i);
+                    int row = location.first;
+                    int column = location.second;
+                    boolean occupied = false;
+                    for (Enemy enemy : spawnedList) {
+                        if (enemy.getPosition().equals(location)) {
+                            occupied = true;
+                            break;
+                        }
+                    }
+                    if (!occupied) {
+                        mapArray[row][column].setBackgroundColor(Color.GRAY);
+                    }
+                }
+
+                if (!unspawnedList.isEmpty()) {
+                    Enemy enemy = unspawnedList.remove(0);
+                    spawnedList.add(enemy);
+                    spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
+
+                    if (enemy instanceof DogeCoin) {
+                        mapArray[path.get(0).first][path.get(0).second].
+                            setBackgroundColor(Color.WHITE);
+                    } else if (enemy instanceof Etherium) {
+                        mapArray[path.get(0).first][path.get(0).second].
+                            setBackgroundColor(Color.CYAN);
+                    } else if (enemy instanceof BitCoin) {
+                        mapArray[path.get(0).first][path.get(0).second].
+                            setBackgroundColor(Color.DKGRAY);
+                    }
+                }
+
+
+                // Updates position of each enemy in spawned list and displays on screen
+                if (!spawnedList.isEmpty()) {
+                    for (int i = 0; i < spawnedList.size(); i++) {
+                        Enemy enemy = spawnedList.get(i);
+
+                        Pair<Integer, Integer> position = enemy.getPosition();
+                        int row = position.first;
+                        int column = position.second;
+
+                        if (enemy instanceof DogeCoin) {
+                            mapArray[row][column].setBackgroundColor(Color.WHITE);
+                        } else if (enemy instanceof Etherium) {
+                            mapArray[row][column].setBackgroundColor(Color.CYAN);
+                        } else if (enemy instanceof BitCoin) {
+                            mapArray[row][column].setBackgroundColor(Color.DKGRAY);
+                        }
+                        boolean atEnd = enemy.updatePosition(path);
+
+                        if (atEnd) {
+                            spawnedList.remove(enemy);
+                            i--;
+                            monumentHealth -= enemy.getDamage();
+                            monumentHealthText.setText("Monument HP: " + monumentHealth);
+                        }
+                    }
+                } else {
+                    timer.purge();
+                    timer.cancel();
+                    mapArray[path.get(path.size() - 2).first][path.get(path.size() - 2).second].
+                        setBackgroundColor(Color.GRAY);
+                    roundCounter++;
+
+                    // FIGURE OUT WHY THIS CRASHES THE APP
+                    //roundCounterText.setText("Round: " + roundCounter);
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
     }
 }
