@@ -38,6 +38,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private boolean isRoundOver = true;
     ArrayList<Enemy> unspawnedList = new ArrayList<>();
     ArrayList<Enemy> spawnedList = new ArrayList<>();
+    int cash = 0;
+    int monumentHealth = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +77,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
         TextView monumentHealthText = findViewById(R.id.monumentHealth);
         TextView playerCashText = findViewById(R.id.playerCash);
-        int cash = 0;
-        int monumentHealth = 0;
         switch (difficulty) {
         case HARD: // hard difficulty
             cash = 600;
@@ -189,6 +189,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    // Imma be honest, we got no clue why this works but it do
     public void startCombat(int round) {
         isRoundOver = false;
 
@@ -196,47 +197,77 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             unspawnedList.add(new DogeCoin());
             unspawnedList.add(new Etherium());
             unspawnedList.add(new BitCoin());
+            unspawnedList.add(new DogeCoin());
         }
 
         Timer timer = new Timer();
         TimerTask updateEnemyPosition = new TimerTask() {
             @Override
             public void run() {
-                if (!spawnedList.isEmpty()) {
+                // Checks if each tile is occupied by an enemy. If not occupied, set to grey
+                for (int i = 0; i < path.size() - 1; i++) {
+                    Pair<Integer, Integer> location = path.get(i);
+                    int row = location.first;
+                    int column = location.second;
+                    boolean occupied = false;
                     for (Enemy enemy : spawnedList) {
+                        if (enemy.getPosition().equals(location)) {
+                            occupied = true;
+                            break;
+                        }
+                    }
+                    if (!occupied) {
+                        mapArray[row][column].setBackgroundColor(Color.GRAY);
+                    }
+                }
+
+                if (!unspawnedList.isEmpty()) {
+                    Enemy enemy = unspawnedList.remove(0);
+                    spawnedList.add(enemy);
+                    spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
+
+                    if (enemy instanceof DogeCoin) {
+                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(Color.WHITE);
+                    } else if (enemy instanceof Etherium) {
+                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(Color.CYAN);
+                    } else if (enemy instanceof BitCoin) {
+                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(Color.DKGRAY);
+                    }
+                }
+
+
+                // Updates position of each enemy in spawned list and displays on screen
+                if (!spawnedList.isEmpty()) {
+                    for (int i = 0; i < spawnedList.size(); i++) {
+                        Enemy enemy = spawnedList.get(i);
+
+                        Pair<Integer, Integer> position = enemy.getPosition();
+                        int row = position.first;
+                        int column = position.second;
+
+                        if (enemy instanceof DogeCoin) {
+                            mapArray[row][column].setBackgroundColor(Color.WHITE);
+                        } else if (enemy instanceof Etherium) {
+                            mapArray[row][column].setBackgroundColor(Color.CYAN);
+                        } else if (enemy instanceof BitCoin) {
+                            mapArray[row][column].setBackgroundColor(Color.DKGRAY);
+                        }
                         boolean atEnd = enemy.updatePosition(path);
 
                         if (atEnd) {
                             spawnedList.remove(enemy);
-                        } else {
-                            Pair<Integer, Integer> position = enemy.getPosition();
-                            int row = position.first;
-                            int column = position.second;
-
-                            if (enemy instanceof DogeCoin) {
-                                mapArray[row][column].setBackgroundColor(Color.WHITE);
-                            } else if (enemy instanceof Etherium) {
-                                mapArray[row][column].setBackgroundColor(Color.CYAN);
-                            } else if (enemy instanceof BitCoin) {
-                                mapArray[row][column].setBackgroundColor(Color.GRAY);
-                            }
+                            i--;
+                            monumentHealth -= enemy.getDamage();
                         }
                     }
-                }
-                if (!unspawnedList.isEmpty()) {
-                    spawnedList.add(unspawnedList.remove(0));
-                    spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
-                }
-
-                if (spawnedList.isEmpty()) {
-                    isRoundOver = true;
+                } else {
+                    timer.purge();
+                    timer.cancel();
+                    mapArray[path.get(path.size() - 2).first][path.get(path.size() - 2).second].setBackgroundColor(Color.GRAY);
                 }
             }
         };
 
-        timer.scheduleAtFixedRate(updateEnemyPosition, 1000, 1000);
-//        while (!isRoundOver) {
-//
-//        }
+        timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
     }
 }

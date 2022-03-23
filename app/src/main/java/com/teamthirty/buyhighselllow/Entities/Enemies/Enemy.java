@@ -26,4 +26,8 @@ public class Enemy extends Entity {
     public Pair<Integer, Integer> getPosition() {
         return position;
     }
+
+    public int getDamage() {
+        return damage;
+    }
 }
