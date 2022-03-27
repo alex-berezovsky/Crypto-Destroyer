@@ -16,9 +16,11 @@ public class EndGameScreen extends AppCompatActivity {
         Button restartGameButton = findViewById(R.id.restartButton);
         restartGameButton.setOnClickListener(v -> restartGame());
 
+
+
     }
 
-    private void restartGame() {
+     private void restartGame() {
 
         Intent intent = new Intent(EndGameScreen.this, MainActivity.class);
         startActivity(intent);
