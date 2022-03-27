@@ -67,6 +67,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         path.add(new Pair<>(3, 6));
         path.add(new Pair<>(3, 7));
         path.add(new Pair<>(3, 8));
+        path.add(new Pair<>(null, null));
         makeMap();
 
         redditDude.setOnClickListener(view -> setTowerType(TowerType.RedditDude));
@@ -131,7 +132,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                 }
             }
         }
-        Pair<Integer, Integer> monumentLocation = path.get(path.size() - 1);
+        Pair<Integer, Integer> monumentLocation = path.get(path.size() - 2);
         int monumentRow = monumentLocation.first;
         int monumentColumn = monumentLocation.second;
         mapArray[monumentRow][monumentColumn].setBackgroundColor(Color.MAGENTA);
@@ -206,7 +207,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void run() {
                 // Checks if each tile is occupied by an enemy. If not occupied, set to grey
-                for (int i = 0; i < path.size() - 1; i++) {
+                for (int i = 0; i < path.size() - 2; i++) {
                     Pair<Integer, Integer> location = path.get(i);
                     int row = location.first;
                     int column = location.second;
@@ -259,6 +260,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                         boolean atEnd = enemy.updatePosition(path);
 
                         if (atEnd) {
+                            mapArray[row][column].setBackgroundColor(Color.MAGENTA);
                             spawnedList.remove(enemy);
                             i--;
                             monumentHealth -= enemy.getDamage();
@@ -268,8 +270,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                 } else {
                     timer.purge();
                     timer.cancel();
-                    mapArray[path.get(path.size() - 2).first][path.get(path.size() - 2).second].
-                        setBackgroundColor(Color.GRAY);
                     roundCounter++;
 
                     // FIGURE OUT WHY THIS CRASHES THE APP
@@ -278,6 +278,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             }
         };
 
-        timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
+        timer.scheduleAtFixedRate(updateEnemyPosition, 1000, 1000);
     }
 }
