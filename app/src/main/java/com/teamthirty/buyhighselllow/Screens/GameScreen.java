@@ -42,6 +42,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private int monumentHealth = 0;
     private TextView monumentHealthText;
     private TextView roundCounterText;
+    private Boolean hasNotFinished = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,11 +266,10 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                             monumentHealth -= enemy.getDamage()*10;
                             monumentHealthText.setText("Monument HP: " + monumentHealth);
 
-                            if (monumentHealth <= 0) {
-
+                            if (monumentHealth <= 0 && hasNotFinished) {
                                 Intent intent = new Intent(GameScreen.this, EndGameScreen.class);
                                 startActivity(intent);
-
+                                hasNotFinished = false;
                             }
                         }
                     }
