@@ -11,6 +11,9 @@
     android:theme="@style/Theme.BuyHighSellLow">
     <activity
       android:exported="true"
+      android:name="com.teamthirty.buyhighselllow.Screens.EndGameScreen"/>
+    <activity
+      android:exported="true"
       android:name="com.teamthirty.buyhighselllow.Screens.GameScreen"/>
     <activity
       android:exported="true"

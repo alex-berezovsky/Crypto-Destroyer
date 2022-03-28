@@ -1,6 +1,7 @@
 package com.teamthirty.buyhighselllow.Screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -40,7 +41,9 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private int monumentHealth = 0;
     private TextView monumentHealthText;
     private TextView roundCounterText;
+    private Boolean hasNotFinished = true;
     private TextView playerCashText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -266,8 +269,16 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                             spawnedList.remove(enemy);
                             i--;
                             monumentHealth -= enemy.getDamage();
+                            monumentHealthText.setText("Monument HP: " + monumentHealth);
+
+                            if (monumentHealth <= 0 && hasNotFinished) {
+                                Intent intent = new Intent(GameScreen.this, EndGameScreen.class);
+                                startActivity(intent);
+                                hasNotFinished = false;
+                            }
                             Util.setText(GameScreen.this, monumentHealthText,
                                          "Monument HP: " + monumentHealth);
+
                         }
                     }
                 } else {
