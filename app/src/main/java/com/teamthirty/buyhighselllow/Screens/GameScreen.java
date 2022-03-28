@@ -29,7 +29,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
-    private GridLayout mapLayout;
     private ArrayList<Pair<Integer, Integer>> path;
     private Button[][] mapArray;
     private TowerType towerType;
@@ -41,6 +40,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private int monumentHealth = 0;
     private TextView monumentHealthText;
     private TextView roundCounterText;
+    private TextView playerCashText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +78,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         playerNameText.setText(playerName);
         monumentHealthText = findViewById(R.id.monumentHealth);
         roundCounterText = findViewById(R.id.roundText);
+        playerCashText = findViewById(R.id.playerCash);
 
-        TextView playerCashText = findViewById(R.id.playerCash);
         switch (difficulty) {
         case HARD: // hard difficulty
             cash = 600;
@@ -98,10 +98,12 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
         playerSystem.setMoney(cash);
 
-        monumentHealthText.setText("Monument HP: " + monumentHealth);
-        roundCounterText.setText("Round: " + roundCounter);
-        playerCashText.setText("Player Cash: " + cash);
-        playerCashText.setTextSize(15);
+        Util.setText(GameScreen.this, monumentHealthText,
+                     "Monument HP: " + monumentHealth);
+        Util.setText(GameScreen.this, roundCounterText,
+                     "Round: " + roundCounter);
+        Util.setText(GameScreen.this, playerCashText,
+                     "Player Cash: " + cash);
 
         for (Button[] buttonArray : mapArray) {
             for (Button button : buttonArray) {
@@ -264,20 +266,20 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                             spawnedList.remove(enemy);
                             i--;
                             monumentHealth -= enemy.getDamage();
-                            monumentHealthText.setText("Monument HP: " + monumentHealth);
+                            Util.setText(GameScreen.this, monumentHealthText,
+                                         "Monument HP: " + monumentHealth);
                         }
                     }
                 } else {
                     timer.purge();
                     timer.cancel();
                     roundCounter++;
-
-                    // FIGURE OUT WHY THIS CRASHES THE APP
-                    //roundCounterText.setText("Round: " + roundCounter);
+                    Util.setText(GameScreen.this, roundCounterText,
+                                 "Round: " + roundCounter);
                 }
             }
         };
 
-        timer.scheduleAtFixedRate(updateEnemyPosition, 1000, 1000);
+        timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
     }
 }
