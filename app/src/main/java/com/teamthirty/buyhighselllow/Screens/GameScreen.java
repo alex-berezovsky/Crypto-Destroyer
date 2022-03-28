@@ -30,7 +30,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
-    private GridLayout mapLayout;
     private ArrayList<Pair<Integer, Integer>> path;
     private Button[][] mapArray;
     private TowerType towerType;
@@ -43,6 +42,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private TextView monumentHealthText;
     private TextView roundCounterText;
     private Boolean hasNotFinished = true;
+    private TextView playerCashText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         path.add(new Pair<>(3, 6));
         path.add(new Pair<>(3, 7));
         path.add(new Pair<>(3, 8));
+        path.add(new Pair<>(null, null));
         makeMap();
 
         redditDude.setOnClickListener(view -> setTowerType(TowerType.RedditDude));
@@ -79,8 +81,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         playerNameText.setText(playerName);
         monumentHealthText = findViewById(R.id.monumentHealth);
         roundCounterText = findViewById(R.id.roundText);
+        playerCashText = findViewById(R.id.playerCash);
 
-        TextView playerCashText = findViewById(R.id.playerCash);
         switch (difficulty) {
         case HARD: // hard difficulty
             cash = 600;
@@ -99,10 +101,12 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
         playerSystem.setMoney(cash);
 
-        monumentHealthText.setText("Monument HP: " + monumentHealth);
-        roundCounterText.setText("Round: " + roundCounter);
-        playerCashText.setText("Player Cash: " + cash);
-        playerCashText.setTextSize(15);
+        Util.setText(GameScreen.this, monumentHealthText,
+                     "Monument HP: " + monumentHealth);
+        Util.setText(GameScreen.this, roundCounterText,
+                     "Round: " + roundCounter);
+        Util.setText(GameScreen.this, playerCashText,
+                     "Player Cash: " + cash);
 
         for (Button[] buttonArray : mapArray) {
             for (Button button : buttonArray) {
@@ -133,7 +137,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                 }
             }
         }
-        Pair<Integer, Integer> monumentLocation = path.get(path.size() - 1);
+        Pair<Integer, Integer> monumentLocation = path.get(path.size() - 2);
         int monumentRow = monumentLocation.first;
         int monumentColumn = monumentLocation.second;
         mapArray[monumentRow][monumentColumn].setBackgroundColor(Color.MAGENTA);
@@ -208,7 +212,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void run() {
                 // Checks if each tile is occupied by an enemy. If not occupied, set to grey
-                for (int i = 0; i < path.size() - 1; i++) {
+                for (int i = 0; i < path.size() - 2; i++) {
                     Pair<Integer, Integer> location = path.get(i);
                     int row = location.first;
                     int column = location.second;
@@ -261,6 +265,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                         boolean atEnd = enemy.updatePosition(path);
 
                         if (atEnd) {
+                            mapArray[row][column].setBackgroundColor(Color.MAGENTA);
                             spawnedList.remove(enemy);
                             i--;
                             monumentHealth -= enemy.getDamage();
@@ -271,17 +276,17 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                                 startActivity(intent);
                                 hasNotFinished = false;
                             }
+                            Util.setText(GameScreen.this, monumentHealthText,
+                                         "Monument HP: " + monumentHealth);
+
                         }
                     }
                 } else {
                     timer.purge();
                     timer.cancel();
-                    mapArray[path.get(path.size() - 2).first][path.get(path.size() - 2).second].
-                        setBackgroundColor(Color.GRAY);
                     roundCounter++;
-
-                    // FIGURE OUT WHY THIS CRASHES THE APP
-                    //roundCounterText.setText("Round: " + roundCounter);
+                    Util.setText(GameScreen.this, roundCounterText,
+                                 "Round: " + roundCounter);
                 }
             }
         };

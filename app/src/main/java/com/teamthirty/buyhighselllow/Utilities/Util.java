@@ -1,6 +1,8 @@
 package com.teamthirty.buyhighselllow.Utilities;
 
+import android.app.Activity;
 import android.content.Context;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.core.util.Pair;
 
@@ -58,5 +60,20 @@ public final class Util {
             column = Integer.parseInt(idString.substring(endOfRowIndex + 3));
         }
         return new Pair<>(row, column);
+    }
+
+    /**
+     * Sets the text for any textviews that need to be updated
+     * @param activity activity that contains textview
+     * @param text TextView to be updated
+     * @param value text to update
+     */
+    public static void setText(Activity activity, TextView text, String value) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                text.setText(value);
+            }
+        });
     }
 }
