@@ -263,7 +263,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                         if (atEnd) {
                             spawnedList.remove(enemy);
                             i--;
-                            monumentHealth -= enemy.getDamage()*10;
+                            monumentHealth -= enemy.getDamage();
                             monumentHealthText.setText("Monument HP: " + monumentHealth);
 
                             if (monumentHealth <= 0 && hasNotFinished) {
