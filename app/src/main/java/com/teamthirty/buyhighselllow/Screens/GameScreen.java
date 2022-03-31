@@ -250,7 +250,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                             mapArray[row][column].setBackgroundColor(Color.MAGENTA);
                             spawnedList.remove(enemy);
                             i--;
-                            monumentHealth -= enemy.getDamage();
+                            monumentHealth -= enemy.getDamage() * 10; //remove this post-demo
                             monumentHealthText.setText("Monument HP: " + monumentHealth);
 
                             if (monumentHealth <= 0 && hasNotFinished) {
