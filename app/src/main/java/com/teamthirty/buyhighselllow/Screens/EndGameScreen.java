@@ -17,10 +17,9 @@ public class EndGameScreen extends AppCompatActivity {
         restartGameButton.setOnClickListener(v -> restartGame());
 
 
-
     }
 
-     private void restartGame() {
+    private void restartGame() {
 
         Intent intent = new Intent(EndGameScreen.this, MainActivity.class);
         startActivity(intent);

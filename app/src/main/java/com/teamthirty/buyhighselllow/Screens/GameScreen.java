@@ -101,12 +101,9 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
         playerSystem.setMoney(cash);
 
-        Util.setText(GameScreen.this, monumentHealthText,
-                     "Monument HP: " + monumentHealth);
-        Util.setText(GameScreen.this, roundCounterText,
-                     "Round: " + roundCounter);
-        Util.setText(GameScreen.this, playerCashText,
-                     "Player Cash: " + cash);
+        Util.setText(GameScreen.this, monumentHealthText, "Monument HP: " + monumentHealth);
+        Util.setText(GameScreen.this, roundCounterText, "Round: " + roundCounter);
+        Util.setText(GameScreen.this, playerCashText, "Player Cash: " + cash);
 
         for (Button[] buttonArray : mapArray) {
             for (Button button : buttonArray) {
@@ -143,8 +140,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         mapArray[monumentRow][monumentColumn].setBackgroundColor(Color.MAGENTA);
     }
 
-    private Button makeMapButton(Context context, int color, int row,
-                                 int column) {
+    private Button makeMapButton(Context context, int color, int row, int column) {
         GridLayout.LayoutParams buttonParams = new GridLayout.LayoutParams();
         buttonParams.height = 0;
         buttonParams.width = 0;
@@ -212,21 +208,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void run() {
                 // Checks if each tile is occupied by an enemy. If not occupied, set to grey
-                for (int i = 0; i < path.size() - 2; i++) {
-                    Pair<Integer, Integer> location = path.get(i);
-                    int row = location.first;
-                    int column = location.second;
-                    boolean occupied = false;
-                    for (Enemy enemy : spawnedList) {
-                        if (enemy.getPosition().equals(location)) {
-                            occupied = true;
-                            break;
-                        }
-                    }
-                    if (!occupied) {
-                        mapArray[row][column].setBackgroundColor(Color.GRAY);
-                    }
-                }
+                drawBackground();
 
                 if (!unspawnedList.isEmpty()) {
                     Enemy enemy = unspawnedList.remove(0);
@@ -234,14 +216,14 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
 
                     if (enemy instanceof DogeCoin) {
-                        mapArray[path.get(0).first][path.get(0).second].
-                            setBackgroundColor(Color.WHITE);
+                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(
+                            Color.WHITE);
                     } else if (enemy instanceof Etherium) {
-                        mapArray[path.get(0).first][path.get(0).second].
-                            setBackgroundColor(Color.CYAN);
+                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(
+                            Color.CYAN);
                     } else if (enemy instanceof BitCoin) {
-                        mapArray[path.get(0).first][path.get(0).second].
-                            setBackgroundColor(Color.DKGRAY);
+                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(
+                            Color.DKGRAY);
                     }
                 }
 
@@ -285,12 +267,29 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     timer.purge();
                     timer.cancel();
                     roundCounter++;
-                    Util.setText(GameScreen.this, roundCounterText,
-                                 "Round: " + roundCounter);
+                    Util.setText(GameScreen.this, roundCounterText, "Round: " + roundCounter);
                 }
             }
         };
 
         timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
+    }
+
+    private void drawBackground() {
+        for (int i = 0; i < path.size() - 2; i++) {
+            Pair<Integer, Integer> location = path.get(i);
+            int row = location.first;
+            int column = location.second;
+            boolean occupied = false;
+            for (Enemy enemy : spawnedList) {
+                if (enemy.getPosition().equals(location)) {
+                    occupied = true;
+                    break;
+                }
+            }
+            if (!occupied) {
+                mapArray[row][column].setBackgroundColor(Color.GRAY);
+            }
+        }
     }
 }
