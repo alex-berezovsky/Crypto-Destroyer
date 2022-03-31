@@ -207,67 +207,21 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         TimerTask updateEnemyPosition = new TimerTask() {
             @Override
             public void run() {
-                // Checks if each tile is occupied by an enemy. If not occupied, set to grey
+                // draw background tiles
                 drawBackground();
 
-                if (!unspawnedList.isEmpty()) {
-                    Enemy enemy = unspawnedList.remove(0);
-                    spawnedList.add(enemy);
-                    spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
-
-                    if (enemy instanceof DogeCoin) {
-                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(
-                            Color.WHITE);
-                    } else if (enemy instanceof Etherium) {
-                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(
-                            Color.CYAN);
-                    } else if (enemy instanceof BitCoin) {
-                        mapArray[path.get(0).first][path.get(0).second].setBackgroundColor(
-                            Color.DKGRAY);
-                    }
-                }
+                // spawn in and draw enemy colors
+                spawnEnemies();
 
 
                 // Updates position of each enemy in spawned list and displays on screen
-                if (!spawnedList.isEmpty()) {
-                    for (int i = 0; i < spawnedList.size(); i++) {
-                        Enemy enemy = spawnedList.get(i);
-
-                        Pair<Integer, Integer> position = enemy.getPosition();
-                        int row = position.first;
-                        int column = position.second;
-
-                        if (enemy instanceof DogeCoin) {
-                            mapArray[row][column].setBackgroundColor(Color.WHITE);
-                        } else if (enemy instanceof Etherium) {
-                            mapArray[row][column].setBackgroundColor(Color.CYAN);
-                        } else if (enemy instanceof BitCoin) {
-                            mapArray[row][column].setBackgroundColor(Color.DKGRAY);
-                        }
-                        boolean atEnd = enemy.updatePosition(path);
-
-                        if (atEnd) {
-                            mapArray[row][column].setBackgroundColor(Color.MAGENTA);
-                            spawnedList.remove(enemy);
-                            i--;
-                            monumentHealth -= enemy.getDamage() * 10; //remove this post-demo
-                            monumentHealthText.setText("Monument HP: " + monumentHealth);
-
-                            if (monumentHealth <= 0 && hasNotFinished) {
-                                Intent intent = new Intent(GameScreen.this, EndGameScreen.class);
-                                startActivity(intent);
-                                hasNotFinished = false;
-                            }
-                            Util.setText(GameScreen.this, monumentHealthText,
-                                         "Monument HP: " + monumentHealth);
-
-                        }
-                    }
-                } else {
+                if (spawnedList.isEmpty()) {
                     timer.purge();
                     timer.cancel();
                     roundCounter++;
                     Util.setText(GameScreen.this, roundCounterText, "Round: " + roundCounter);
+                } else {
+                    updateEnemies();
                 }
             }
         };
@@ -275,7 +229,48 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
     }
 
+    private void updateEnemies() {
+        for (int i = 0; i < spawnedList.size(); i++) {
+            Enemy enemy = spawnedList.get(i);
+
+            Pair<Integer, Integer> position = enemy.getPosition();
+            int row = position.first;
+            int column = position.second;
+
+            drawEnemy(enemy, mapArray, row, column);
+            boolean atEnd = enemy.updatePosition(path);
+
+            if (atEnd) {
+                mapArray[row][column].setBackgroundColor(Color.MAGENTA);
+                spawnedList.remove(enemy);
+                i--;
+                monumentHealth -= enemy.getDamage() * 10; //remove this post-demo
+                monumentHealthText.setText("Monument HP: " + monumentHealth);
+
+                if (monumentHealth <= 0 && hasNotFinished) {
+                    Intent intent = new Intent(GameScreen.this, EndGameScreen.class);
+                    startActivity(intent);
+                    hasNotFinished = false;
+                }
+                Util.setText(GameScreen.this, monumentHealthText, "Monument HP: " + monumentHealth);
+
+            }
+        }
+    }
+
+
+    private void spawnEnemies() {
+        if (!unspawnedList.isEmpty()) {
+            Enemy enemy = unspawnedList.remove(0);
+            spawnedList.add(enemy);
+            spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
+
+            drawEnemy(enemy, mapArray, path.get(0).first, path.get(0).second);
+        }
+    }
+
     private void drawBackground() {
+        // Checks if each tile is occupied by an enemy. If not occupied, set to grey
         for (int i = 0; i < path.size() - 2; i++) {
             Pair<Integer, Integer> location = path.get(i);
             int row = location.first;
@@ -290,6 +285,16 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             if (!occupied) {
                 mapArray[row][column].setBackgroundColor(Color.GRAY);
             }
+        }
+    }
+
+    private void drawEnemy(Enemy enemy, Button[][] map, int row, int col) {
+        if (enemy instanceof DogeCoin) {
+            map[row][col].setBackgroundColor(Color.WHITE);
+        } else if (enemy instanceof Etherium) {
+            map[row][col].setBackgroundColor(Color.CYAN);
+        } else if (enemy instanceof BitCoin) {
+            map[row][col].setBackgroundColor(Color.DKGRAY);
         }
     }
 }
