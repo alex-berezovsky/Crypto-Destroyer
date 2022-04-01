@@ -15,15 +15,15 @@ public class PlayerSystemTests {
         PlayerSystem playerHard = new PlayerSystem((Difficulty.HARD));
 
         Assert.assertEquals(playerEasy.getCryptoWhaleCost(), 500);
-        Assert.assertEquals(playerEasy.getRedditDudeCost(),300);
+        Assert.assertEquals(playerEasy.getRedditDudeCost(), 300);
         Assert.assertEquals(playerEasy.getTradingChadCost(), 100);
 
         Assert.assertEquals(playerStandard.getCryptoWhaleCost(), 600);
-        Assert.assertEquals(playerStandard.getRedditDudeCost(),400);
+        Assert.assertEquals(playerStandard.getRedditDudeCost(), 400);
         Assert.assertEquals(playerStandard.getTradingChadCost(), 200);
 
         Assert.assertEquals(playerHard.getCryptoWhaleCost(), 700);
-        Assert.assertEquals(playerHard.getRedditDudeCost(),500);
+        Assert.assertEquals(playerHard.getRedditDudeCost(), 500);
         Assert.assertEquals(playerHard.getTradingChadCost(), 300);
     }
 }

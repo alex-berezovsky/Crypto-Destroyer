@@ -43,7 +43,7 @@ public class EnemyTests {
     @Test
     public void testSetPosition() {
         BitCoin coin = new BitCoin();
-        coin.setPosition(new Pair<>(1,2));
+        coin.setPosition(new Pair<>(1, 2));
         Assert.assertEquals(coin.getPosition().first, new Integer(1));
         Assert.assertEquals(coin.getPosition().second, new Integer(2));
     }

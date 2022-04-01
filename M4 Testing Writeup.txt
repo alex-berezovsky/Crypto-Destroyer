@@ -1,6 +1,6 @@
 M4 Testing Writeup
 BitCoinInstantiation: Tests the instantiation of a BitCoin object and ensures that all instance variables are of the correct values.
 DogeCoinInstantiation: Tests the instantiation of a DogeCoin object and ensures that all instance variables are of the correct values.
-EthereumInstantiation: : Tests the instantiation of a Ethereum object and ensures that all instance variables are of the correct values.
-testSetPosition: Tests if a enemy object's position tuple can be correctly updated.
+EthereumInstantiation: : Tests the instantiation of an Ethereum object and ensures that all instance variables are of the correct values.
+testSetPosition: Tests if an enemy object's position tuple can be correctly updated.
 playerSystemInstantiation: Tests the instantiation of a PlayerSystem object and ensures that all instance variables are of the correct values for the three different levels of difficulty.
