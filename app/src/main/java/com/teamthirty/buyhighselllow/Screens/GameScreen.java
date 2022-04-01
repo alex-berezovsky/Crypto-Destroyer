@@ -42,8 +42,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private TextView monumentHealthText;
     private TextView roundCounterText;
     private Boolean hasNotFinished = true;
-    private TextView playerCashText;
-    private TextView playerNameText;
 
 
     @Override
@@ -51,28 +49,55 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         Bundle extras = getIntent().getExtras();
+
         String playerName = extras.getString("name");
         Difficulty difficulty = (Difficulty) extras.get("difficulty");
         playerSystem = new PlayerSystem(difficulty);
 
         // User interface buttons
+        Button playButton = findViewById(R.id.playButton);
         Button redditDude = findViewById(R.id.RedditDude);
         Button tradingChad = findViewById(R.id.TradingChad);
         Button cryptoWhale = findViewById(R.id.CryptoWhale);
-        Button playButton = findViewById(R.id.playButton);
-        generatePath();
-        makeMap();
-
         redditDude.setOnClickListener(view -> setTowerType(TowerType.RedditDude));
         tradingChad.setOnClickListener(view -> setTowerType(TowerType.TradingChad));
         cryptoWhale.setOnClickListener(view -> setTowerType(TowerType.CryptoWhale));
 
-        playerNameText = findViewById(R.id.playerName);
-        playerNameText.setText(playerName);
-        monumentHealthText = findViewById(R.id.monumentHealth);
-        roundCounterText = findViewById(R.id.roundText);
-        playerCashText = findViewById(R.id.playerCash);
+        setDifficulty(difficulty);
 
+        // create path for enemies to follow
+        generatePath();
+
+        // color in map tiles
+        generateMap();
+
+        // set player name text
+        TextView playerNameText = findViewById(R.id.playerName);
+        playerNameText.setText(playerName);
+
+        // set monument health text
+        monumentHealthText = findViewById(R.id.monumentHealth);
+        Util.setText(GameScreen.this, monumentHealthText, "Monument HP: " + monumentHealth);
+
+        // set round text
+        roundCounterText = findViewById(R.id.roundText);
+        Util.setText(GameScreen.this, roundCounterText, "Round: " + roundCounter);
+
+        // set balance text
+        TextView playerCashText = findViewById(R.id.playerCash);
+        Util.setText(GameScreen.this, playerCashText, "Player Cash: " + cash);
+
+        // set onClick listener for all buttons
+        for (Button[] buttonArray : mapArray) {
+            for (Button button : buttonArray) {
+                button.setOnClickListener(this);
+            }
+        }
+
+        playButton.setOnClickListener(view -> startCombat());
+    }
+
+    private void setDifficulty(Difficulty difficulty) {
         switch (difficulty) {
         case HARD: // hard difficulty
             cash = 600;
@@ -90,18 +115,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             break;
         }
         playerSystem.setMoney(cash);
-
-        Util.setText(GameScreen.this, monumentHealthText, "Monument HP: " + monumentHealth);
-        Util.setText(GameScreen.this, roundCounterText, "Round: " + roundCounter);
-        Util.setText(GameScreen.this, playerCashText, "Player Cash: " + cash);
-
-        for (Button[] buttonArray : mapArray) {
-            for (Button button : buttonArray) {
-                button.setOnClickListener(this);
-            }
-        }
-
-        playButton.setOnClickListener(view -> startCombat());
     }
 
     private void generatePath() {
@@ -123,7 +136,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         towerType = newType;
     }
 
-    private void makeMap() {
+    private void generateMap() {
         // Layout object representing the map
         GridLayout mapLayout = findViewById(R.id.map);
         mapArray = new Button[mapLayout.getRowCount()][mapLayout.getColumnCount()];
