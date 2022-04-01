@@ -100,18 +100,18 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private void setDifficulty(Difficulty difficulty) {
         switch (difficulty) {
         case HARD: // hard difficulty
-            cash = 600;
-            monumentHealth = 60;
+            cash = Difficulty.HARD.getCash();
+            monumentHealth = Difficulty.HARD.getMonumentHealth();
             break;
         case STANDARD: // medium difficulty
-            cash = 800;
-            monumentHealth = 80;
+            cash = Difficulty.STANDARD.getCash();
+            monumentHealth = Difficulty.STANDARD.getMonumentHealth();
             break;
         case EASY: // easy difficulty
         default:
             // default is easy mode
-            cash = 1000;
-            monumentHealth = 100;
+            cash = Difficulty.EASY.getCash();
+            monumentHealth = Difficulty.EASY.getMonumentHealth();
             break;
         }
         playerSystem.setMoney(cash);
