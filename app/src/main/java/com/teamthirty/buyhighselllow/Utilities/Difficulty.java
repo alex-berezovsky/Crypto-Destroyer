@@ -9,12 +9,12 @@ public enum Difficulty {
 
         @Override
         public int getCash() {
-            return (int) (defaultCash * getMultiplier());
+            return (int) (DEFAULT_CASH * getMultiplier());
         }
 
         @Override
         public int getMonumentHealth() {
-            return (int) (defaultMonumentHealth * getMultiplier());
+            return (int) (DEFAULT_MONUMENT_HEALTH * getMultiplier());
         }
     },
     STANDARD {
@@ -25,12 +25,12 @@ public enum Difficulty {
 
         @Override
         public int getCash() {
-            return (int) (defaultCash * getMultiplier());
+            return (int) (DEFAULT_CASH * getMultiplier());
         }
 
         @Override
         public int getMonumentHealth() {
-            return (int) (defaultMonumentHealth * getMultiplier());
+            return (int) (DEFAULT_MONUMENT_HEALTH * getMultiplier());
         }
     },
     HARD {
@@ -41,12 +41,12 @@ public enum Difficulty {
 
         @Override
         public int getCash() {
-            return (int) (defaultCash * getMultiplier());
+            return (int) (DEFAULT_CASH * getMultiplier());
         }
 
         @Override
         public int getMonumentHealth() {
-            return (int) (defaultMonumentHealth * getMultiplier());
+            return (int) (DEFAULT_MONUMENT_HEALTH * getMultiplier());
         }
     };
 
@@ -55,6 +55,6 @@ public enum Difficulty {
     public abstract int getCash();
     public abstract int getMonumentHealth();
 
-    private static final int defaultCash = 1000;
-    private static final int defaultMonumentHealth = 100;
+    private static final int DEFAULT_CASH = 1000;
+    private static final int DEFAULT_MONUMENT_HEALTH = 100;
 }
