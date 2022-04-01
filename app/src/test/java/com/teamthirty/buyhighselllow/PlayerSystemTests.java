@@ -1,8 +1,10 @@
 package com.teamthirty.buyhighselllow;
+
+import com.teamthirty.buyhighselllow.Systems.PlayerSystem;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import org.junit.Assert;
 import org.junit.Test;
-import com.teamthirty.buyhighselllow.Systems.*;
+
 public class PlayerSystemTests {
 
     /**

@@ -1,8 +1,12 @@
 package com.teamthirty.buyhighselllow;
+
 import androidx.core.util.Pair;
+import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import org.junit.Assert;
 import org.junit.Test;
-import com.teamthirty.buyhighselllow.Entities.Enemies.*;
+
 public class EnemyTests {
     /**
      * M4 test for instantiation of BitCoin objects
@@ -15,6 +19,7 @@ public class EnemyTests {
         Assert.assertEquals(coin.getDamage(), 3);
         Assert.assertEquals(coin.getHealth(), 3);
     }
+
     /**
      * M4 test for instantiation of DogeCoin objects
      */
@@ -26,6 +31,7 @@ public class EnemyTests {
         Assert.assertEquals(coin.getDamage(), 1);
         Assert.assertEquals(coin.getHealth(), 1);
     }
+
     /**
      * M4 test for instantiation of Ethereum objects
      */
@@ -37,6 +43,7 @@ public class EnemyTests {
         Assert.assertEquals(coin.getDamage(), 2);
         Assert.assertEquals(coin.getHealth(), 2);
     }
+
     /**
      * M4 test for setting the position of an enemy
      */
