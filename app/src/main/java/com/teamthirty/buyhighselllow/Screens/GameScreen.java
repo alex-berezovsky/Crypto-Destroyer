@@ -43,6 +43,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private TextView roundCounterText;
     private Boolean hasNotFinished = true;
     private TextView playerCashText;
+    private TextView playerNameText;
 
 
     @Override
@@ -59,25 +60,14 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         Button tradingChad = findViewById(R.id.TradingChad);
         Button cryptoWhale = findViewById(R.id.CryptoWhale);
         Button playButton = findViewById(R.id.playButton);
-        // THIS IS HARD-CODED AND NEEDS TO GO
-        path = new ArrayList<>();
-        path.add(new Pair<>(3, 0));
-        path.add(new Pair<>(3, 1));
-        path.add(new Pair<>(3, 2));
-        path.add(new Pair<>(3, 3));
-        path.add(new Pair<>(3, 4));
-        path.add(new Pair<>(3, 5));
-        path.add(new Pair<>(3, 6));
-        path.add(new Pair<>(3, 7));
-        path.add(new Pair<>(3, 8));
-        path.add(new Pair<>(null, null));
+        generatePath();
         makeMap();
 
         redditDude.setOnClickListener(view -> setTowerType(TowerType.RedditDude));
         tradingChad.setOnClickListener(view -> setTowerType(TowerType.TradingChad));
         cryptoWhale.setOnClickListener(view -> setTowerType(TowerType.CryptoWhale));
 
-        TextView playerNameText = findViewById(R.id.playerName);
+        playerNameText = findViewById(R.id.playerName);
         playerNameText.setText(playerName);
         monumentHealthText = findViewById(R.id.monumentHealth);
         roundCounterText = findViewById(R.id.roundText);
@@ -114,6 +104,21 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         playButton.setOnClickListener(view -> startCombat());
     }
 
+    private void generatePath() {
+        // THIS IS HARD-CODED AND NEEDS TO GO
+        path = new ArrayList<>();
+        path.add(new Pair<>(3, 0));
+        path.add(new Pair<>(3, 1));
+        path.add(new Pair<>(3, 2));
+        path.add(new Pair<>(3, 3));
+        path.add(new Pair<>(3, 4));
+        path.add(new Pair<>(3, 5));
+        path.add(new Pair<>(3, 6));
+        path.add(new Pair<>(3, 7));
+        path.add(new Pair<>(3, 8));
+        path.add(new Pair<>(null, null));
+    }
+
     private void setTowerType(TowerType newType) {
         towerType = newType;
     }
@@ -124,16 +129,17 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         mapArray = new Button[mapLayout.getRowCount()][mapLayout.getColumnCount()];
         for (int i = 0; i < mapLayout.getRowCount(); i++) {
             for (int j = 0; j < mapLayout.getColumnCount(); j++) {
-                Pair<Integer, Integer> temp = new Pair<>(i, j);
-                if (!path.contains(temp)) {
-                    mapArray[i][j] = makeMapButton(this, Color.GREEN, i, j);
+                Pair<Integer, Integer> curPosition = new Pair<>(i, j);
+                if (path.contains(curPosition)) {
+                    mapArray[i][j] = makeMapButton(this, Color.GRAY, i, j);
                     mapLayout.addView(mapArray[i][j]);
                 } else {
-                    mapArray[i][j] = makeMapButton(this, Color.GRAY, i, j);
+                    mapArray[i][j] = makeMapButton(this, Color.GREEN, i, j);
                     mapLayout.addView(mapArray[i][j]);
                 }
             }
         }
+        // hard-coded monument location
         Pair<Integer, Integer> monumentLocation = path.get(path.size() - 2);
         int monumentRow = monumentLocation.first;
         int monumentColumn = monumentLocation.second;
