@@ -1,5 +1,6 @@
 package com.teamthirty.buyhighselllow;
 
+import androidx.core.util.Pair;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,6 +25,4 @@ public class UtilTest {
         Assert.assertFalse(Util.sanitizeNameInput(null, name));
 
     }
-
-
 }

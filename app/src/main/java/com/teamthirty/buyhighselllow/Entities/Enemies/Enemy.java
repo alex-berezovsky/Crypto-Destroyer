@@ -26,6 +26,10 @@ public class Enemy extends Entity {
         return position;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
     public int getDamage() {
         return damage;
     }

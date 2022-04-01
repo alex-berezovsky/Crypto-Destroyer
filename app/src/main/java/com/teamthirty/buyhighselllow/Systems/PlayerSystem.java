@@ -83,4 +83,16 @@ public class PlayerSystem extends System {
     public void setMoney(int money) {
         this.money = money;
     }
+
+    public int getTradingChadCost() {
+        return tradingChadCost;
+    }
+
+    public int getRedditDudeCost() {
+        return redditDudeCost;
+    }
+
+    public int getCryptoWhaleCost() {
+        return cryptoWhaleCost;
+    }
 }
