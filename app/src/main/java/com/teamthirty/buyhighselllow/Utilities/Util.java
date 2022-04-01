@@ -13,8 +13,8 @@ public final class Util {
      * It checks for null, empty, and whitespace only inputs
      *
      * @param context the context of the application
-     *
      * @param input   the string you are checking
+     *
      * @return true if name follows proper formatting, false otherwise
      */
     public static boolean sanitizeNameInput(Context context, String input) {
@@ -43,7 +43,9 @@ public final class Util {
 
     /**
      * Returns button location in grid based on id
+     *
      * @param id of button
+     *
      * @return button location
      */
     public static Pair<Integer, Integer> towerLocation(int id) {
@@ -64,16 +66,12 @@ public final class Util {
 
     /**
      * Sets the text for any textviews that need to be updated
+     *
      * @param activity activity that contains textview
-     * @param text TextView to be updated
-     * @param value text to update
+     * @param text     TextView to be updated
+     * @param value    text to update
      */
     public static void setText(Activity activity, TextView text, String value) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                text.setText(value);
-            }
-        });
+        activity.runOnUiThread(() -> text.setText(value));
     }
 }

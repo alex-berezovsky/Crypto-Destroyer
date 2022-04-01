@@ -2,10 +2,12 @@ package com.teamthirty.buyhighselllow;
 
 import androidx.core.util.Pair;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
-import com.teamthirty.buyhighselllow.Entities.Towers.*;
+import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
+import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
+import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TowerTests {
 
@@ -27,6 +29,7 @@ public class TowerTests {
         assertEquals(30, proj.getPosition().first.intValue());
         assertEquals(35, proj.getPosition().second.intValue());
     }
+
     /**
      * Tests that all values of a cryptoWhale tower are instantiated correctly
      */

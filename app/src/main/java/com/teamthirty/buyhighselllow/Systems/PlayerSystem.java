@@ -43,14 +43,8 @@ public class PlayerSystem extends System {
 
     public boolean buyTower(TowerType towerType, Context context, Button[][] mapArray, int row,
                             int column, Activity activity) {
-        int initialCost;
-        if (towerType.equals(TowerType.TradingChad)) {
-            initialCost = tradingChadCost;
-        } else if (towerType == TowerType.RedditDude) {
-            initialCost = redditDudeCost;
-        } else if (towerType == TowerType.CryptoWhale) {
-            initialCost = cryptoWhaleCost;
-        } else {
+        int initialCost = findInitialCost(towerType);
+        if (initialCost == -1) {
             return false;
         }
         if (initialCost <= money) {
@@ -76,11 +70,35 @@ public class PlayerSystem extends System {
         playerCashText.setText("Player Cash: " + getMoney());
     }
 
+    public int findInitialCost(TowerType towerType) {
+        if (towerType.equals(TowerType.TradingChad)) {
+            return tradingChadCost;
+        } else if (towerType == TowerType.RedditDude) {
+            return redditDudeCost;
+        } else if (towerType == TowerType.CryptoWhale) {
+            return cryptoWhaleCost;
+        } else {
+            return -1;
+        }
+    }
+
     public int getMoney() {
         return money;
     }
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public int getTradingChadCost() {
+        return tradingChadCost;
+    }
+
+    public int getRedditDudeCost() {
+        return redditDudeCost;
+    }
+
+    public int getCryptoWhaleCost() {
+        return cryptoWhaleCost;
     }
 }

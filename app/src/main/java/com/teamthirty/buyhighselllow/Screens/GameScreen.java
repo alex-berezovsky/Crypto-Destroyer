@@ -42,7 +42,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private TextView monumentHealthText;
     private TextView roundCounterText;
     private Boolean hasNotFinished = true;
-    private TextView playerCashText;
 
 
     @Override
@@ -50,15 +49,75 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         Bundle extras = getIntent().getExtras();
+
         String playerName = extras.getString("name");
         Difficulty difficulty = (Difficulty) extras.get("difficulty");
         playerSystem = new PlayerSystem(difficulty);
 
         // User interface buttons
+        Button playButton = findViewById(R.id.playButton);
         Button redditDude = findViewById(R.id.RedditDude);
         Button tradingChad = findViewById(R.id.TradingChad);
         Button cryptoWhale = findViewById(R.id.CryptoWhale);
-        Button playButton = findViewById(R.id.playButton);
+        redditDude.setOnClickListener(view -> setTowerType(TowerType.RedditDude));
+        tradingChad.setOnClickListener(view -> setTowerType(TowerType.TradingChad));
+        cryptoWhale.setOnClickListener(view -> setTowerType(TowerType.CryptoWhale));
+
+        setDifficulty(difficulty);
+        playerSystem.setMoney(cash);
+
+        // create path for enemies to follow
+        generatePath();
+
+        // color in map tiles
+        generateMap();
+
+        // set player name text
+        TextView playerNameText = findViewById(R.id.playerName);
+        playerNameText.setText(playerName);
+
+        // set monument health text
+        monumentHealthText = findViewById(R.id.monumentHealth);
+        Util.setText(GameScreen.this, monumentHealthText, "Monument HP: " + monumentHealth);
+
+        // set round text
+        roundCounterText = findViewById(R.id.roundText);
+        Util.setText(GameScreen.this, roundCounterText, "Round: " + roundCounter);
+
+        // set balance text
+        TextView playerCashText = findViewById(R.id.playerCash);
+        Util.setText(GameScreen.this, playerCashText, "Player Cash: " + cash);
+
+        // set onClick listener for all buttons
+        for (Button[] buttonArray : mapArray) {
+            for (Button button : buttonArray) {
+                button.setOnClickListener(this);
+            }
+        }
+
+        playButton.setOnClickListener(view -> startCombat());
+    }
+
+    private void setDifficulty(Difficulty difficulty) {
+        switch (difficulty) {
+        case HARD: // hard difficulty
+            cash = Difficulty.HARD.getCash();
+            monumentHealth = Difficulty.HARD.getMonumentHealth();
+            break;
+        case STANDARD: // medium difficulty
+            cash = Difficulty.STANDARD.getCash();
+            monumentHealth = Difficulty.STANDARD.getMonumentHealth();
+            break;
+        case EASY: // easy difficulty
+        default:
+            // default is easy mode
+            cash = Difficulty.EASY.getCash();
+            monumentHealth = Difficulty.EASY.getMonumentHealth();
+            break;
+        }
+    }
+
+    private void generatePath() {
         // THIS IS HARD-CODED AND NEEDS TO GO
         path = new ArrayList<>();
         path.add(new Pair<>(3, 0));
@@ -71,80 +130,36 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         path.add(new Pair<>(3, 7));
         path.add(new Pair<>(3, 8));
         path.add(new Pair<>(null, null));
-        makeMap();
-
-        redditDude.setOnClickListener(view -> setTowerType(TowerType.RedditDude));
-        tradingChad.setOnClickListener(view -> setTowerType(TowerType.TradingChad));
-        cryptoWhale.setOnClickListener(view -> setTowerType(TowerType.CryptoWhale));
-
-        TextView playerNameText = findViewById(R.id.playerName);
-        playerNameText.setText(playerName);
-        monumentHealthText = findViewById(R.id.monumentHealth);
-        roundCounterText = findViewById(R.id.roundText);
-        playerCashText = findViewById(R.id.playerCash);
-
-        switch (difficulty) {
-        case HARD: // hard difficulty
-            cash = 600;
-            monumentHealth = 60;
-            break;
-        case STANDARD: // medium difficulty
-            cash = 800;
-            monumentHealth = 80;
-            break;
-        case EASY: // easy difficulty
-        default:
-            // default is easy mode
-            cash = 1000;
-            monumentHealth = 100;
-            break;
-        }
-        playerSystem.setMoney(cash);
-
-        Util.setText(GameScreen.this, monumentHealthText,
-                     "Monument HP: " + monumentHealth);
-        Util.setText(GameScreen.this, roundCounterText,
-                     "Round: " + roundCounter);
-        Util.setText(GameScreen.this, playerCashText,
-                     "Player Cash: " + cash);
-
-        for (Button[] buttonArray : mapArray) {
-            for (Button button : buttonArray) {
-                button.setOnClickListener(this);
-            }
-        }
-
-        playButton.setOnClickListener(view -> startCombat());
     }
 
     private void setTowerType(TowerType newType) {
         towerType = newType;
     }
 
-    private void makeMap() {
+    private void generateMap() {
         // Layout object representing the map
         GridLayout mapLayout = findViewById(R.id.map);
         mapArray = new Button[mapLayout.getRowCount()][mapLayout.getColumnCount()];
         for (int i = 0; i < mapLayout.getRowCount(); i++) {
             for (int j = 0; j < mapLayout.getColumnCount(); j++) {
-                Pair<Integer, Integer> temp = new Pair<>(i, j);
-                if (!path.contains(temp)) {
-                    mapArray[i][j] = makeMapButton(this, Color.GREEN, i, j);
+                Pair<Integer, Integer> curPosition = new Pair<>(i, j);
+                if (path.contains(curPosition)) {
+                    mapArray[i][j] = makeMapButton(this, Color.GRAY, i, j);
                     mapLayout.addView(mapArray[i][j]);
                 } else {
-                    mapArray[i][j] = makeMapButton(this, Color.GRAY, i, j);
+                    mapArray[i][j] = makeMapButton(this, Color.GREEN, i, j);
                     mapLayout.addView(mapArray[i][j]);
                 }
             }
         }
+        // hard-coded monument location
         Pair<Integer, Integer> monumentLocation = path.get(path.size() - 2);
         int monumentRow = monumentLocation.first;
         int monumentColumn = monumentLocation.second;
         mapArray[monumentRow][monumentColumn].setBackgroundColor(Color.MAGENTA);
     }
 
-    private Button makeMapButton(Context context, int color, int row,
-                                 int column) {
+    private Button makeMapButton(Context context, int color, int row, int column) {
         GridLayout.LayoutParams buttonParams = new GridLayout.LayoutParams();
         buttonParams.height = 0;
         buttonParams.width = 0;
@@ -211,86 +226,94 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         TimerTask updateEnemyPosition = new TimerTask() {
             @Override
             public void run() {
-                // Checks if each tile is occupied by an enemy. If not occupied, set to grey
-                for (int i = 0; i < path.size() - 2; i++) {
-                    Pair<Integer, Integer> location = path.get(i);
-                    int row = location.first;
-                    int column = location.second;
-                    boolean occupied = false;
-                    for (Enemy enemy : spawnedList) {
-                        if (enemy.getPosition().equals(location)) {
-                            occupied = true;
-                            break;
-                        }
-                    }
-                    if (!occupied) {
-                        mapArray[row][column].setBackgroundColor(Color.GRAY);
-                    }
-                }
+                // draw background tiles
+                drawBackground();
 
-                if (!unspawnedList.isEmpty()) {
-                    Enemy enemy = unspawnedList.remove(0);
-                    spawnedList.add(enemy);
-                    spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
-
-                    if (enemy instanceof DogeCoin) {
-                        mapArray[path.get(0).first][path.get(0).second].
-                            setBackgroundColor(Color.WHITE);
-                    } else if (enemy instanceof Etherium) {
-                        mapArray[path.get(0).first][path.get(0).second].
-                            setBackgroundColor(Color.CYAN);
-                    } else if (enemy instanceof BitCoin) {
-                        mapArray[path.get(0).first][path.get(0).second].
-                            setBackgroundColor(Color.DKGRAY);
-                    }
-                }
+                // spawn in and draw enemy colors
+                spawnEnemies();
 
 
                 // Updates position of each enemy in spawned list and displays on screen
-                if (!spawnedList.isEmpty()) {
-                    for (int i = 0; i < spawnedList.size(); i++) {
-                        Enemy enemy = spawnedList.get(i);
-
-                        Pair<Integer, Integer> position = enemy.getPosition();
-                        int row = position.first;
-                        int column = position.second;
-
-                        if (enemy instanceof DogeCoin) {
-                            mapArray[row][column].setBackgroundColor(Color.WHITE);
-                        } else if (enemy instanceof Etherium) {
-                            mapArray[row][column].setBackgroundColor(Color.CYAN);
-                        } else if (enemy instanceof BitCoin) {
-                            mapArray[row][column].setBackgroundColor(Color.DKGRAY);
-                        }
-                        boolean atEnd = enemy.updatePosition(path);
-
-                        if (atEnd) {
-                            mapArray[row][column].setBackgroundColor(Color.MAGENTA);
-                            spawnedList.remove(enemy);
-                            i--;
-                            monumentHealth -= enemy.getDamage();
-                            monumentHealthText.setText("Monument HP: " + monumentHealth);
-
-                            if (monumentHealth <= 0 && hasNotFinished) {
-                                Intent intent = new Intent(GameScreen.this, EndGameScreen.class);
-                                startActivity(intent);
-                                hasNotFinished = false;
-                            }
-                            Util.setText(GameScreen.this, monumentHealthText,
-                                         "Monument HP: " + monumentHealth);
-
-                        }
-                    }
-                } else {
+                if (spawnedList.isEmpty()) {
                     timer.purge();
                     timer.cancel();
                     roundCounter++;
-                    Util.setText(GameScreen.this, roundCounterText,
-                                 "Round: " + roundCounter);
+                    Util.setText(GameScreen.this, roundCounterText, "Round: " + roundCounter);
+                } else {
+                    updateEnemies();
                 }
             }
         };
 
         timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
+    }
+
+    private void updateEnemies() {
+        for (int i = 0; i < spawnedList.size(); i++) {
+            Enemy enemy = spawnedList.get(i);
+
+            Pair<Integer, Integer> position = enemy.getPosition();
+            int row = position.first;
+            int column = position.second;
+
+            drawEnemy(enemy, mapArray, row, column);
+            boolean atEnd = enemy.updatePosition(path);
+
+            if (atEnd) {
+                mapArray[row][column].setBackgroundColor(Color.MAGENTA);
+                spawnedList.remove(enemy);
+                i--;
+                monumentHealth -= enemy.getDamage() * 10; //remove this post-demo
+                monumentHealthText.setText("Monument HP: " + monumentHealth);
+
+                if (monumentHealth <= 0 && hasNotFinished) {
+                    Intent intent = new Intent(GameScreen.this, EndGameScreen.class);
+                    startActivity(intent);
+                    hasNotFinished = false;
+                }
+                Util.setText(GameScreen.this, monumentHealthText, "Monument HP: " + monumentHealth);
+
+            }
+        }
+    }
+
+
+    private void spawnEnemies() {
+        if (!unspawnedList.isEmpty()) {
+            Enemy enemy = unspawnedList.remove(0);
+            spawnedList.add(enemy);
+            spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
+
+            drawEnemy(enemy, mapArray, path.get(0).first, path.get(0).second);
+        }
+    }
+
+    private void drawBackground() {
+        // Checks if each tile is occupied by an enemy. If not occupied, set to grey
+        for (int i = 0; i < path.size() - 2; i++) {
+            Pair<Integer, Integer> location = path.get(i);
+            int row = location.first;
+            int column = location.second;
+            boolean occupied = false;
+            for (Enemy enemy : spawnedList) {
+                if (enemy.getPosition().equals(location)) {
+                    occupied = true;
+                    break;
+                }
+            }
+            if (!occupied) {
+                mapArray[row][column].setBackgroundColor(Color.GRAY);
+            }
+        }
+    }
+
+    private void drawEnemy(Enemy enemy, Button[][] map, int row, int col) {
+        if (enemy instanceof DogeCoin) {
+            map[row][col].setBackgroundColor(Color.WHITE);
+        } else if (enemy instanceof Etherium) {
+            map[row][col].setBackgroundColor(Color.CYAN);
+        } else if (enemy instanceof BitCoin) {
+            map[row][col].setBackgroundColor(Color.DKGRAY);
+        }
     }
 }

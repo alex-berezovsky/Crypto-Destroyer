@@ -24,6 +24,4 @@ public class UtilTest {
         Assert.assertFalse(Util.sanitizeNameInput(null, name));
 
     }
-
-
 }

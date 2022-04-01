@@ -14,7 +14,6 @@ public class Enemy extends Entity {
     public boolean updatePosition(ArrayList<Pair<Integer, Integer>> path) {
         int pathIndex = path.indexOf(position);
         position = path.get(pathIndex + 1);
-
         return position == path.get(path.size() - 1);
     }
 
@@ -24,6 +23,10 @@ public class Enemy extends Entity {
 
     public Pair<Integer, Integer> getPosition() {
         return position;
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public int getDamage() {

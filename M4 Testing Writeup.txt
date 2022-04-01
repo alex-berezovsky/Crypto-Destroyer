@@ -1,0 +1,11 @@
+M4 Testing Writeup
+BitCoinInstantiation: Tests the instantiation of a BitCoin object and ensures that all instance variables are of the correct values.
+DogeCoinInstantiation: Tests the instantiation of a DogeCoin object and ensures that all instance variables are of the correct values.
+EthereumInstantiation: : Tests the instantiation of an Ethereum object and ensures that all instance variables are of the correct values.
+testUpdatePosition: M4 Test that checks if the enemy is correctly moved forward by one grid unit along the path
+testEndOfPathDetection: M4 Test for detecting if an enemy is at the end of the path
+testSetPosition: Tests if an enemy object's position tuple can be correctly updated.
+playerSystemInstantiation: Tests the instantiation of a PlayerSystem object and ensures that all instance variables are of the correct values for the three different levels of difficulty.
+testCosts: M4 Test that finds the appropriate initial cost for a given tower type
+testInsufficientFunds: M4 Test that checks that insufficient funds are correctly handled when buying a tower
+difficultyParameterVerificationTest: Tests the instantiation of the GameScreen's cash and monument health based on difficulty.
