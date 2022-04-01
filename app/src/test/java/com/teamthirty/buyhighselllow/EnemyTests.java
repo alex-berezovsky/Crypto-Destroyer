@@ -7,6 +7,8 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class EnemyTests {
     /**
      * M4 test for instantiation of BitCoin objects
@@ -42,6 +44,52 @@ public class EnemyTests {
         Assert.assertNull(coin.getPosition().second);
         Assert.assertEquals(coin.getDamage(), 2);
         Assert.assertEquals(coin.getHealth(), 2);
+    }
+
+    /**
+     * M4 Test that checks if the enemy is correctly moved forward by one grid unit along the path
+     */
+    @Test
+    public void testUpdatePosition() {
+        ArrayList<Pair<Integer, Integer>> path = new ArrayList<>();
+        path.add(new Pair<>(3, 0));
+        path.add(new Pair<>(3, 1));
+        path.add(new Pair<>(3, 2));
+        path.add(new Pair<>(3, 3));
+        path.add(new Pair<>(3, 4));
+        path.add(new Pair<>(3, 5));
+        path.add(new Pair<>(3, 6));
+        path.add(new Pair<>(3, 7));
+        path.add(new Pair<>(3, 8));
+        path.add(new Pair<>(null, null));
+
+        Etherium coin = new Etherium();
+        coin.setPosition(new Pair<>(3,0));
+        coin.updatePosition(path);
+        Assert.assertEquals(coin.getPosition().first, new Integer(3));
+        Assert.assertEquals(coin.getPosition().second, new Integer(1));
+    }
+
+    /**
+     * M4 Test for detecting if an enemy is at the end of the path
+     */
+    @Test
+    public void testEndOfPathDetection() {
+        ArrayList<Pair<Integer, Integer>> path = new ArrayList<>();
+        path.add(new Pair<>(3, 0));
+        path.add(new Pair<>(3, 1));
+        path.add(new Pair<>(3, 2));
+        path.add(new Pair<>(3, 3));
+        path.add(new Pair<>(3, 4));
+        path.add(new Pair<>(3, 5));
+        path.add(new Pair<>(3, 6));
+        path.add(new Pair<>(3, 7));
+        path.add(new Pair<>(3, 8));
+        path.add(new Pair<>(null, null));
+
+        Etherium coin = new Etherium();
+        coin.setPosition(new Pair<>(3,8));
+        Assert.assertTrue(coin.updatePosition(path));
     }
 
     /**

@@ -2,6 +2,7 @@ package com.teamthirty.buyhighselllow;
 
 import com.teamthirty.buyhighselllow.Systems.PlayerSystem;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
+import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,5 +28,26 @@ public class PlayerSystemTests {
         Assert.assertEquals(playerHard.getCryptoWhaleCost(), 700);
         Assert.assertEquals(playerHard.getRedditDudeCost(), 500);
         Assert.assertEquals(playerHard.getTradingChadCost(), 300);
+    }
+
+    /**
+     * M4 Test that finds the appropriate initial cost for a given tower type
+     */
+    @Test
+    public void testCosts() {
+        PlayerSystem playerStandard = new PlayerSystem(Difficulty.STANDARD);
+        Assert.assertEquals(playerStandard.findInitialCost(TowerType.TradingChad), 200);
+        Assert.assertEquals(playerStandard.findInitialCost(TowerType.RedditDude), 400);
+        Assert.assertEquals(playerStandard.findInitialCost(TowerType.CryptoWhale), 600);
+    }
+
+    /**
+     * M4 Test that checks that insufficient funds are correctly handled when buying a tower
+     */
+    @Test
+    public void testInsufficientFunds() {
+        PlayerSystem playerStandard = new PlayerSystem(Difficulty.STANDARD);
+        playerStandard.setMoney(100);
+        Assert.assertFalse(playerStandard.buyTower(TowerType.TradingChad, null, null, 0, 0, null));
     }
 }
