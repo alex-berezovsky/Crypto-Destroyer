@@ -64,6 +64,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         cryptoWhale.setOnClickListener(view -> setTowerType(TowerType.CryptoWhale));
 
         setDifficulty(difficulty);
+        playerSystem.setMoney(cash);
 
         // create path for enemies to follow
         generatePath();
@@ -114,7 +115,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             monumentHealth = Difficulty.EASY.getMonumentHealth();
             break;
         }
-        playerSystem.setMoney(cash);
     }
 
     private void generatePath() {

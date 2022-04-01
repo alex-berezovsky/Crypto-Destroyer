@@ -4,3 +4,4 @@ DogeCoinInstantiation: Tests the instantiation of a DogeCoin object and ensures 
 EthereumInstantiation: : Tests the instantiation of an Ethereum object and ensures that all instance variables are of the correct values.
 testSetPosition: Tests if an enemy object's position tuple can be correctly updated.
 playerSystemInstantiation: Tests the instantiation of a PlayerSystem object and ensures that all instance variables are of the correct values for the three different levels of difficulty.
+difficultyParameterVerificationTest: Tests the instantiation of the GameScreen's cash and monument health based on difficulty.
