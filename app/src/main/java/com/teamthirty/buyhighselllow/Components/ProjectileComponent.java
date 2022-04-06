@@ -2,7 +2,7 @@ package com.teamthirty.buyhighselllow.Components;
 
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 
-public interface ProjectileComponent extends IComponent {
+public interface ProjectileComponent {
     /**
      * Creates a new projectile
      *

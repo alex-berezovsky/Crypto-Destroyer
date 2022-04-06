@@ -1,11 +1,10 @@
 package com.teamthirty.buyhighselllow.Entities.Enemies;
 
 import androidx.core.util.Pair;
-import com.teamthirty.buyhighselllow.Entities.Entity;
 
 import java.util.ArrayList;
 
-public class Enemy extends Entity {
+public class Enemy {
     protected Pair<Integer, Integer> position;
     protected int health;
     protected int damage;

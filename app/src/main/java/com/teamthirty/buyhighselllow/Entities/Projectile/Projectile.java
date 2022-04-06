@@ -1,10 +1,8 @@
 package com.teamthirty.buyhighselllow.Entities.Projectile;
 
 import androidx.core.util.Pair;
-import com.teamthirty.buyhighselllow.Components.TransformComponent;
-import com.teamthirty.buyhighselllow.Entities.Entity;
 
-public class Projectile extends Entity implements TransformComponent {
+public class Projectile {
     protected Pair<Integer, Integer> position;
     protected int damage;
     protected final int speed = 20;
@@ -23,7 +21,6 @@ public class Projectile extends Entity implements TransformComponent {
     /**
      * Updates the position of the projectile
      */
-    @Override
     public void updatePosition() {
         position = new Pair<>(position.first + speed, position.second + speed);
     }

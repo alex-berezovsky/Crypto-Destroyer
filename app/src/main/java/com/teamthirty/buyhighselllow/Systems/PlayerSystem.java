@@ -5,15 +5,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.widget.Button;
 import android.widget.TextView;
-import com.teamthirty.buyhighselllow.Entities.Entity;
 import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
-import java.util.ArrayList;
-
-public class PlayerSystem extends System {
+public class PlayerSystem {
     // tower cost constants
     private int tradingChadCost;
     private int redditDudeCost;
@@ -35,10 +32,6 @@ public class PlayerSystem extends System {
             redditDudeCost = 500;
             cryptoWhaleCost = 700;
         }
-    }
-
-    public PlayerSystem(ArrayList<Entity> entityList) {
-        super(entityList);
     }
 
     public boolean buyTower(TowerType towerType, Context context, Button[][] mapArray, int row,
