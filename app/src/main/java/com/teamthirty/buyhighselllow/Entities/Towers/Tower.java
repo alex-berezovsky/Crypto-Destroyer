@@ -6,7 +6,7 @@ import com.teamthirty.buyhighselllow.Components.ProjectileComponent;
 import com.teamthirty.buyhighselllow.Entities.Entity;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 
-public abstract class Tower extends Entity implements LevelComponent, ProjectileComponent {
+public abstract class Tower extends Entity implements LevelComponent {
     protected Pair<Integer, Integer> position;
     protected int level;
     protected int fireRate;
@@ -54,10 +54,7 @@ public abstract class Tower extends Entity implements LevelComponent, Projectile
      *
      * @return the created projectile
      */
-    @Override
-    public Projectile generateProjectile() {
-        return null;
-    }
+    public abstract Projectile generateProjectile();
 
     /**
      * Returns the location of the tower
