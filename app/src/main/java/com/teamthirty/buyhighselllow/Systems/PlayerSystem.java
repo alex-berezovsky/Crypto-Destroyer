@@ -20,16 +20,16 @@ public class PlayerSystem {
 
     public PlayerSystem(Difficulty difficulty) {
         if (difficulty.equals(Difficulty.EASY)) {
-            tradingChadCost = 100;
-            redditDudeCost = 300;
+            redditDudeCost = 100;
+            tradingChadCost = 300;
             cryptoWhaleCost = 500;
         } else if (difficulty.equals(Difficulty.STANDARD)) {
-            tradingChadCost = 200;
-            redditDudeCost = 400;
+            redditDudeCost = 200;
+            tradingChadCost = 400;
             cryptoWhaleCost = 600;
         } else if (difficulty.equals(Difficulty.HARD)) {
-            tradingChadCost = 300;
-            redditDudeCost = 500;
+            redditDudeCost = 300;
+            tradingChadCost = 500;
             cryptoWhaleCost = 700;
         }
     }
