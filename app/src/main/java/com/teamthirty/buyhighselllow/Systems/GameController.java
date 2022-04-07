@@ -10,10 +10,12 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
+import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
+import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.R;
-import com.teamthirty.buyhighselllow.Screens.EndGameScreen;
-import com.teamthirty.buyhighselllow.Screens.GameScreen;
-import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
@@ -28,28 +30,10 @@ public class GameController {
         this.gameScreen = gameScreen;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
-        switch (difficulty) {
-        case HARD: // hard difficulty
-            gameScreen.setCash(Difficulty.HARD.getCash());
-            gameScreen.setMonumentHealth(Difficulty.HARD.getMonumentHealth());
-            break;
-        case STANDARD: // medium difficulty
-            gameScreen.setCash(Difficulty.STANDARD.getCash());
-            gameScreen.setMonumentHealth(Difficulty.STANDARD.getMonumentHealth());
-            break;
-        case EASY: // easy difficulty
-        default:
-            // default is easy mode
-            gameScreen.setCash(Difficulty.EASY.getCash());
-            gameScreen.setMonumentHealth(Difficulty.EASY.getMonumentHealth());
-            break;
-        }
-    }
-
     public void generatePath() {
         // THIS IS HARD-CODED AND NEEDS TO GO
         gameScreen.setPath(new ArrayList<Pair<Integer, Integer>>());
+        gameScreen.getPath().add(new Pair<Integer, Integer>(null, null));
         gameScreen.getPath().add(new Pair<Integer, Integer>(3, 0));
         gameScreen.getPath().add(new Pair<Integer, Integer>(3, 1));
         gameScreen.getPath().add(new Pair<Integer, Integer>(3, 2));
@@ -144,6 +128,46 @@ public class GameController {
             }
         };
 
+        TimerTask redditTask = new TimerTask() {
+            @Override
+            public void run() {
+                for (Tower tower : GameScreen.towerList) {
+                    if (tower instanceof RedditDude) {
+                        int col = tower.getPosition().second;
+                        ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
+                        for (Enemy enemy : spawnedList) {
+                            if (enemy.getPosition().second == col) {
+                                if (enemy.takeDamage(tower.getDamage())) {
+                                    enemy.setDelete(true);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        TimerTask tradingTask = new TimerTask() {
+            @Override
+            public void run() {
+                for (Tower tower : GameScreen.towerList) {
+                    if (tower instanceof TradingChad) {
+                        int col = tower.getPosition().second;
+                        ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
+                        for (Enemy enemy : spawnedList) {
+                            if (enemy.getPosition().second == col) {
+                                if (enemy.takeDamage(tower.getDamage())) {
+                                    enemy.setDelete(true);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(redditTask, 0, 250);
+        timer.scheduleAtFixedRate(tradingTask, 0, 125);
         timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
     }
 
@@ -152,28 +176,38 @@ public class GameController {
             Enemy enemy = gameScreen.getSpawnedList().get(i);
 
             Pair<Integer, Integer> position = enemy.getPosition();
-            int row = position.first;
-            int column = position.second;
+            if (position.first != null) {
+                int row = position.first;
+                int column = position.second;
 
-            drawEnemy(enemy, gameScreen.getMapArray(), position);
-            boolean atEnd = enemy.updatePosition(gameScreen.getPath());
 
-            if (atEnd) {
-                gameScreen.getMapArray()[row][column].setBackgroundColor(Color.MAGENTA);
-                gameScreen.getSpawnedList().remove(enemy);
-                i--;
-                gameScreen.setMonumentHealth(gameScreen.getMonumentHealth() - enemy.getDamage() * 10); //remove this post-demo
-                gameScreen.getMonumentHealthText()
-                    .setText("Monument HP: " + gameScreen.getMonumentHealth());
-
-                if (gameScreen.getMonumentHealth() <= 0 && gameScreen.getHasNotFinished()) {
-                    Intent intent = new Intent(gameScreen, EndGameScreen.class);
-                    gameScreen.startActivity(intent);
-                    gameScreen.setHasNotFinished(false);
+                if (enemy.getDelete()) {
+                    gameScreen.getSpawnedList().remove(i--);
                 }
-                Util.setText(gameScreen, gameScreen.getMonumentHealthText(),
-                             "Monument HP: " + gameScreen.getMonumentHealth());
 
+                drawEnemy(enemy, gameScreen.getMapArray(), position);
+
+                boolean atEnd = enemy.updatePosition(gameScreen.getPath());
+
+                if (atEnd) {
+                    gameScreen.getMapArray()[row][column].setBackgroundColor(Color.MAGENTA);
+                    gameScreen.getSpawnedList().remove(enemy);
+                    i--;
+                    gameScreen.setMonumentHealth(gameScreen.getMonumentHealth()
+                                                     - enemy.getDamage() * 10); //remove this post-demo
+                    gameScreen.getMonumentHealthText()
+                        .setText("Monument HP: " + gameScreen.getMonumentHealth());
+
+                    if (gameScreen.getMonumentHealth() <= 0 && gameScreen.getHasNotFinished()) {
+                        Intent intent = new Intent(gameScreen, EndGameScreen.class);
+                        gameScreen.startActivity(intent);
+                        gameScreen.setHasNotFinished(false);
+                    }
+                    Util.setText(gameScreen, gameScreen.getMonumentHealthText(),
+                                 "Monument HP: " + gameScreen.getMonumentHealth());
+                }
+            } else {
+                enemy.updatePosition(gameScreen.getPath());
             }
         }
     }
@@ -184,14 +218,12 @@ public class GameController {
             gameScreen.getSpawnedList().add(enemy);
             gameScreen.getSpawnedList().get(gameScreen.getSpawnedList().size() - 1)
                 .setPosition(gameScreen.getPath().get(0));
-
-            drawEnemy(enemy, gameScreen.getMapArray(), gameScreen.getPath().get(0));
         }
     }
 
     public void drawBackground() {
         // Checks if each tile is occupied by an enemy. If not occupied, set to grey
-        for (int i = 0; i < gameScreen.getPath().size() - 2; i++) {
+        for (int i = 1; i < gameScreen.getPath().size() - 2; i++) {
             Pair<Integer, Integer> location = gameScreen.getPath().get(i);
             int row = location.first;
             int column = location.second;

@@ -1,4 +1,4 @@
-package com.teamthirty.buyhighselllow.Screens;
+package com.teamthirty.buyhighselllow.Entities.Towers.Screens;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -30,12 +30,13 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private PlayerSystem playerSystem;
     private int roundCounter = 1;
     private ArrayList<Enemy> unspawnedList = new ArrayList<>();
-    private ArrayList<Enemy> spawnedList = new ArrayList<>();
+    public static ArrayList<Enemy> spawnedList = new ArrayList<>();
     private int cash = 0;
     private int monumentHealth = 0;
     private TextView monumentHealthText;
     private TextView roundCounterText;
     private Boolean hasNotFinished = true;
+    public static ArrayList<Tower> towerList;
 
 
     @Override
@@ -57,7 +58,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         tradingChad.setOnClickListener(view -> gameController.setTowerType(TowerType.TradingChad));
         cryptoWhale.setOnClickListener(view -> gameController.setTowerType(TowerType.CryptoWhale));
 
-        gameController.setDifficulty(difficulty);
+        setCash(difficulty.getCash());
+        setMonumentHealth(difficulty.getMonumentHealth());
         playerSystem.setMoney(cash);
 
         // create path for enemies to follow
@@ -82,6 +84,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         TextView playerCashText = findViewById(R.id.playerCash);
         Util.setText(GameScreen.this, playerCashText, "Player Cash: " + cash);
 
+        towerList = new ArrayList<>();
         // set onClick listener for all buttons
         for (Button[] buttonArray : mapArray) {
             for (Button button : buttonArray) {
@@ -118,40 +121,15 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     }
 
                     //playerSystem.addEntity(tower);
-                    playerSystem.buyTower(towerType, this, mapArray, row, column, this);
+                    if (playerSystem.buyTower(towerType, this, mapArray, row, column, this)) {
+                        towerList.add(tower);
+                    }
+
                 }
             }
         }
     }
 
-    // Imma be honest, we got no clue why this works but it do
-    public void startCombat() {
-
-        gameController.startCombat();
-    }
-
-    private void updateEnemies() {
-        gameController.updateEnemies();
-    }
-
-
-    private void spawnEnemies() {
-        gameController.spawnEnemies();
-    }
-
-    private void drawBackground() {
-        // Checks if each tile is occupied by an enemy. If not occupied, set to grey
-        gameController.drawBackground();
-    }
-
-    private void drawEnemy(Enemy enemy, Button[][] map,
-                           Pair<Integer, Integer> integerPair) {
-        gameController.drawEnemy(enemy, map, integerPair);
-    }
-
-    public TowerType getTowerType() {
-        return towerType;
-    }
 
     public ArrayList<Enemy> getSpawnedList() {
         return spawnedList;
@@ -163,10 +141,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
     public Boolean getHasNotFinished() {
         return hasNotFinished;
-    }
-
-    public int getCash() {
-        return cash;
     }
 
     public int getMonumentHealth() {

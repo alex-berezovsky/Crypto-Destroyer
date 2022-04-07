@@ -1,6 +1,6 @@
 package com.teamthirty.buyhighselllow;
 
-import com.teamthirty.buyhighselllow.Screens.GameScreen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.teamthirty.buyhighselllow.Screens;
+package com.teamthirty.buyhighselllow.Entities.Towers.Screens;
 
 import android.content.Intent;
 import android.os.Bundle;
