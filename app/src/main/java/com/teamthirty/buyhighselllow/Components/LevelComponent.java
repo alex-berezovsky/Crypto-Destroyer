@@ -1,6 +1,6 @@
 package com.teamthirty.buyhighselllow.Components;
 
-public interface LevelComponent extends IComponent {
+public interface LevelComponent {
     /**
      * Increases the level of the tower
      */
