@@ -1,4 +1,4 @@
-package com.teamthirty.buyhighselllow.Screens;
+package com.teamthirty.buyhighselllow.Entities.Towers.Screens;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -30,12 +30,13 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private PlayerSystem playerSystem;
     private int roundCounter = 1;
     private ArrayList<Enemy> unspawnedList = new ArrayList<>();
-    private ArrayList<Enemy> spawnedList = new ArrayList<>();
+    public static ArrayList<Enemy> spawnedList = new ArrayList<>();
     private int cash = 0;
     private int monumentHealth = 0;
     private TextView monumentHealthText;
     private TextView roundCounterText;
     private Boolean hasNotFinished = true;
+    public static ArrayList<Tower> towerList;
 
 
     @Override
@@ -82,6 +83,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         TextView playerCashText = findViewById(R.id.playerCash);
         Util.setText(GameScreen.this, playerCashText, "Player Cash: " + cash);
 
+        towerList = new ArrayList<>();
         // set onClick listener for all buttons
         for (Button[] buttonArray : mapArray) {
             for (Button button : buttonArray) {
@@ -118,7 +120,10 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     }
 
                     //playerSystem.addEntity(tower);
-                    playerSystem.buyTower(towerType, this, mapArray, row, column, this);
+                    if (playerSystem.buyTower(towerType, this, mapArray, row, column, this)) {
+                        towerList.add(tower);
+                    }
+
                 }
             }
         }

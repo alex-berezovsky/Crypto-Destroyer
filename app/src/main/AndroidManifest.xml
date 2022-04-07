@@ -11,16 +11,16 @@
     android:theme="@style/Theme.BuyHighSellLow">
     <activity
       android:exported="true"
-      android:name="com.teamthirty.buyhighselllow.Screens.EndGameScreen"/>
+      android:name="com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen"/>
     <activity
       android:exported="true"
-      android:name="com.teamthirty.buyhighselllow.Screens.GameScreen"/>
+      android:name="com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen"/>
     <activity
       android:exported="true"
-      android:name="com.teamthirty.buyhighselllow.Screens.StartMenu"/>
+      android:name="com.teamthirty.buyhighselllow.Entities.Towers.Screens.StartMenu"/>
     <activity
       android:exported="true"
-      android:name="com.teamthirty.buyhighselllow.Screens.MainActivity">
+      android:name="com.teamthirty.buyhighselllow.Entities.Towers.Screens.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 

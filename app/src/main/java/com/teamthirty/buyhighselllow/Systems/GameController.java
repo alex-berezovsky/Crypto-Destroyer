@@ -10,9 +10,12 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
+import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
+import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
+import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.R;
-import com.teamthirty.buyhighselllow.Screens.EndGameScreen;
-import com.teamthirty.buyhighselllow.Screens.GameScreen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
@@ -144,6 +147,50 @@ public class GameController {
             }
         };
 
+        TimerTask redditTask = new TimerTask() {
+            @Override
+            public void run() {
+                for (Tower tower: GameScreen.towerList) {
+                    if (tower instanceof RedditDude) {
+                        int col = tower.getPosition().second;
+                        ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
+                        for (int i = 0; i < spawnedList.size(); i++) {
+                            Enemy enemy = spawnedList.get(i);
+                            if (enemy.getPosition().second == col) {
+                                if (enemy.takeDamage(tower.getDamage())) {
+                                    spawnedList.remove(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        TimerTask tradingTask = new TimerTask() {
+            @Override
+            public void run() {
+                for (Tower tower: GameScreen.towerList) {
+                    if (tower instanceof TradingChad) {
+                        int col = tower.getPosition().second;
+                        ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
+                        for (int i = 0; i < spawnedList.size(); i++) {
+                            Enemy enemy = spawnedList.get(i);
+                            if (enemy.getPosition().second == col) {
+                                if (enemy.takeDamage(tower.getDamage())) {
+                                    spawnedList.remove(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(redditTask, 0, 250);
+        timer.scheduleAtFixedRate(tradingTask, 0, 125);
         timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
     }
 
@@ -162,7 +209,8 @@ public class GameController {
                 gameScreen.getMapArray()[row][column].setBackgroundColor(Color.MAGENTA);
                 gameScreen.getSpawnedList().remove(enemy);
                 i--;
-                gameScreen.setMonumentHealth(gameScreen.getMonumentHealth() - enemy.getDamage() * 10); //remove this post-demo
+                gameScreen.setMonumentHealth(gameScreen.getMonumentHealth()
+                                                 - enemy.getDamage() * 10); //remove this post-demo
                 gameScreen.getMonumentHealthText()
                     .setText("Monument HP: " + gameScreen.getMonumentHealth());
 

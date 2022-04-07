@@ -31,4 +31,9 @@ public class Enemy {
     public int getDamage() {
         return damage;
     }
+
+    public boolean takeDamage(int damage) {
+        health -= damage;
+        return health <= 0;
+    }
 }
