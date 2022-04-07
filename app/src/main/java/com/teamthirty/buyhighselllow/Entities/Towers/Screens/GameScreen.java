@@ -58,7 +58,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         tradingChad.setOnClickListener(view -> gameController.setTowerType(TowerType.TradingChad));
         cryptoWhale.setOnClickListener(view -> gameController.setTowerType(TowerType.CryptoWhale));
 
-        gameController.setDifficulty(difficulty);
+        setCash(difficulty.getCash());
+        setMonumentHealth(difficulty.getMonumentHealth());
         playerSystem.setMoney(cash);
 
         // create path for enemies to follow

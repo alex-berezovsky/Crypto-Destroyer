@@ -16,7 +16,6 @@ import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
 import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.R;
-import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
@@ -29,25 +28,6 @@ public class GameController {
 
     public GameController(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        switch (difficulty) {
-        case HARD: // hard difficulty
-            gameScreen.setCash(Difficulty.HARD.getCash());
-            gameScreen.setMonumentHealth(Difficulty.HARD.getMonumentHealth());
-            break;
-        case STANDARD: // medium difficulty
-            gameScreen.setCash(Difficulty.STANDARD.getCash());
-            gameScreen.setMonumentHealth(Difficulty.STANDARD.getMonumentHealth());
-            break;
-        case EASY: // easy difficulty
-        default:
-            // default is easy mode
-            gameScreen.setCash(Difficulty.EASY.getCash());
-            gameScreen.setMonumentHealth(Difficulty.EASY.getMonumentHealth());
-            break;
-        }
     }
 
     public void generatePath() {
