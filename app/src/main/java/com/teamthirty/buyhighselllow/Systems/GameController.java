@@ -11,11 +11,11 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
 import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.R;
-import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
-import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
@@ -150,7 +150,7 @@ public class GameController {
         TimerTask redditTask = new TimerTask() {
             @Override
             public void run() {
-                for (Tower tower: GameScreen.towerList) {
+                for (Tower tower : GameScreen.towerList) {
                     if (tower instanceof RedditDude) {
                         int col = tower.getPosition().second;
                         ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
@@ -171,7 +171,7 @@ public class GameController {
         TimerTask tradingTask = new TimerTask() {
             @Override
             public void run() {
-                for (Tower tower: GameScreen.towerList) {
+                for (Tower tower : GameScreen.towerList) {
                     if (tower instanceof TradingChad) {
                         int col = tower.getPosition().second;
                         ArrayList<Enemy> spawnedList = GameScreen.spawnedList;

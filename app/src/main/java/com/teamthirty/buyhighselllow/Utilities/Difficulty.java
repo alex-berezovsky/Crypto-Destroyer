@@ -53,6 +53,7 @@ public enum Difficulty {
     public abstract double getMultiplier();
 
     public abstract int getCash();
+
     public abstract int getMonumentHealth();
 
     private static final int DEFAULT_CASH = 1000;
