@@ -11,12 +11,11 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
 import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.R;
-import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
-import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
-import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
@@ -29,25 +28,6 @@ public class GameController {
 
     public GameController(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        switch (difficulty) {
-        case HARD: // hard difficulty
-            gameScreen.setCash(Difficulty.HARD.getCash());
-            gameScreen.setMonumentHealth(Difficulty.HARD.getMonumentHealth());
-            break;
-        case STANDARD: // medium difficulty
-            gameScreen.setCash(Difficulty.STANDARD.getCash());
-            gameScreen.setMonumentHealth(Difficulty.STANDARD.getMonumentHealth());
-            break;
-        case EASY: // easy difficulty
-        default:
-            // default is easy mode
-            gameScreen.setCash(Difficulty.EASY.getCash());
-            gameScreen.setMonumentHealth(Difficulty.EASY.getMonumentHealth());
-            break;
-        }
     }
 
     public void generatePath() {
@@ -150,7 +130,7 @@ public class GameController {
         TimerTask redditTask = new TimerTask() {
             @Override
             public void run() {
-                for (Tower tower: GameScreen.towerList) {
+                for (Tower tower : GameScreen.towerList) {
                     if (tower instanceof RedditDude) {
                         int col = tower.getPosition().second;
                         ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
@@ -169,7 +149,7 @@ public class GameController {
         TimerTask tradingTask = new TimerTask() {
             @Override
             public void run() {
-                for (Tower tower: GameScreen.towerList) {
+                for (Tower tower : GameScreen.towerList) {
                     if (tower instanceof TradingChad) {
                         int col = tower.getPosition().second;
                         ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
