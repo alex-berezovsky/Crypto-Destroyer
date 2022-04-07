@@ -144,8 +144,9 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         gameController.drawBackground();
     }
 
-    private void drawEnemy(Enemy enemy, Button[][] map, int row, int col) {
-        gameController.drawEnemy(enemy, map, row, col);
+    private void drawEnemy(Enemy enemy, Button[][] map,
+                           Pair<Integer, Integer> integerPair) {
+        gameController.drawEnemy(enemy, map, integerPair);
     }
 
     public TowerType getTowerType() {

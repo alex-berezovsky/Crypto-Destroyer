@@ -155,7 +155,7 @@ public class GameController {
             int row = position.first;
             int column = position.second;
 
-            drawEnemy(enemy, gameScreen.getMapArray(), row, column);
+            drawEnemy(enemy, gameScreen.getMapArray(), position);
             boolean atEnd = enemy.updatePosition(gameScreen.getPath());
 
             if (atEnd) {
@@ -185,8 +185,7 @@ public class GameController {
             gameScreen.getSpawnedList().get(gameScreen.getSpawnedList().size() - 1)
                 .setPosition(gameScreen.getPath().get(0));
 
-            drawEnemy(enemy, gameScreen.getMapArray(), gameScreen.getPath().get(0).first,
-                      gameScreen.getPath().get(0).second);
+            drawEnemy(enemy, gameScreen.getMapArray(), gameScreen.getPath().get(0));
         }
     }
 
@@ -209,13 +208,14 @@ public class GameController {
         }
     }
 
-    public void drawEnemy(Enemy enemy, Button[][] map, int row, int col) {
+    public void drawEnemy(Enemy enemy, Button[][] map,
+                          Pair<Integer, Integer> integerPair) {
         if (enemy instanceof DogeCoin) {
-            map[row][col].setBackgroundColor(Color.WHITE);
+            map[integerPair.first][integerPair.second].setBackgroundColor(Color.WHITE);
         } else if (enemy instanceof Etherium) {
-            map[row][col].setBackgroundColor(Color.CYAN);
+            map[integerPair.first][integerPair.second].setBackgroundColor(Color.CYAN);
         } else if (enemy instanceof BitCoin) {
-            map[row][col].setBackgroundColor(Color.DKGRAY);
+            map[integerPair.first][integerPair.second].setBackgroundColor(Color.DKGRAY);
         }
     }
 }
