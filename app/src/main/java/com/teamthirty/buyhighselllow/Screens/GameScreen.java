@@ -99,22 +99,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     private void setDifficulty(Difficulty difficulty) {
-        switch (difficulty) {
-        case HARD: // hard difficulty
-            cash = Difficulty.HARD.getCash();
-            monumentHealth = Difficulty.HARD.getMonumentHealth();
-            break;
-        case STANDARD: // medium difficulty
-            cash = Difficulty.STANDARD.getCash();
-            monumentHealth = Difficulty.STANDARD.getMonumentHealth();
-            break;
-        case EASY: // easy difficulty
-        default:
-            // default is easy mode
-            cash = Difficulty.EASY.getCash();
-            monumentHealth = Difficulty.EASY.getMonumentHealth();
-            break;
-        }
+        cash = difficulty.getCash();
+        monumentHealth = difficulty.getMonumentHealth();
     }
 
     private void generatePath() {
