@@ -130,34 +130,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    // Imma be honest, we got no clue why this works but it do
-    public void startCombat() {
-
-        gameController.startCombat();
-    }
-
-    private void updateEnemies() {
-        gameController.updateEnemies();
-    }
-
-
-    private void spawnEnemies() {
-        gameController.spawnEnemies();
-    }
-
-    private void drawBackground() {
-        // Checks if each tile is occupied by an enemy. If not occupied, set to grey
-        gameController.drawBackground();
-    }
-
-    private void drawEnemy(Enemy enemy, Button[][] map,
-                           Pair<Integer, Integer> integerPair) {
-        gameController.drawEnemy(enemy, map, integerPair);
-    }
-
-    public TowerType getTowerType() {
-        return towerType;
-    }
 
     public ArrayList<Enemy> getSpawnedList() {
         return spawnedList;
@@ -169,10 +141,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
     public Boolean getHasNotFinished() {
         return hasNotFinished;
-    }
-
-    public int getCash() {
-        return cash;
     }
 
     public int getMonumentHealth() {
