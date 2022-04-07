@@ -33,6 +33,7 @@ public class GameController {
     public void generatePath() {
         // THIS IS HARD-CODED AND NEEDS TO GO
         gameScreen.setPath(new ArrayList<Pair<Integer, Integer>>());
+        gameScreen.getPath().add(new Pair<Integer, Integer>(null, null));
         gameScreen.getPath().add(new Pair<Integer, Integer>(3, 0));
         gameScreen.getPath().add(new Pair<Integer, Integer>(3, 1));
         gameScreen.getPath().add(new Pair<Integer, Integer>(3, 2));
@@ -175,34 +176,38 @@ public class GameController {
             Enemy enemy = gameScreen.getSpawnedList().get(i);
 
             Pair<Integer, Integer> position = enemy.getPosition();
-            int row = position.first;
-            int column = position.second;
+            if (position.first != null) {
+                int row = position.first;
+                int column = position.second;
 
-            drawEnemy(enemy, gameScreen.getMapArray(), position);
 
-            if (enemy.getDelete()) {
-                gameScreen.getSpawnedList().remove(i--);
-            }
-
-            boolean atEnd = enemy.updatePosition(gameScreen.getPath());
-
-            if (atEnd) {
-                gameScreen.getMapArray()[row][column].setBackgroundColor(Color.MAGENTA);
-                gameScreen.getSpawnedList().remove(enemy);
-                i--;
-                gameScreen.setMonumentHealth(gameScreen.getMonumentHealth()
-                                                 - enemy.getDamage() * 10); //remove this post-demo
-                gameScreen.getMonumentHealthText()
-                    .setText("Monument HP: " + gameScreen.getMonumentHealth());
-
-                if (gameScreen.getMonumentHealth() <= 0 && gameScreen.getHasNotFinished()) {
-                    Intent intent = new Intent(gameScreen, EndGameScreen.class);
-                    gameScreen.startActivity(intent);
-                    gameScreen.setHasNotFinished(false);
+                if (enemy.getDelete()) {
+                    gameScreen.getSpawnedList().remove(i--);
                 }
-                Util.setText(gameScreen, gameScreen.getMonumentHealthText(),
-                             "Monument HP: " + gameScreen.getMonumentHealth());
 
+                drawEnemy(enemy, gameScreen.getMapArray(), position);
+
+                boolean atEnd = enemy.updatePosition(gameScreen.getPath());
+
+                if (atEnd) {
+                    gameScreen.getMapArray()[row][column].setBackgroundColor(Color.MAGENTA);
+                    gameScreen.getSpawnedList().remove(enemy);
+                    i--;
+                    gameScreen.setMonumentHealth(gameScreen.getMonumentHealth()
+                                                     - enemy.getDamage() * 10); //remove this post-demo
+                    gameScreen.getMonumentHealthText()
+                        .setText("Monument HP: " + gameScreen.getMonumentHealth());
+
+                    if (gameScreen.getMonumentHealth() <= 0 && gameScreen.getHasNotFinished()) {
+                        Intent intent = new Intent(gameScreen, EndGameScreen.class);
+                        gameScreen.startActivity(intent);
+                        gameScreen.setHasNotFinished(false);
+                    }
+                    Util.setText(gameScreen, gameScreen.getMonumentHealthText(),
+                                 "Monument HP: " + gameScreen.getMonumentHealth());
+                }
+            } else {
+                enemy.updatePosition(gameScreen.getPath());
             }
         }
     }
@@ -213,14 +218,12 @@ public class GameController {
             gameScreen.getSpawnedList().add(enemy);
             gameScreen.getSpawnedList().get(gameScreen.getSpawnedList().size() - 1)
                 .setPosition(gameScreen.getPath().get(0));
-
-            drawEnemy(enemy, gameScreen.getMapArray(), gameScreen.getPath().get(0));
         }
     }
 
     public void drawBackground() {
         // Checks if each tile is occupied by an enemy. If not occupied, set to grey
-        for (int i = 0; i < gameScreen.getPath().size() - 2; i++) {
+        for (int i = 1; i < gameScreen.getPath().size() - 2; i++) {
             Pair<Integer, Integer> location = gameScreen.getPath().get(i);
             int row = location.first;
             int column = location.second;
