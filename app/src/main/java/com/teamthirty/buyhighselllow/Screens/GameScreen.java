@@ -256,7 +256,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             int row = position.first;
             int column = position.second;
 
-            drawEnemy(enemy, mapArray, row, column);
+            drawEnemy(enemy, mapArray, position);
             boolean atEnd = enemy.updatePosition(path);
 
             if (atEnd) {
@@ -284,7 +284,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             spawnedList.add(enemy);
             spawnedList.get(spawnedList.size() - 1).setPosition(path.get(0));
 
-            drawEnemy(enemy, mapArray, path.get(0).first, path.get(0).second);
+            drawEnemy(enemy, mapArray, path.get(0));
         }
     }
 
@@ -307,13 +307,13 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    private void drawEnemy(Enemy enemy, Button[][] map, int row, int col) {
+    private void drawEnemy(Enemy enemy, Button[][] map, Pair<Integer, Integer> integerPair) {
         if (enemy instanceof DogeCoin) {
-            map[row][col].setBackgroundColor(Color.WHITE);
+            map[integerPair.first][integerPair.second].setBackgroundColor(Color.WHITE);
         } else if (enemy instanceof Etherium) {
-            map[row][col].setBackgroundColor(Color.CYAN);
+            map[integerPair.first][integerPair.second].setBackgroundColor(Color.CYAN);
         } else if (enemy instanceof BitCoin) {
-            map[row][col].setBackgroundColor(Color.DKGRAY);
+            map[integerPair.first][integerPair.second].setBackgroundColor(Color.DKGRAY);
         }
     }
 }
