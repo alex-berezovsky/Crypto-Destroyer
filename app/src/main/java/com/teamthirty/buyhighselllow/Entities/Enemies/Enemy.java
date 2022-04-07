@@ -9,6 +9,7 @@ public class Enemy {
     protected int health;
     protected int damage;
     protected int speed = 1;
+    protected boolean delete = false;
 
     public boolean updatePosition(ArrayList<Pair<Integer, Integer>> path) {
         int pathIndex = path.indexOf(position);
@@ -35,5 +36,13 @@ public class Enemy {
     public boolean takeDamage(int damage) {
         health -= damage;
         return health <= 0;
+    }
+
+    public boolean getDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean bool) {
+        delete = bool;
     }
 }

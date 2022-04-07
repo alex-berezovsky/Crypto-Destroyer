@@ -154,12 +154,10 @@ public class GameController {
                     if (tower instanceof RedditDude) {
                         int col = tower.getPosition().second;
                         ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
-                        for (int i = 0; i < spawnedList.size(); i++) {
-                            Enemy enemy = spawnedList.get(i);
+                        for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
-                                    spawnedList.remove(i);
-                                    i--;
+                                    enemy.setDelete(true);
                                 }
                             }
                         }
@@ -175,12 +173,10 @@ public class GameController {
                     if (tower instanceof TradingChad) {
                         int col = tower.getPosition().second;
                         ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
-                        for (int i = 0; i < spawnedList.size(); i++) {
-                            Enemy enemy = spawnedList.get(i);
+                        for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
-                                    spawnedList.remove(i);
-                                    i--;
+                                    enemy.setDelete(true);
                                 }
                             }
                         }
@@ -203,6 +199,11 @@ public class GameController {
             int column = position.second;
 
             drawEnemy(enemy, gameScreen.getMapArray(), position);
+
+            if (enemy.getDelete()) {
+                gameScreen.getSpawnedList().remove(i--);
+            }
+
             boolean atEnd = enemy.updatePosition(gameScreen.getPath());
 
             if (atEnd) {
