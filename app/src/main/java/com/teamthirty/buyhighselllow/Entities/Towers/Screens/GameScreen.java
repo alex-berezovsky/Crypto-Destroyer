@@ -90,8 +90,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         // set balance text
         TextView playerCashText = findViewById(R.id.playerCash);
 
-        Timer lol = new Timer();
-        TimerTask akshinVemana = new TimerTask() {
+        Timer textTimer = new Timer();
+        TimerTask updateCashTextTask = new TimerTask() {
             @Override
             public void run() {
                 Util.setText(GameScreen.this, playerCashText, "Player Cash: "
@@ -100,7 +100,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             }
         };
 
-        lol.scheduleAtFixedRate(akshinVemana, 0, 1000);
+        textTimer.scheduleAtFixedRate(updateCashTextTask, 0, 1000);
 
         towerList = new ArrayList<>();
         // set onClick listener for all buttons
