@@ -3,7 +3,6 @@ package com.teamthirty.buyhighselllow.Systems;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.SystemClock;
 import android.widget.Button;
 import androidx.core.util.Pair;
 import androidx.gridlayout.widget.GridLayout;
@@ -24,9 +23,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen.mapArray;
-import static com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen.towerList;
 
 public class GameController {
     private final GameScreen gameScreen;
@@ -206,8 +202,8 @@ public class GameController {
                     gameScreen.getSpawnedList().remove(enemy);
                     i--;
                     gameScreen.setMonumentHealth(gameScreen.getMonumentHealth()
-                                                     - enemy.getDamage() *
-                        10); //remove this post-demo
+                                                     - enemy.getDamage()
+                        * 10); //remove this post-demo
                     gameScreen.getMonumentHealthText()
                         .setText("Monument HP: " + gameScreen.getMonumentHealth());
 
@@ -261,9 +257,9 @@ public class GameController {
             float[] hsv = new float[3];
             Color.colorToHSV(enemy.getColor(), hsv);
             System.out.println("Old HSV: " + Arrays.toString(hsv));
-            System.out.println("cur health: " + enemy.getHealth() + ", max health: " + enemy.getMAX_HEALTH());
-//            hsv[2] = (float) ((1.0 / Math.log(1 + ((enemy.getHealth() * 1.0) / enemy.getMAX_HEALTH()))) - 1);
-            hsv[2] = (float) Math.pow((enemy.getHealth() * 1.0) / enemy.getMAX_HEALTH(), 1.1);
+            System.out.println(
+                "cur health: " + enemy.getHealth() + ", max health: " + enemy.getMaxHealth());
+            hsv[2] = (float) Math.pow((enemy.getHealth() * 1.0) / enemy.getMaxHealth(), 1.1);
             System.out.println("New HSV: " + Arrays.toString(hsv));
             enemy.setColor(Color.HSVToColor(hsv));
         } else {

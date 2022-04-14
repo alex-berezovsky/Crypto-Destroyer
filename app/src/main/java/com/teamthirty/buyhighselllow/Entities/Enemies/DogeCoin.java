@@ -7,7 +7,7 @@ public class DogeCoin extends Enemy {
     public DogeCoin() {
         position = new Pair<Integer, Integer>(null, null);
         health = 100;
-        MAX_HEALTH = health;
+        maxHealth = health;
         damage = 1;
         color = Color.WHITE;
     }

@@ -1,6 +1,5 @@
 package com.teamthirty.buyhighselllow.Entities.Enemies;
 
-import android.graphics.Color;
 import androidx.core.util.Pair;
 
 import java.util.ArrayList;
@@ -12,10 +11,10 @@ public class Enemy {
     protected int speed = 1;
     protected boolean delete = false;
     protected boolean isDamaged = false;
-    protected int MAX_HEALTH;
+    protected int maxHealth;
 
-    public int getMAX_HEALTH() {
-        return MAX_HEALTH;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public int getColor() {
