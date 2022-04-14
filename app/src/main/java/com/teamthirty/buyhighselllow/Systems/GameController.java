@@ -173,6 +173,8 @@ public class GameController {
                     timer.purge();
                     timer.cancel();
                     gameScreen.setRoundCounter(gameScreen.getRoundCounter() + 1);
+                    gameScreen.getPlayerSystem().setMoney(gameScreen.getPlayerSystem().getMoney()
+                                                              + 400);
                     Util.setText(gameScreen, gameScreen.getRoundCounterText(),
                                  "Round: " + gameScreen.getRoundCounter());
                 } else {
