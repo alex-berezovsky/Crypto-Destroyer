@@ -8,3 +8,4 @@ TradingChadDamage: Tests if TradingChad deals the appropriate amount of damage t
 RedditDudeDamage: Tests if RedditDude deals the appropriate amount of damage to an enemy.
 TradingLevelUpDamage: Tests if RedditDude deals correct amount of damage when leveled up.
 RedditLevelUpDamage: Tests if TradingChad deals correct amount of damage when leveled up.
+EnemyTakeDamageNegative: Tests for negative damage taken by an enemy, which could potentially break our game by having an unkillable enemy.
