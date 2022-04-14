@@ -10,6 +10,7 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
+import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
@@ -174,9 +175,25 @@ public class GameController {
             }
         };
 
+        TimerTask cryptoWhaleTask = new TimerTask() {
+            @Override
+            public void run() {
+                for (Tower tower : GameScreen.towerList) {
+                    if (tower instanceof CryptoWhale) {
+                        System.out.println("found cryptowhale, upgrading damage");
+                        for (Tower otherTower : GameScreen.towerList) {
+                            otherTower.setDamage(otherTower.getDamage() + tower.getLevel());
+                        }
+                    }
+                }
+            }
+        };
+
+
         timer.scheduleAtFixedRate(redditTask, 0, 250);
         timer.scheduleAtFixedRate(tradingTask, 0, 125);
         timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
+        timer.scheduleAtFixedRate(cryptoWhaleTask, 0, 1000);
     }
 
     public void updateEnemies() {
