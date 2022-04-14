@@ -172,9 +172,10 @@ public class GameController {
                 if (gameScreen.getSpawnedList().isEmpty()) {
                     timer.purge();
                     timer.cancel();
-                    gameScreen.setRoundCounter(gameScreen.getRoundCounter() + 1);
                     gameScreen.getPlayerSystem().setMoney(gameScreen.getPlayerSystem().getMoney()
-                                                              + 400);
+                                                              + 400 + 10
+                                                            * gameScreen.getRoundCounter());
+                    gameScreen.setRoundCounter(gameScreen.getRoundCounter() + 1);
                     Util.setText(gameScreen, gameScreen.getRoundCounterText(),
                                  "Round: " + gameScreen.getRoundCounter());
                 } else {
