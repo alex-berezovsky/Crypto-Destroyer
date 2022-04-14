@@ -94,6 +94,11 @@ public abstract class Tower implements LevelComponent, ProjectileComponent {
         return damage;
     }
 
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     /**
      * Returns the upgrade cost of the tower
      *

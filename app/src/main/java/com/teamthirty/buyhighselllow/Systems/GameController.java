@@ -10,6 +10,7 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
+import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
@@ -20,6 +21,7 @@ import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -138,7 +140,10 @@ public class GameController {
                         for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
+                                    enemy.setDamaged(true);
                                     enemy.setDelete(true);
+                                } else {
+                                    enemy.setDamaged(true);
                                 }
                             }
                         }
@@ -157,7 +162,11 @@ public class GameController {
                         for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
+                                    enemy.setDamaged(true);
                                     enemy.setDelete(true);
+                                } else {
+                                    enemy.setDamaged(true);
+
                                 }
                             }
                         }
@@ -166,9 +175,25 @@ public class GameController {
             }
         };
 
+        TimerTask cryptoWhaleTask = new TimerTask() {
+            @Override
+            public void run() {
+                for (Tower tower : GameScreen.towerList) {
+                    if (tower instanceof CryptoWhale) {
+                        System.out.println("found cryptowhale, upgrading damage");
+                        for (Tower otherTower : GameScreen.towerList) {
+                            otherTower.setDamage(otherTower.getDamage() + tower.getLevel());
+                        }
+                    }
+                }
+            }
+        };
+
+
         timer.scheduleAtFixedRate(redditTask, 0, 250);
         timer.scheduleAtFixedRate(tradingTask, 0, 125);
         timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
+        timer.scheduleAtFixedRate(cryptoWhaleTask, 0, 1000);
     }
 
     public void updateEnemies() {
@@ -243,12 +268,19 @@ public class GameController {
 
     public void drawEnemy(Enemy enemy, Button[][] map,
                           Pair<Integer, Integer> integerPair) {
-        if (enemy instanceof DogeCoin) {
-            map[integerPair.first][integerPair.second].setBackgroundColor(Color.WHITE);
-        } else if (enemy instanceof Etherium) {
-            map[integerPair.first][integerPair.second].setBackgroundColor(Color.CYAN);
-        } else if (enemy instanceof BitCoin) {
-            map[integerPair.first][integerPair.second].setBackgroundColor(Color.DKGRAY);
+        if (enemy.isDamaged()) {
+            map[integerPair.first][integerPair.second].setBackgroundColor(Color.RED);
+            enemy.setDamaged(false);
+            float[] hsv = new float[3];
+            Color.colorToHSV(enemy.getColor(), hsv);
+            System.out.println("Old HSV: " + Arrays.toString(hsv));
+            System.out.println(
+                "cur health: " + enemy.getHealth() + ", max health: " + enemy.getMaxHealth());
+            hsv[2] = (float) Math.pow((enemy.getHealth() * 1.0) / enemy.getMaxHealth(), 1.1);
+            System.out.println("New HSV: " + Arrays.toString(hsv));
+            enemy.setColor(Color.HSVToColor(hsv));
+        } else {
+            map[integerPair.first][integerPair.second].setBackgroundColor(enemy.getColor());
         }
     }
 }

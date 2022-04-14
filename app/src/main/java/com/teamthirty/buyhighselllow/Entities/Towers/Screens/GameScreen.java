@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
     private final GameController gameController = new GameController(this);
     private ArrayList<Pair<Integer, Integer>> path;
-    private Button[][] mapArray;
+    public static Button[][] mapArray;
     private TowerType towerType;
     private PlayerSystem playerSystem;
     private int roundCounter = 1;
