@@ -11,6 +11,7 @@ public class Enemy {
     protected int damage;
     protected int speed = 1;
     protected boolean delete = false;
+    protected boolean isDamaged = false;
     protected int MAX_HEALTH;
 
     public int getMAX_HEALTH() {
@@ -26,6 +27,15 @@ public class Enemy {
     }
 
     protected int color;
+
+
+    public boolean isDamaged() {
+        return isDamaged;
+    }
+
+    public void setDamaged(boolean damaged) {
+        isDamaged = damaged;
+    }
 
     public boolean updatePosition(ArrayList<Pair<Integer, Integer>> path) {
         int pathIndex = path.indexOf(position);

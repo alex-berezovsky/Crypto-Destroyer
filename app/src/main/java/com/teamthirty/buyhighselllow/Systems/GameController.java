@@ -3,6 +3,7 @@ package com.teamthirty.buyhighselllow.Systems;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.widget.Button;
 import androidx.core.util.Pair;
 import androidx.gridlayout.widget.GridLayout;
@@ -20,6 +21,7 @@ import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -141,18 +143,16 @@ public class GameController {
                         for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
+                                    enemy.setDamaged(true);
                                     enemy.setDelete(true);
                                 } else {
-
-                                    mapArray[enemy.getPosition().first][enemy.getPosition().second].setBackgroundColor(
-                                        Color.RED);
-
-                                    }
+                                    enemy.setDamaged(true);
                                 }
                             }
                         }
                     }
                 }
+            }
         };
 
         TimerTask tradingTask = new TimerTask() {
@@ -165,10 +165,10 @@ public class GameController {
                         for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
+                                    enemy.setDamaged(true);
                                     enemy.setDelete(true);
                                 } else {
-
-                                    mapArray[enemy.getPosition().first][enemy.getPosition().second].setBackgroundColor(Color.RED);
+                                    enemy.setDamaged(true);
 
                                 }
                             }
@@ -206,7 +206,8 @@ public class GameController {
                     gameScreen.getSpawnedList().remove(enemy);
                     i--;
                     gameScreen.setMonumentHealth(gameScreen.getMonumentHealth()
-                                                     - enemy.getDamage() * 10); //remove this post-demo
+                                                     - enemy.getDamage() *
+                        10); //remove this post-demo
                     gameScreen.getMonumentHealthText()
                         .setText("Monument HP: " + gameScreen.getMonumentHealth());
 
@@ -254,12 +255,19 @@ public class GameController {
 
     public void drawEnemy(Enemy enemy, Button[][] map,
                           Pair<Integer, Integer> integerPair) {
-        if (enemy instanceof DogeCoin) {
-            map[integerPair.first][integerPair.second].setBackgroundColor(Color.WHITE);
-        } else if (enemy instanceof Etherium) {
-            map[integerPair.first][integerPair.second].setBackgroundColor(Color.CYAN);
-        } else if (enemy instanceof BitCoin) {
-            map[integerPair.first][integerPair.second].setBackgroundColor(Color.DKGRAY);
+        if (enemy.isDamaged()) {
+            map[integerPair.first][integerPair.second].setBackgroundColor(Color.RED);
+            enemy.setDamaged(false);
+            float[] hsv = new float[3];
+            Color.colorToHSV(enemy.getColor(), hsv);
+            System.out.println("Old HSV: " + Arrays.toString(hsv));
+            System.out.println("cur health: " + enemy.getHealth() + ", max health: " + enemy.getMAX_HEALTH());
+//            hsv[2] = (float) ((1.0 / Math.log(1 + ((enemy.getHealth() * 1.0) / enemy.getMAX_HEALTH()))) - 1);
+            hsv[2] = (float) Math.pow((enemy.getHealth() * 1.0) / enemy.getMAX_HEALTH(), 1.1);
+            System.out.println("New HSV: " + Arrays.toString(hsv));
+            enemy.setColor(Color.HSVToColor(hsv));
+        } else {
+            map[integerPair.first][integerPair.second].setBackgroundColor(enemy.getColor());
         }
     }
 }
