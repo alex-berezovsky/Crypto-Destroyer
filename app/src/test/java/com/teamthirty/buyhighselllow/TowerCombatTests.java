@@ -12,12 +12,38 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TowerCombatTests {
-
+    /**
+     * Tests that BitCoin takes damage properly
+     */
+    @Test
+    public void BitCoinDamage() {
+        BitCoin bitCoin = new BitCoin();
+        bitCoin.takeDamage(5);
+        assertEquals(bitCoin.getHealth(), 25);
+    }
+    /**
+     * Tests that DogeCoin takes damage properly
+     */
+    @Test
+    public void DogeCoinDamage() {
+        DogeCoin dogeCoin = new DogeCoin();
+        dogeCoin.takeDamage(5);
+        assertEquals(dogeCoin.getHealth(), 5);
+    }
+    /**
+     * Tests that Ethereum takes damage properly
+     */
+    @Test
+    public void EthereumDamage() {
+        Etherium etherium = new Etherium();
+        etherium.takeDamage(5);
+        assertEquals(etherium.getHealth(), 15);
+    }
     /**
      * Tests that upon taking non-lethal damage, an enemy will not be flagged for deletion
      */
     @Test
-    public void EnemyTakeDamageNotDead() {
+    public void EnemyNotDelete() {
 
         Pair<Integer, Integer> location = new Pair<>(4, 4);
         RedditDude redditDude = new RedditDude(location);
@@ -25,8 +51,8 @@ public class TowerCombatTests {
         BitCoin bitCoin = new BitCoin();
         Etherium etherium = new Etherium();
 
-        etherium.setDelete(etherium.takeDamage(redditDude.getDamage()));
-        bitCoin.setDelete(bitCoin.takeDamage(redditDude.getDamage()));
+        etherium.setDelete(etherium.takeDamage(5));
+        bitCoin.setDelete(bitCoin.takeDamage(5));
 
         assertFalse(etherium.getDelete());
         assertFalse(bitCoin.getDelete());
@@ -37,14 +63,14 @@ public class TowerCombatTests {
      * Tests that upon taking lethal damage, an enemy will be flagged for deletion
      */
     @Test
-    public void EnemyTakeDamageDead() {
+    public void EnemyDelete() {
 
         Pair<Integer, Integer> location = new Pair<>(4, 4);
         RedditDude redditDude = new RedditDude(location);
 
         DogeCoin dogeCoin = new DogeCoin();
 
-        dogeCoin.setDelete(dogeCoin.takeDamage(redditDude.getDamage()));
+        dogeCoin.setDelete(dogeCoin.takeDamage(10));
 
         assertTrue(dogeCoin.getDelete());
 
