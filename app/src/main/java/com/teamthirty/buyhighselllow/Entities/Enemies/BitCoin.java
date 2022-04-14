@@ -6,7 +6,7 @@ import androidx.core.util.Pair;
 public class BitCoin extends Enemy {
     public BitCoin() {
         position = new Pair<Integer, Integer>(null, null);
-        health = 3;
+        health = 30;
         maxHealth = health;
         damage = 3;
         color = Color.DKGRAY;

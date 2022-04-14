@@ -25,18 +25,23 @@ import java.util.ArrayList;
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
     private final GameController gameController = new GameController(this);
     private ArrayList<Pair<Integer, Integer>> path;
-    public static Button[][] mapArray;
+    private static Button[][] mapArray;
     private TowerType towerType;
     private PlayerSystem playerSystem;
     private int roundCounter = 1;
     private ArrayList<Enemy> unspawnedList = new ArrayList<>();
-    public static ArrayList<Enemy> spawnedList = new ArrayList<>();
+    private static ArrayList<Enemy> spawnedList = new ArrayList<>();
     private int cash = 0;
     private int monumentHealth = 0;
     private TextView monumentHealthText;
     private TextView roundCounterText;
     private Boolean hasNotFinished = true;
-    public static ArrayList<Tower> towerList;
+
+    public static ArrayList<Tower> getTowerList() {
+        return towerList;
+    }
+
+    private static ArrayList<Tower> towerList;
 
 
     @Override
@@ -131,7 +136,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    public ArrayList<Enemy> getSpawnedList() {
+    public static ArrayList<Enemy> getSpawnedList() {
         return spawnedList;
     }
 
