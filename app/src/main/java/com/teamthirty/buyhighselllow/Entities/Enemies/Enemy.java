@@ -59,6 +59,13 @@ public class Enemy {
     }
 
     public boolean takeDamage(int damage) {
+
+        if (damage < 0) {
+
+            throw new RuntimeException("Error: Damage should not be negative");
+
+        }
+
         health -= damage;
         return health <= 0;
     }

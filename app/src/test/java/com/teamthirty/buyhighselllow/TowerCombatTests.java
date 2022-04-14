@@ -76,4 +76,17 @@ public class TowerCombatTests {
         assertTrue(dogeCoin.getDelete());
 
     }
+
+    /**
+     * Tests that checks for negative damage to an enemy, which is not intended and will result
+     * in an unkillable enemy
+     */
+    @Test (expected = RuntimeException.class)
+    public void EnemyTakeDamageNegative() {
+
+        DogeCoin dogeCoin = new DogeCoin();
+        dogeCoin.takeDamage(-5);
+
+
+    }
 }
