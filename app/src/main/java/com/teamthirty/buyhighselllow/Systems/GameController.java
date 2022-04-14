@@ -104,6 +104,20 @@ public class GameController {
             gameScreen.getUnspawnedList().add(new Etherium());
             gameScreen.getUnspawnedList().add(new BitCoin());
             gameScreen.getUnspawnedList().add(new DogeCoin());
+        } else if (gameScreen.getRoundCounter() == 2) {
+            gameScreen.getUnspawnedList().add(new DogeCoin());
+            gameScreen.getUnspawnedList().add(new DogeCoin());
+            gameScreen.getUnspawnedList().add(new DogeCoin());
+            gameScreen.getUnspawnedList().add(new BitCoin());
+            gameScreen.getUnspawnedList().add(new Etherium());
+            gameScreen.getUnspawnedList().add(new BitCoin());
+            gameScreen.getUnspawnedList().add(new Etherium());
+        } else if (gameScreen.getRoundCounter() == 3) {
+            gameScreen.getUnspawnedList().add(new BitCoin());
+            gameScreen.getUnspawnedList().add(new BitCoin());
+            gameScreen.getUnspawnedList().add(new BitCoin());
+            gameScreen.getUnspawnedList().add(new BitCoin());
+            gameScreen.getUnspawnedList().add(new BitCoin());
         }
 
         Timer timer = new Timer();
@@ -161,6 +175,7 @@ public class GameController {
                         ArrayList<Enemy> spawnedList = GameScreen.getSpawnedList();
                         for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
+                                System.out.println("Trading damage: " + tower.getDamage());
                                 if (enemy.takeDamage(tower.getDamage())) {
                                     enemy.setDamaged(true);
                                     enemy.setDelete(true);
@@ -190,9 +205,9 @@ public class GameController {
         };
 
 
-        timer.scheduleAtFixedRate(redditTask, 0, 250);
-        timer.scheduleAtFixedRate(tradingTask, 0, 125);
-        timer.scheduleAtFixedRate(updateEnemyPosition, 500, 500);
+        timer.scheduleAtFixedRate(redditTask, 0, 500);
+        timer.scheduleAtFixedRate(tradingTask, 0, 500);
+        timer.scheduleAtFixedRate(updateEnemyPosition, 0, 500);
         timer.scheduleAtFixedRate(cryptoWhaleTask, 0, 1000);
     }
 
