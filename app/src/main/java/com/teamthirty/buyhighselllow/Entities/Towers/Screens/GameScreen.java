@@ -21,6 +21,8 @@ import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
     private final GameController gameController = new GameController(this);
@@ -87,7 +89,18 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
         // set balance text
         TextView playerCashText = findViewById(R.id.playerCash);
-        Util.setText(GameScreen.this, playerCashText, "Player Cash: " + cash);
+
+        Timer textTimer = new Timer();
+        TimerTask updateCashTextTask = new TimerTask() {
+            @Override
+            public void run() {
+                Util.setText(GameScreen.this, playerCashText, "Player Cash: "
+                    + playerSystem.getMoney());
+
+            }
+        };
+
+        textTimer.scheduleAtFixedRate(updateCashTextTask, 0, 1000);
 
         towerList = new ArrayList<>();
         // set onClick listener for all buttons
@@ -199,5 +212,13 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
     public void setMapArray(Button[][] mapArray) {
         this.mapArray = mapArray;
+    }
+
+    public PlayerSystem getPlayerSystem() {
+        return playerSystem;
+    }
+
+    public void setPlayerSystem(PlayerSystem playerSystem) {
+        this.playerSystem = playerSystem;
     }
 }
