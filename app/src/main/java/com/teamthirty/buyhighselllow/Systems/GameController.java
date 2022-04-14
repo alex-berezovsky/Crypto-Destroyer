@@ -178,10 +178,10 @@ public class GameController {
         TimerTask cryptoWhaleTask = new TimerTask() {
             @Override
             public void run() {
-                for (Tower tower : GameScreen.towerList) {
+                for (Tower tower : GameScreen.getTowerList()) {
                     if (tower instanceof CryptoWhale) {
                         System.out.println("found cryptowhale, upgrading damage");
-                        for (Tower otherTower : GameScreen.towerList) {
+                        for (Tower otherTower : GameScreen.getTowerList()) {
                             otherTower.setDamage(otherTower.getDamage() + tower.getLevel());
                         }
                     }
