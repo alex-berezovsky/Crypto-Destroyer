@@ -10,6 +10,31 @@ public class Enemy {
     protected int damage;
     protected int speed = 1;
     protected boolean delete = false;
+    protected boolean isDamaged = false;
+    protected int maxHealth;
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    protected int color;
+
+
+    public boolean isDamaged() {
+        return isDamaged;
+    }
+
+    public void setDamaged(boolean damaged) {
+        isDamaged = damaged;
+    }
 
     public boolean updatePosition(ArrayList<Pair<Integer, Integer>> path) {
         int pathIndex = path.indexOf(position);
