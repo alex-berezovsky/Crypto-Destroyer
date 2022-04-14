@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen.mapArray;
+import static com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen.towerList;
+
 public class GameController {
     private final GameScreen gameScreen;
 
@@ -139,12 +142,17 @@ public class GameController {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
                                     enemy.setDelete(true);
+                                } else {
+
+                                    mapArray[enemy.getPosition().first][enemy.getPosition().second].setBackgroundColor(
+                                        Color.RED);
+
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
         };
 
         TimerTask tradingTask = new TimerTask() {
@@ -158,6 +166,10 @@ public class GameController {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
                                     enemy.setDelete(true);
+                                } else {
+
+                                    mapArray[enemy.getPosition().first][enemy.getPosition().second].setBackgroundColor(Color.RED);
+
                                 }
                             }
                         }
