@@ -15,7 +15,7 @@ public class TradingChad extends Tower {
         this.position = position;
         level = 1;
         fireRate = 10;
-        damage = 10;
+        damage = 20;
         upgradeCost = 100;
     }
 
