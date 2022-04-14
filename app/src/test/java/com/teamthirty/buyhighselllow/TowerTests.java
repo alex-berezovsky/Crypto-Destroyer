@@ -1,10 +1,12 @@
 package com.teamthirty.buyhighselllow;
 
 import androidx.core.util.Pair;
+import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
 import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,6 +17,7 @@ public class TowerTests {
      * Tests if projectile behaves correctly
      */
     @Test
+    @Deprecated
     public void projectileCryptoWhale() {
         Pair<Integer, Integer> location = new Pair<>(10, 15);
         CryptoWhale whale = new CryptoWhale(location);
@@ -110,6 +113,7 @@ public class TowerTests {
      * Tests if projectile behaves correctly
      */
     @Test
+    @Deprecated
     public void projectileTradingChad() {
         Pair<Integer, Integer> location = new Pair<>(10, 15);
         TradingChad chad = new TradingChad(location);
@@ -170,6 +174,7 @@ public class TowerTests {
      * Tests if a RedditDude makes a correct projectile
      */
     @Test
+    @Deprecated
     public void projectileRedditDude() {
         Pair<Integer, Integer> location = new Pair<>(10, 15);
         RedditDude redditDude = new RedditDude(location);
@@ -183,6 +188,28 @@ public class TowerTests {
         proj.updatePosition();
         assertEquals(30, proj.getPosition().first.intValue());
         assertEquals(35, proj.getPosition().second.intValue());
+    }
+
+    /**
+     * M5 Test to test if RedditDude deals the appropriate amount of damage to an enemy.
+     */
+    @Test
+    public void redditDudeDamage() {
+        BitCoin coin = new BitCoin();
+        RedditDude redditDude = new RedditDude(new Pair<>(0,0));
+        coin.takeDamage(redditDude.getDamage());
+        Assert.assertEquals(20, coin.getHealth());
+    }
+
+    /**
+     * M5 Test to test if TradingChad deals the appropriate amount of damage to an enemy.
+     */
+    @Test
+    public void tradingChadDamage() {
+        BitCoin coin = new BitCoin();
+        TradingChad tradingChad = new TradingChad(new Pair<>(0,0));
+        coin.takeDamage(tradingChad.getDamage());
+        Assert.assertEquals(20, coin.getHealth());
     }
 
 }

@@ -19,7 +19,7 @@ public class EnemyTests {
         Assert.assertNull(coin.getPosition().first);
         Assert.assertNull(coin.getPosition().second);
         Assert.assertEquals(coin.getDamage(), 3);
-        Assert.assertEquals(coin.getHealth(), 3);
+        Assert.assertEquals(coin.getHealth(), 30);
     }
 
     /**
@@ -31,7 +31,7 @@ public class EnemyTests {
         Assert.assertNull(coin.getPosition().first);
         Assert.assertNull(coin.getPosition().second);
         Assert.assertEquals(coin.getDamage(), 1);
-        Assert.assertEquals(coin.getHealth(), 1);
+        Assert.assertEquals(coin.getHealth(), 10);
     }
 
     /**
@@ -43,7 +43,7 @@ public class EnemyTests {
         Assert.assertNull(coin.getPosition().first);
         Assert.assertNull(coin.getPosition().second);
         Assert.assertEquals(coin.getDamage(), 2);
-        Assert.assertEquals(coin.getHealth(), 2);
+        Assert.assertEquals(coin.getHealth(), 20);
     }
 
     /**

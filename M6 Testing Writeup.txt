@@ -4,3 +4,5 @@ DogeCoinDamage: Tests if the appropriate amount of health is removed from a Doge
 EthereumDamage: Tests if the appropriate amount of health is removed from an Ethereum if it takes damage.
 EnemyNotDelete: Tests that if an enemy takes damage that is non-lethal, that it will not be marked for deletion. This ensures that the enemy will NOT disappear in our respective method implementation. 
 EnemyDelete: Tests that if an enemy takes damage that is lethal, that it will be marked for deletion. This enssures that the enemy WILL disappear in our respective method implementation.
+TradingChadDamage:  Tests if TradingChad deals the appropriate amount of damage to an enemy.
+RedditDudeDamage:   Tests if RedditDude deals the appropriate amount of damage to an enemy.
