@@ -84,7 +84,7 @@ public class TowerTests {
         assertEquals(10, chad.getPosition().first.intValue());
         assertEquals(15, chad.getPosition().second.intValue());
         assertEquals(10, chad.getFireRate());
-        assertEquals(10, chad.getDamage());
+        assertEquals(20, chad.getDamage());
         assertEquals(100, chad.getUpgradeCost());
     }
 
@@ -99,13 +99,13 @@ public class TowerTests {
         chad.levelUp();
         assertEquals(2, chad.getLevel());
         assertEquals(15, chad.getFireRate());
-        assertEquals(20, chad.getDamage());
+        assertEquals(40, chad.getDamage());
         assertEquals(500, chad.getUpgradeCost());
 
         chad.levelUp();
         assertEquals(3, chad.getLevel());
         assertEquals(20, chad.getFireRate());
-        assertEquals(40, chad.getDamage());
+        assertEquals(80, chad.getDamage());
         assertEquals(2500, chad.getUpgradeCost());
 
     }
@@ -123,7 +123,7 @@ public class TowerTests {
         assertEquals(10, proj.getPosition().first.intValue());
         assertEquals(15, proj.getPosition().second.intValue());
         assertEquals(20, proj.getSpeed());
-        assertEquals(10, proj.getDamage());
+        assertEquals(20, proj.getDamage());
 
         proj.updatePosition();
         assertEquals(30, proj.getPosition().first.intValue());
@@ -210,7 +210,7 @@ public class TowerTests {
         BitCoin coin = new BitCoin();
         TradingChad tradingChad = new TradingChad(new Pair<>(0,0));
         coin.takeDamage(tradingChad.getDamage());
-        Assert.assertEquals(20, coin.getHealth());
+        Assert.assertEquals(10, coin.getHealth());
     }
 
     /**
@@ -240,6 +240,6 @@ public class TowerTests {
         chad.levelUp();
 
         doge.takeDamage(chad.getDamage());
-        assertEquals(doge.getHealth(), -10);
+        assertEquals(doge.getHealth(), -30);
     }
 }

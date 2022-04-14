@@ -121,9 +121,46 @@ public class GameController {
         }
 
         Timer timer = new Timer();
-        TimerTask updateEnemyPosition = new TimerTask() {
+        TimerTask megaTimer = new TimerTask() {
             @Override
             public void run() {
+                for (Tower tower : GameScreen.getTowerList()) {
+                    if (tower instanceof RedditDude) {
+                        int col = tower.getPosition().second;
+                        ArrayList<Enemy> spawnedList = GameScreen.getSpawnedList();
+                        for (Enemy enemy : spawnedList) {
+                            if (enemy.getPosition().second == col) {
+                                if (enemy.takeDamage(tower.getDamage())) {
+                                    enemy.setDamaged(true);
+                                    enemy.setDelete(true);
+                                } else {
+                                    enemy.setDamaged(true);
+                                }
+                            }
+                        }
+                    } else if (tower instanceof TradingChad) {
+                        int col = tower.getPosition().second;
+                        ArrayList<Enemy> spawnedList = GameScreen.getSpawnedList();
+                        for (Enemy enemy : spawnedList) {
+                            if (enemy.getPosition().second == col) {
+                                System.out.println("Trading damage: " + tower.getDamage());
+                                if (enemy.takeDamage(tower.getDamage())) {
+                                    enemy.setDamaged(true);
+                                    enemy.setDelete(true);
+                                } else {
+                                    enemy.setDamaged(true);
+
+                                }
+                            }
+                        }
+                    } else if (tower instanceof CryptoWhale) {
+                        System.out.println("found cryptowhale, upgrading damage");
+                        for (Tower otherTower : GameScreen.getTowerList()) {
+                            otherTower.setDamage(otherTower.getDamage() + tower.getLevel());
+                        }
+                    }
+                }
+
                 // draw background tiles
                 drawBackground();
 
@@ -143,72 +180,7 @@ public class GameController {
                 }
             }
         };
-
-        TimerTask redditTask = new TimerTask() {
-            @Override
-            public void run() {
-                for (Tower tower : GameScreen.getTowerList()) {
-                    if (tower instanceof RedditDude) {
-                        int col = tower.getPosition().second;
-                        ArrayList<Enemy> spawnedList = GameScreen.getSpawnedList();
-                        for (Enemy enemy : spawnedList) {
-                            if (enemy.getPosition().second == col) {
-                                if (enemy.takeDamage(tower.getDamage())) {
-                                    enemy.setDamaged(true);
-                                    enemy.setDelete(true);
-                                } else {
-                                    enemy.setDamaged(true);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-
-        TimerTask tradingTask = new TimerTask() {
-            @Override
-            public void run() {
-                for (Tower tower : GameScreen.getTowerList()) {
-                    if (tower instanceof TradingChad) {
-                        int col = tower.getPosition().second;
-                        ArrayList<Enemy> spawnedList = GameScreen.getSpawnedList();
-                        for (Enemy enemy : spawnedList) {
-                            if (enemy.getPosition().second == col) {
-                                System.out.println("Trading damage: " + tower.getDamage());
-                                if (enemy.takeDamage(tower.getDamage())) {
-                                    enemy.setDamaged(true);
-                                    enemy.setDelete(true);
-                                } else {
-                                    enemy.setDamaged(true);
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-
-        TimerTask cryptoWhaleTask = new TimerTask() {
-            @Override
-            public void run() {
-                for (Tower tower : GameScreen.getTowerList()) {
-                    if (tower instanceof CryptoWhale) {
-                        System.out.println("found cryptowhale, upgrading damage");
-                        for (Tower otherTower : GameScreen.getTowerList()) {
-                            otherTower.setDamage(otherTower.getDamage() + tower.getLevel());
-                        }
-                    }
-                }
-            }
-        };
-
-
-        timer.scheduleAtFixedRate(redditTask, 0, 500);
-        timer.scheduleAtFixedRate(tradingTask, 0, 500);
-        timer.scheduleAtFixedRate(updateEnemyPosition, 0, 500);
-        timer.scheduleAtFixedRate(cryptoWhaleTask, 0, 1000);
+        timer.scheduleAtFixedRate(megaTimer, 0, 500);
     }
 
     public void updateEnemies() {
