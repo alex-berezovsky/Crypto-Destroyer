@@ -1,5 +1,6 @@
 package com.teamthirty.buyhighselllow.Entities.Enemies;
 
+import android.graphics.Color;
 import androidx.core.util.Pair;
 
 import java.util.ArrayList;
@@ -15,6 +16,16 @@ public class Enemy {
     public int getMAX_HEALTH() {
         return MAX_HEALTH;
     }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    protected int color;
 
     public boolean updatePosition(ArrayList<Pair<Integer, Integer>> path) {
         int pathIndex = path.indexOf(position);

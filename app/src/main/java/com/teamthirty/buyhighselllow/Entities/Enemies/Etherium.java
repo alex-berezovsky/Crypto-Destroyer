@@ -1,5 +1,6 @@
 package com.teamthirty.buyhighselllow.Entities.Enemies;
 
+import android.graphics.Color;
 import androidx.core.util.Pair;
 
 public class Etherium extends Enemy {
@@ -8,5 +9,6 @@ public class Etherium extends Enemy {
         health = 2;
         MAX_HEALTH = health;
         damage = 2;
+        color = Color.CYAN;
     }
 }
