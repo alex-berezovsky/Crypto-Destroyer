@@ -131,10 +131,10 @@ public class GameController {
         TimerTask redditTask = new TimerTask() {
             @Override
             public void run() {
-                for (Tower tower : GameScreen.towerList) {
+                for (Tower tower : GameScreen.getTowerList()) {
                     if (tower instanceof RedditDude) {
                         int col = tower.getPosition().second;
-                        ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
+                        ArrayList<Enemy> spawnedList = GameScreen.getSpawnedList();
                         for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
@@ -150,10 +150,10 @@ public class GameController {
         TimerTask tradingTask = new TimerTask() {
             @Override
             public void run() {
-                for (Tower tower : GameScreen.towerList) {
+                for (Tower tower : GameScreen.getTowerList()) {
                     if (tower instanceof TradingChad) {
                         int col = tower.getPosition().second;
-                        ArrayList<Enemy> spawnedList = GameScreen.spawnedList;
+                        ArrayList<Enemy> spawnedList = GameScreen.getSpawnedList();
                         for (Enemy enemy : spawnedList) {
                             if (enemy.getPosition().second == col) {
                                 if (enemy.takeDamage(tower.getDamage())) {
@@ -194,7 +194,8 @@ public class GameController {
                     gameScreen.getSpawnedList().remove(enemy);
                     i--;
                     gameScreen.setMonumentHealth(gameScreen.getMonumentHealth()
-                                                     - enemy.getDamage() * 10); //remove this post-demo
+                                                     - enemy.getDamage()
+                        * 10); //remove this post-demo
                     gameScreen.getMonumentHealthText()
                         .setText("Monument HP: " + gameScreen.getMonumentHealth());
 
