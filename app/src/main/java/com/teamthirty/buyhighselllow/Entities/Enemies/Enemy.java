@@ -10,6 +10,11 @@ public class Enemy {
     protected int damage;
     protected int speed = 1;
     protected boolean delete = false;
+    protected int MAX_HEALTH;
+
+    public int getMAX_HEALTH() {
+        return MAX_HEALTH;
+    }
 
     public boolean updatePosition(ArrayList<Pair<Integer, Integer>> path) {
         int pathIndex = path.indexOf(position);

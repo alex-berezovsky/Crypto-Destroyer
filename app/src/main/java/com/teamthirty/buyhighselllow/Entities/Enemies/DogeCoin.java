@@ -6,6 +6,7 @@ public class DogeCoin extends Enemy {
     public DogeCoin() {
         position = new Pair<Integer, Integer>(null, null);
         health = 100;
+        MAX_HEALTH = health;
         damage = 1;
     }
 }

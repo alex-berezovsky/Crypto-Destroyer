@@ -6,6 +6,7 @@ public class BitCoin extends Enemy {
     public BitCoin() {
         position = new Pair<Integer, Integer>(null, null);
         health = 3;
+        MAX_HEALTH = health;
         damage = 3;
     }
 }

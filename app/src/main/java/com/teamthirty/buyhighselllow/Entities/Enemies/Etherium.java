@@ -6,6 +6,7 @@ public class Etherium extends Enemy {
     public Etherium() {
         position = new Pair<Integer, Integer>(null, null);
         health = 2;
+        MAX_HEALTH = health;
         damage = 2;
     }
 }
