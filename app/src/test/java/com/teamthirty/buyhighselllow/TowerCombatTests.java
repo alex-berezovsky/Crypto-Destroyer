@@ -5,6 +5,7 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
+import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.Systems.GameController;
 import org.junit.Assert;
 import org.junit.Test;
@@ -75,5 +76,4 @@ public class TowerCombatTests {
         assertTrue(dogeCoin.getDelete());
 
     }
-
 }

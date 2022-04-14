@@ -2,6 +2,7 @@ package com.teamthirty.buyhighselllow;
 
 import androidx.core.util.Pair;
 import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
@@ -212,4 +213,33 @@ public class TowerTests {
         Assert.assertEquals(20, coin.getHealth());
     }
 
+    /**
+     * Tests if RedditDude deals correct amount of damage when leveled up
+     */
+    @Test
+    public void redditLevelUpDamage() {
+        Pair<Integer, Integer> location = new Pair<>(0,0);
+        RedditDude dude = new RedditDude(location);
+        DogeCoin doge = new DogeCoin();
+
+        dude.levelUp();
+
+        doge.takeDamage(dude.getDamage());
+        assertEquals(doge.getHealth(), -30);
+    }
+
+    /**
+     * Tests if TradingChad deals correct amount of damage when leveled up
+     */
+    @Test
+    public void tradingLevelUpDamage() {
+        Pair<Integer, Integer> location = new Pair<>(0,0);
+        TradingChad chad = new TradingChad(location);
+        DogeCoin doge = new DogeCoin();
+
+        chad.levelUp();
+
+        doge.takeDamage(chad.getDamage());
+        assertEquals(doge.getHealth(), -10);
+    }
 }
