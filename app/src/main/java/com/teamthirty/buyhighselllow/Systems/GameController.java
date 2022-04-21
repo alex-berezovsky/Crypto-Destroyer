@@ -247,6 +247,12 @@ public class GameController {
 
                     if (gameScreen.getMonumentHealth() <= 0 && gameScreen.getHasNotFinished()) {
                         Intent intent = new Intent(gameScreen, EndGameScreen.class);
+                        intent.putExtra("enemiesKilled",
+                                        gameScreen.getEnemiesKilled());
+                        intent.putExtra("cashEarned",
+                                        GameScreen.getCash());
+                        intent.putExtra("roundsPlayed",
+                                        gameScreen.getRoundCounter());
                         gameScreen.startActivity(intent);
                         gameScreen.setHasNotFinished(false);
                     }
