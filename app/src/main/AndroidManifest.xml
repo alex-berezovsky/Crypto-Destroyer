@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.BuyHighSellLow">
         <activity
-                android:name=".Entities.Towers.Screens.win_screen"
+                android:name=".Entities.Towers.Screens.WinScreen"
                 android:exported="true"/>
         <activity
                 android:name=".Entities.Towers.Screens.EndGameScreen"

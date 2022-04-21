@@ -6,10 +6,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.teamthirty.buyhighselllow.R;
-import com.teamthirty.buyhighselllow.Systems.GameController;
-import com.teamthirty.buyhighselllow.Systems.PlayerSystem;
 
-public class win_screen extends AppCompatActivity {
+public class WinScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class win_screen extends AppCompatActivity {
 
     private void restartGame() {
 
-        Intent intent = new Intent(win_screen.this, MainActivity.class);
+        Intent intent = new Intent(WinScreen.this, MainActivity.class);
         startActivity(intent);
 
     }
