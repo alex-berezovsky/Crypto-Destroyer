@@ -137,6 +137,7 @@ public class GameController {
                                     if (enemy instanceof ElonMusk) {
                                         gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled()
                                                                         + 1);
+                                        spawnedList.remove(enemy);
                                         Intent intent = new Intent(gameScreen, WinScreen.class);
                                         intent.putExtra("enemiesKilled",
                                                         gameScreen.getEnemiesKilled());
@@ -145,7 +146,6 @@ public class GameController {
                                         intent.putExtra("roundsPlayed",
                                                         gameScreen.getRoundCounter());
                                         gameScreen.startActivity(intent);
-
                                     }
                                 } else {
                                     enemy.setDamaged(true);
@@ -165,6 +165,7 @@ public class GameController {
                                     if (enemy instanceof ElonMusk) {
                                         gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled()
                                                                         + 1);
+                                        spawnedList.remove(enemy);
                                         Intent intent = new Intent(gameScreen, WinScreen.class);
                                         intent.putExtra("enemiesKilled",
                                                         gameScreen.getEnemiesKilled());
@@ -173,7 +174,6 @@ public class GameController {
                                         intent.putExtra("roundsPlayed",
                                                         gameScreen.getRoundCounter());
                                         gameScreen.startActivity(intent);
-
                                     }
                                 } else {
                                     enemy.setDamaged(true);
