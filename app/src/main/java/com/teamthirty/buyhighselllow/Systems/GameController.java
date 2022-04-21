@@ -17,7 +17,6 @@ import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
-import org.w3c.dom.Element;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -139,9 +138,12 @@ public class GameController {
                                     if (enemy instanceof ElonMusk) {
 
                                         Intent intent = new Intent(gameScreen, win_screen.class);
-                                        intent.putExtra("enemiesKilled", gameScreen.getEnemiesKilled());
-                                        intent.putExtra("cashEarned", gameScreen.getPlayerSystem().getMoney());
-                                        intent.putExtra("roundsPlayed", gameScreen.getRoundCounter());
+                                        intent.putExtra("enemiesKilled",
+                                                        gameScreen.getEnemiesKilled());
+                                        intent.putExtra("cashEarned",
+                                                        gameScreen.getPlayerSystem().getMoney());
+                                        intent.putExtra("roundsPlayed",
+                                                        gameScreen.getRoundCounter());
                                         gameScreen.startActivity(intent);
 
                                     }
@@ -164,9 +166,12 @@ public class GameController {
                                     if (enemy instanceof ElonMusk) {
 
                                         Intent intent = new Intent(gameScreen, win_screen.class);
-                                        intent.putExtra("enemiesKilled", gameScreen.getEnemiesKilled());
-                                        intent.putExtra("cashEarned", gameScreen.getPlayerSystem().getMoney());
-                                        intent.putExtra("roundsPlayed", gameScreen.getRoundCounter());
+                                        intent.putExtra("enemiesKilled",
+                                                        gameScreen.getEnemiesKilled());
+                                        intent.putExtra("cashEarned",
+                                                        gameScreen.getPlayerSystem().getMoney());
+                                        intent.putExtra("roundsPlayed",
+                                                        gameScreen.getRoundCounter());
                                         gameScreen.startActivity(intent);
 
                                     }
@@ -242,19 +247,6 @@ public class GameController {
                         gameScreen.startActivity(intent);
                         gameScreen.setHasNotFinished(false);
                     }
-
-//                    if (gameScreen.getRoundCounter() == 4 && gameScreen.getMonumentHealth() > 0) {
-//
-//                        System.out.println("cum pog");
-//                        System.out.println("round: " + gameScreen.getRoundCounter() + " " + "mon health: " + gameScreen.getMonumentHealth());
-//
-//                        Intent intent = new Intent(gameScreen, win_screen.class);
-//                        intent.putExtra("enemiesKilled", gameScreen.getEnemiesKilled());
-//                        intent.putExtra("cashEarned", gameScreen.getPlayerSystem().getMoney());
-//                        intent.putExtra("roundsPlayed", gameScreen.getRoundCounter());
-//                        gameScreen.startActivity(intent);
-//
-//                    }
                     Util.setText(gameScreen, gameScreen.getMonumentHealthText(),
                                  "Monument HP: " + gameScreen.getMonumentHealth());
                 }
