@@ -11,7 +11,7 @@ import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
-import com.teamthirty.buyhighselllow.Entities.Towers.Screens.win_screen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.WinScreen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
 import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.R;
@@ -133,15 +133,15 @@ public class GameController {
                                 if (enemy.takeDamage(tower.getDamage())) {
                                     enemy.setDamaged(true);
                                     enemy.setDelete(true);
-                                    gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled() + 1);
 
                                     if (enemy instanceof ElonMusk) {
-
-                                        Intent intent = new Intent(gameScreen, win_screen.class);
+                                        gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled()
+                                                                        + 1);
+                                        Intent intent = new Intent(gameScreen, WinScreen.class);
                                         intent.putExtra("enemiesKilled",
                                                         gameScreen.getEnemiesKilled());
                                         intent.putExtra("cashEarned",
-                                                        gameScreen.getPlayerSystem().getMoney());
+                                                        GameScreen.getCash());
                                         intent.putExtra("roundsPlayed",
                                                         gameScreen.getRoundCounter());
                                         gameScreen.startActivity(intent);
@@ -161,15 +161,15 @@ public class GameController {
                                 if (enemy.takeDamage(tower.getDamage())) {
                                     enemy.setDamaged(true);
                                     enemy.setDelete(true);
-                                    gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled() + 1);
 
                                     if (enemy instanceof ElonMusk) {
-
-                                        Intent intent = new Intent(gameScreen, win_screen.class);
+                                        gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled()
+                                                                        + 1);
+                                        Intent intent = new Intent(gameScreen, WinScreen.class);
                                         intent.putExtra("enemiesKilled",
                                                         gameScreen.getEnemiesKilled());
                                         intent.putExtra("cashEarned",
-                                                        gameScreen.getPlayerSystem().getMoney());
+                                                        GameScreen.getCash());
                                         intent.putExtra("roundsPlayed",
                                                         gameScreen.getRoundCounter());
                                         gameScreen.startActivity(intent);
@@ -227,6 +227,7 @@ public class GameController {
 
 
                 if (enemy.getDelete()) {
+                    gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled() + 1);
                     gameScreen.getSpawnedList().remove(i--);
                 }
 
