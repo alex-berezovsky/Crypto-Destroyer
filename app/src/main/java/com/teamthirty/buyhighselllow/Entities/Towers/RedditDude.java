@@ -16,7 +16,7 @@ public class RedditDude extends Tower {
         level = 1;
         fireRate = 20;
         damage = 10;
-        upgradeCost = 250;
+        upgradeCost = 100;
     }
 
     /**

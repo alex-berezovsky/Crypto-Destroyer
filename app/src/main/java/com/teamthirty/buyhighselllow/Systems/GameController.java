@@ -156,7 +156,7 @@ public class GameController {
                     } else if (tower instanceof CryptoWhale) {
                         System.out.println("found cryptowhale, upgrading damage");
                         for (Tower otherTower : GameScreen.getTowerList()) {
-                            otherTower.setDamage(otherTower.getDamage() + tower.getLevel());
+                            otherTower.setDamage(otherTower.getDamage() + ((CryptoWhale) tower).getDamageAdder());
                         }
                     }
                 }
@@ -172,12 +172,13 @@ public class GameController {
                 if (gameScreen.getSpawnedList().isEmpty()) {
                     timer.purge();
                     timer.cancel();
-                    gameScreen.getPlayerSystem().setMoney(gameScreen.getPlayerSystem().getMoney()
-                                                              + 400 + 10
-                                                            * gameScreen.getRoundCounter());
+                    GameScreen.setCash(GameScreen.getCash() + 400 + 10
+                        * gameScreen.getRoundCounter());
                     gameScreen.setRoundCounter(gameScreen.getRoundCounter() + 1);
                     Util.setText(gameScreen, gameScreen.getRoundCounterText(),
                                  "Round: " + gameScreen.getRoundCounter());
+                    Util.setText(gameScreen, gameScreen.getCashText(),
+                                 "Player Cash: " + GameScreen.getCash());
                 } else {
                     updateEnemies();
                 }

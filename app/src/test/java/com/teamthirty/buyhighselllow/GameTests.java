@@ -3,6 +3,7 @@ package com.teamthirty.buyhighselllow;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -14,6 +15,8 @@ public class GameTests {
      * M4 Test that tests cash and monument health is correct for all difficulty levels
      */
     @Test
+    @Deprecated
+    @Ignore
     public void difficultyParameterVerificationTest() throws Exception {
         GameScreen gameScreen = new GameScreen();
 

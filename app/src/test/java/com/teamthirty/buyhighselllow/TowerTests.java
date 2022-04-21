@@ -85,7 +85,7 @@ public class TowerTests {
         assertEquals(15, chad.getPosition().second.intValue());
         assertEquals(10, chad.getFireRate());
         assertEquals(20, chad.getDamage());
-        assertEquals(100, chad.getUpgradeCost());
+        assertEquals(250, chad.getUpgradeCost());
     }
 
     /**
@@ -100,13 +100,13 @@ public class TowerTests {
         assertEquals(2, chad.getLevel());
         assertEquals(15, chad.getFireRate());
         assertEquals(40, chad.getDamage());
-        assertEquals(500, chad.getUpgradeCost());
+        assertEquals(1250, chad.getUpgradeCost());
 
         chad.levelUp();
         assertEquals(3, chad.getLevel());
         assertEquals(20, chad.getFireRate());
         assertEquals(80, chad.getDamage());
-        assertEquals(2500, chad.getUpgradeCost());
+        assertEquals(6250, chad.getUpgradeCost());
 
     }
 
@@ -143,7 +143,7 @@ public class TowerTests {
         assertEquals(15, redditDude.getPosition().second.intValue());
         assertEquals(20, redditDude.getFireRate());
         assertEquals(10, redditDude.getDamage());
-        assertEquals(250, redditDude.getUpgradeCost());
+        assertEquals(100, redditDude.getUpgradeCost());
     }
 
     /**
@@ -160,7 +160,7 @@ public class TowerTests {
         assertEquals(15, redditDude.getPosition().second.intValue());
         assertEquals(30, redditDude.getFireRate());
         assertEquals(40, redditDude.getDamage());
-        assertEquals(2500, redditDude.getUpgradeCost());
+        assertEquals(1000, redditDude.getUpgradeCost());
 
         redditDude.levelUp();
         assertEquals(3, redditDude.getLevel());
@@ -168,7 +168,7 @@ public class TowerTests {
         assertEquals(15, redditDude.getPosition().second.intValue());
         assertEquals(40, redditDude.getFireRate());
         assertEquals(160, redditDude.getDamage());
-        assertEquals(25000, redditDude.getUpgradeCost());
+        assertEquals(10000, redditDude.getUpgradeCost());
     }
 
     /**
