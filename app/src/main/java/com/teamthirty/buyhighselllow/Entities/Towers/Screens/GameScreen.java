@@ -39,6 +39,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private TextView roundCounterText;
     private Boolean hasNotFinished = true;
 
+    private int enemiesKilled = 0;
+
     public static ArrayList<Tower> getTowerList() {
         return towerList;
     }
@@ -220,5 +222,13 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
     public void setPlayerSystem(PlayerSystem playerSystem) {
         this.playerSystem = playerSystem;
+    }
+
+    public int getEnemiesKilled() {
+        return enemiesKilled;
+    }
+
+    public void setEnemiesKilled(int enemiesKilled) {
+        this.enemiesKilled = enemiesKilled;
     }
 }
