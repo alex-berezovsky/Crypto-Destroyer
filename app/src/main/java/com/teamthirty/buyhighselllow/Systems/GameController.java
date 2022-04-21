@@ -156,7 +156,8 @@ public class GameController {
                     } else if (tower instanceof CryptoWhale) {
                         System.out.println("found cryptowhale, upgrading damage");
                         for (Tower otherTower : GameScreen.getTowerList()) {
-                            otherTower.setDamage(otherTower.getDamage() + ((CryptoWhale) tower).getDamageAdder());
+                            otherTower.setDamage(otherTower.getDamage() + ((CryptoWhale) tower)
+                                .getDamageAdder());
                         }
                     }
                 }
