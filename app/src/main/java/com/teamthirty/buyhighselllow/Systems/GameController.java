@@ -6,10 +6,7 @@ import android.graphics.Color;
 import android.widget.Button;
 import androidx.core.util.Pair;
 import androidx.gridlayout.widget.GridLayout;
-import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
-import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
-import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
-import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
+import com.teamthirty.buyhighselllow.Entities.Enemies.*;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
@@ -118,6 +115,8 @@ public class GameController {
             gameScreen.getUnspawnedList().add(new BitCoin());
             gameScreen.getUnspawnedList().add(new BitCoin());
             gameScreen.getUnspawnedList().add(new BitCoin());
+        } else if (gameScreen.getRoundCounter() == 4) {
+            gameScreen.getUnspawnedList().add(new ElonMusk());
         }
 
         Timer timer = new Timer();
