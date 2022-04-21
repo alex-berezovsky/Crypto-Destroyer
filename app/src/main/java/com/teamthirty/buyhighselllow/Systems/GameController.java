@@ -12,8 +12,8 @@ import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
-import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.win_screen;
 import com.teamthirty.buyhighselllow.Entities.Towers.Tower;
 import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
 import com.teamthirty.buyhighselllow.R;
@@ -133,6 +133,7 @@ public class GameController {
                                 if (enemy.takeDamage(tower.getDamage())) {
                                     enemy.setDamaged(true);
                                     enemy.setDelete(true);
+                                    gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled() + 1);
                                 } else {
                                     enemy.setDamaged(true);
                                 }
@@ -215,7 +216,10 @@ public class GameController {
                         .setText("Monument HP: " + gameScreen.getMonumentHealth());
 
                     if (gameScreen.getMonumentHealth() <= 0 && gameScreen.getHasNotFinished()) {
-                        Intent intent = new Intent(gameScreen, EndGameScreen.class);
+                        Intent intent = new Intent(gameScreen, win_screen.class);
+                        intent.putExtra("enemiesKilled", gameScreen.getEnemiesKilled());
+                        intent.putExtra("cashEarned", gameScreen.getPlayerSystem().getMoney());
+                        intent.putExtra("roundsPlayed", gameScreen.getRoundCounter());
                         gameScreen.startActivity(intent);
                         gameScreen.setHasNotFinished(false);
                     }

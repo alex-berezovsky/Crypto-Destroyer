@@ -12,14 +12,26 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="1dp" android:layout_marginEnd="1dp"
             app:layout_constraintEnd_toEndOf="parent">
         <TextView
-                android:text="Game Over"
+                android:text="You Won!"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView3" android:textSize="48sp"
-                android:translationX="80dp" android:translationY="200dp"/>
+                android:layout_height="wrap_content" android:id="@+id/textViewWin" android:textSize="48sp"
+                android:translationX="100dp" android:translationY="200dp"/>
         <Button
                 android:text="Restart"
                 android:layout_width="125dp"
-                android:layout_height="wrap_content" android:id="@+id/restartButton2" android:translationX="140dp"
+                android:layout_height="wrap_content" android:id="@+id/restartButtonWin" android:translationX="140dp"
                 android:translationY="350dp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/cashEndedText" android:translationY="175dp"
+                android:translationX="100dp" android:textSize="20sp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/roundsPlayedText" android:translationY="175dp"
+                android:translationX="100dp" android:textSize="20sp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/enemiesKilled" android:translationY="175dp"
+                android:translationX="100dp" android:textSize="20sp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

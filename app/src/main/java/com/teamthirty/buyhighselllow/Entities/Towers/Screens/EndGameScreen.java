@@ -13,7 +13,7 @@ public class EndGameScreen extends AppCompatActivity {
 
         setContentView(R.layout.end_game_screen);
 
-        Button restartGameButton = findViewById(R.id.restartButton);
+        Button restartGameButton = findViewById(R.id.restartButton2);
         restartGameButton.setOnClickListener(v -> restartGame());
 
 
