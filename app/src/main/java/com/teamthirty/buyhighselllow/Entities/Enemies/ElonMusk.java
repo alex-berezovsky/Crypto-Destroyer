@@ -3,12 +3,12 @@ package com.teamthirty.buyhighselllow.Entities.Enemies;
 import android.graphics.Color;
 import androidx.core.util.Pair;
 
-public class BitCoin extends Enemy {
-    public BitCoin() {
+public class ElonMusk extends Enemy {
+    public ElonMusk() {
         position = new Pair<Integer, Integer>(null, null);
-        health = 30;
+        health = 420;
         maxHealth = health;
-        damage = 3;
-        color = Color.DKGRAY;
+        damage = 69;
+        color = Color.rgb(255, 165, 0);
     }
 }
