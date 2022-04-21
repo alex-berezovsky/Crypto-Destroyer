@@ -21,5 +21,17 @@
                 android:layout_width="125dp"
                 android:layout_height="wrap_content" android:id="@+id/restartButton2" android:translationX="140dp"
                 android:translationY="350dp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/cashEndedText3" android:translationY="175dp"
+                android:translationX="100dp" android:textSize="20sp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/enemiesKilled3" android:translationY="175dp"
+                android:translationX="100dp" android:textSize="20sp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/roundsPlayedText3" android:translationY="175dp"
+                android:translationX="100dp" android:textSize="20sp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
