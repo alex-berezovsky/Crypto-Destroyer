@@ -16,7 +16,7 @@ public class TradingChad extends Tower {
         level = 1;
         fireRate = 10;
         damage = 20;
-        upgradeCost = 100;
+        upgradeCost = 250;
     }
 
     /**

@@ -21,8 +21,6 @@ import com.teamthirty.buyhighselllow.Utilities.TowerType;
 import com.teamthirty.buyhighselllow.Utilities.Util;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
     private final GameController gameController = new GameController(this);
@@ -33,10 +31,11 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private int roundCounter = 1;
     private ArrayList<Enemy> unspawnedList = new ArrayList<>();
     private static ArrayList<Enemy> spawnedList = new ArrayList<>();
-    private int cash = 0;
+    private static int cash = 0;
     private int monumentHealth = 0;
     private TextView monumentHealthText;
     private TextView roundCounterText;
+    private TextView playerCashText;
     private Boolean hasNotFinished = true;
 
     private int enemiesKilled = 0;
@@ -63,13 +62,15 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         Button redditDude = findViewById(R.id.RedditDude);
         Button tradingChad = findViewById(R.id.TradingChad);
         Button cryptoWhale = findViewById(R.id.CryptoWhale);
+        Button clearSelection = findViewById(R.id.clearSelection);
         redditDude.setOnClickListener(view -> gameController.setTowerType(TowerType.RedditDude));
         tradingChad.setOnClickListener(view -> gameController.setTowerType(TowerType.TradingChad));
         cryptoWhale.setOnClickListener(view -> gameController.setTowerType(TowerType.CryptoWhale));
+        clearSelection.setOnClickListener(view -> gameController.setTowerType(null));
 
         setCash(difficulty.getCash());
         setMonumentHealth(difficulty.getMonumentHealth());
-        playerSystem.setMoney(cash);
+
 
         // create path for enemies to follow
         gameController.generatePath();
@@ -90,19 +91,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         Util.setText(GameScreen.this, roundCounterText, "Round: " + roundCounter);
 
         // set balance text
-        TextView playerCashText = findViewById(R.id.playerCash);
-
-        Timer textTimer = new Timer();
-        TimerTask updateCashTextTask = new TimerTask() {
-            @Override
-            public void run() {
-                Util.setText(GameScreen.this, playerCashText, "Player Cash: "
-                    + playerSystem.getMoney());
-
-            }
-        };
-
-        textTimer.scheduleAtFixedRate(updateCashTextTask, 0, 1000);
+        playerCashText = findViewById(R.id.playerCash);
+        Util.setText(GameScreen.this, playerCashText, "Player Cash: " + cash);
 
         towerList = new ArrayList<>();
         // set onClick listener for all buttons
@@ -121,17 +111,41 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         int row = towerLocation.first;
         int column = towerLocation.second;
 
-        Tower tower = null;
         if (path.contains(towerLocation)) {
             Util.displayError(this, "Cannot place tower on path!");
         } else {
-            if (towerType == null) {
+            if (towerType == null && ((ColorDrawable) mapArray[row][column].getBackground())
+                .getColor() == (Color.GREEN)) {
                 Util.displayError(this, "Select a tower type to place!");
+            } else if (towerType == null && ((ColorDrawable) mapArray[row][column].getBackground())
+                .getColor() != (Color.GREEN)) {
+                for (Tower tower: towerList) {
+                    if (tower.getPosition().first == row && tower.getPosition().second == column) {
+                        if (tower.getUpgradeCost() <= cash) {
+                            System.out.println(tower.getUpgradeCost());
+                            cash -= tower.getUpgradeCost();
+                            System.out.println(cash);
+                            Util.setText(GameScreen.this, playerCashText, "Player Cash: "
+                                + cash);
+                            tower.levelUp();
+                            Util.displayError(this, "Tower leveled up!");
+
+                            float[] hsv = new float[3];
+                            Color.colorToHSV(((ColorDrawable) mapArray[row][column].getBackground())
+                                                 .getColor(), hsv);
+                            hsv[2] = (float) (hsv[2] * .9);
+                            mapArray[row][column].setBackgroundColor(Color.HSVToColor(hsv));
+                        } else {
+                            Util.displayError(this, "Not enough money to level tower up!");
+                        }
+                    }
+                }
             } else {
                 if (((ColorDrawable) mapArray[row][column].getBackground()).getColor()
                     != (Color.GREEN)) {
                     Util.displayError(this, "Cannot place tower on top of another tower!");
                 } else {
+                    Tower tower = null;
                     if (towerType.equals(TowerType.RedditDude)) {
                         tower = new RedditDude(towerLocation);
                     } else if (towerType.equals(TowerType.TradingChad)) {
@@ -183,6 +197,10 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         return monumentHealthText;
     }
 
+    public TextView getCashText() {
+        return playerCashText;
+    }
+
     public ArrayList<Enemy> getUnspawnedList() {
         return unspawnedList;
     }
@@ -195,8 +213,12 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         this.hasNotFinished = hasNotFinished;
     }
 
-    public void setCash(int cash) {
-        this.cash = cash;
+    public static void setCash(int cashnew) {
+        cash = cashnew;
+    }
+
+    public static int getCash() {
+        return cash;
     }
 
     public void setMonumentHealth(int monumentHealth) {

@@ -4,6 +4,7 @@ import androidx.core.util.Pair;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 
 public class CryptoWhale extends Tower {
+    private int damageAdder;
     /**
      * Creates a new CryptoWhale Tower
      *
@@ -12,6 +13,7 @@ public class CryptoWhale extends Tower {
     public CryptoWhale(Pair<Integer, Integer> position) {
         this.position = position;
         level = 1;
+        damageAdder = 1;
         fireRate = 30;
         damage = 15;
         upgradeCost = 450;
@@ -31,6 +33,7 @@ public class CryptoWhale extends Tower {
     @Override
     public void damageIncrease() {
         damage *= 16;
+        damageAdder += 1;
     }
 
     /**
@@ -57,5 +60,13 @@ public class CryptoWhale extends Tower {
     @Override
     public Projectile generateProjectile() {
         return new Projectile(position, damage);
+    }
+
+    /**
+     * Returns damage adder
+     * @return damage adder
+     */
+    public int getDamageAdder() {
+        return damageAdder;
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.widget.Button;
 import android.widget.TextView;
+import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
 import com.teamthirty.buyhighselllow.R;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
 import com.teamthirty.buyhighselllow.Utilities.TowerType;
@@ -15,8 +16,6 @@ public class PlayerSystem {
     private int tradingChadCost;
     private int redditDudeCost;
     private int cryptoWhaleCost;
-    // private variables
-    private int money;
 
     public PlayerSystem(Difficulty difficulty) {
         if (difficulty.equals(Difficulty.EASY)) {
@@ -40,8 +39,8 @@ public class PlayerSystem {
         if (initialCost == -1) {
             return false;
         }
-        if (initialCost <= money) {
-            money -= initialCost;
+        if (initialCost <= GameScreen.getCash()) {
+            GameScreen.setCash(GameScreen.getCash() - initialCost);
             placeTower(towerType, mapArray, row, column, activity);
             return true;
         } else {
@@ -57,10 +56,10 @@ public class PlayerSystem {
         } else if (towerType.equals(TowerType.TradingChad)) {
             mapArray[row][column].setBackgroundColor(Color.BLUE);
         } else if (towerType.equals(TowerType.CryptoWhale)) {
-            mapArray[row][column].setBackgroundColor(Color.BLACK);
+            mapArray[row][column].setBackgroundColor(Color.WHITE);
         }
         TextView playerCashText = activity.findViewById(R.id.playerCash);
-        playerCashText.setText("Player Cash: " + getMoney());
+        playerCashText.setText("Player Cash: " + GameScreen.getCash());
     }
 
     public int findInitialCost(TowerType towerType) {
@@ -73,14 +72,6 @@ public class PlayerSystem {
         } else {
             return -1;
         }
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
     }
 
     public int getTradingChadCost() {

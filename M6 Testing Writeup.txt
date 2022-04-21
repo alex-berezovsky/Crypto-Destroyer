@@ -1,0 +1,4 @@
+M6 Testing Writeup:
+cryptoWhaleDamageAdder: Checks if damage adder gets incremented correctly on Crypto Whale level up
+towerDamageIncreases: Checks that CryptoWhale can correctly increment damage of other towers
+ 
