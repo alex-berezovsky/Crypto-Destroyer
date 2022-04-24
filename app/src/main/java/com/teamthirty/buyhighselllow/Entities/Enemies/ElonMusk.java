@@ -11,4 +11,14 @@ public class ElonMusk extends Enemy {
         damage = 969;
         color = Color.rgb(255, 165, 0);
     }
+
+    public ElonMusk(int color) {
+
+        position = new Pair<Integer, Integer>(null, null);
+        health = 100;
+        maxHealth = health;
+        damage = 969;
+        this.color = color;
+
+    }
 }

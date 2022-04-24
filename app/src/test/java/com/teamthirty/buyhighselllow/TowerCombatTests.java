@@ -1,7 +1,9 @@
 package com.teamthirty.buyhighselllow;
+import android.graphics.Color;
 import androidx.core.util.Pair;
 import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.ElonMusk;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
@@ -87,6 +89,35 @@ public class TowerCombatTests {
         DogeCoin dogeCoin = new DogeCoin();
         dogeCoin.takeDamage(-5);
 
+    }
+
+    /**
+     * Tests that checks that the final boss dies after taking lethal damage, which ensures that the
+     * game will end.
+     */
+    @Test
+    public void BossTakeDamageKilled() {
+
+        ElonMusk elonMusk = new ElonMusk(Color.WHITE);
+
+        elonMusk.setDelete(elonMusk.takeDamage(150));
+
+        assertTrue(elonMusk.getDelete());
+
+    }
+
+    /**
+     * Tests that checks that the final boss does NOT die after taking non-lethal damage,
+     * which ensures that the game will NOT end until the boss is dead.
+     */
+    @Test
+    public void BossTakeDamageNotKilled() {
+
+        ElonMusk elonMusk = new ElonMusk(Color.WHITE);
+
+        elonMusk.setDelete(elonMusk.takeDamage(99));
+
+        assertFalse(elonMusk.getDelete());
 
     }
 }
