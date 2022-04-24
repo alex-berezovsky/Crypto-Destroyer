@@ -133,19 +133,9 @@ public class GameController {
                                 if (enemy.takeDamage(tower.getDamage())) {
                                     enemy.setDamaged(true);
                                     enemy.setDelete(true);
-
                                     if (enemy instanceof ElonMusk) {
-                                        gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled()
-                                                                        + 1);
                                         spawnedList.remove(enemy);
-                                        Intent intent = new Intent(gameScreen, WinScreen.class);
-                                        intent.putExtra("enemiesKilled",
-                                                        gameScreen.getEnemiesKilled());
-                                        intent.putExtra("cashEarned",
-                                                        GameScreen.getCash());
-                                        intent.putExtra("roundsPlayed",
-                                                        gameScreen.getRoundCounter());
-                                        gameScreen.startActivity(intent);
+                                        winGame();
                                     }
                                 } else {
                                     enemy.setDamaged(true);
@@ -163,21 +153,11 @@ public class GameController {
                                     enemy.setDelete(true);
 
                                     if (enemy instanceof ElonMusk) {
-                                        gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled()
-                                                                        + 1);
                                         spawnedList.remove(enemy);
-                                        Intent intent = new Intent(gameScreen, WinScreen.class);
-                                        intent.putExtra("enemiesKilled",
-                                                        gameScreen.getEnemiesKilled());
-                                        intent.putExtra("cashEarned",
-                                                        GameScreen.getCash());
-                                        intent.putExtra("roundsPlayed",
-                                                        gameScreen.getRoundCounter());
-                                        gameScreen.startActivity(intent);
+                                        winGame();
                                     }
                                 } else {
                                     enemy.setDamaged(true);
-
                                 }
                             }
                         }
@@ -309,5 +289,17 @@ public class GameController {
         } else {
             map[integerPair.first][integerPair.second].setBackgroundColor(enemy.getColor());
         }
+    }
+
+    public void winGame() {
+        gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled() + 1);
+        Intent intent = new Intent(gameScreen, WinScreen.class);
+        intent.putExtra("enemiesKilled",
+                        gameScreen.getEnemiesKilled());
+        intent.putExtra("cashEarned",
+                        GameScreen.getCash());
+        intent.putExtra("roundsPlayed",
+                        gameScreen.getRoundCounter());
+        gameScreen.startActivity(intent);
     }
 }
