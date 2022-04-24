@@ -1,4 +1,5 @@
 M6 Testing Writeup:
 cryptoWhaleDamageAdder: Checks if damage adder gets incremented correctly on Crypto Whale level up
 towerDamageIncreases: Checks that CryptoWhale can correctly increment damage of other towers
- 
+BossTakeDamageKilled: Checks that Elon Musk(the boss) correctly dies after taking fatal damage, which allows the game to end.
+BossTakeDamageNotKilled: Checks that Elon Musk(the boss) correctly survives after taking non-fatal damage, which ensures the game will go on.
