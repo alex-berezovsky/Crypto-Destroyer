@@ -1,8 +1,10 @@
 package com.teamthirty.buyhighselllow;
 
 import androidx.core.util.Pair;
+import android.graphics.Color;
 import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.ElonMusk;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import org.junit.Assert;
 import org.junit.Test;
@@ -45,6 +47,20 @@ public class EnemyTests {
         Assert.assertEquals(coin.getDamage(), 2);
         Assert.assertEquals(coin.getHealth(), 20);
     }
+
+    /**
+     * M6 test for instantiation of ElonMusk objects
+     */
+    @Test
+    public void elonMuskInstantiation() {
+        ElonMusk elonMusk = new ElonMusk(Color.GREEN);
+        Assert.assertNull(elonMusk.getPosition().first);
+        Assert.assertNull(elonMusk.getPosition().second);
+        Assert.assertEquals(elonMusk.getDamage(), 969);
+        Assert.assertEquals(elonMusk.getHealth(), 100);
+    }
+
+
 
     /**
      * M4 Test that checks if the enemy is correctly moved forward by one grid unit along the path

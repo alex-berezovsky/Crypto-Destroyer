@@ -4,4 +4,6 @@ towerDamageIncreases: Checks that CryptoWhale can correctly increment damage of 
 BossTakeDamageKilled: Checks that Elon Musk(the boss) correctly dies after taking fatal damage, which allows the game to end.
 BossTakeDamageNotKilled: Checks that Elon Musk(the boss) correctly survives after taking non-fatal damage, which ensures the game will go on.
 addUnspawnedListTest: Tests for correct functionality of adding an enemy to the unspawned enemies list.
-addSpawnedListTest:: Tests for correct functionality of adding an enemy to the spawned enemies list. 
+addSpawnedListTest: Tests for correct functionality of adding an enemy to the spawned enemies list.
+elonMuskInstantiation: Tests that Elon Musk is spawned with the proper amount of health and damage
+redditDudeCostIncrease: Tests that the cost required to increase a redditDude increases with each level
