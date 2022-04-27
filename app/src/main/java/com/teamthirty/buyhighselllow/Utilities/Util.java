@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.core.util.Pair;
 
 public final class Util {
@@ -14,7 +15,6 @@ public final class Util {
      *
      * @param context the context of the application
      * @param input   the string you are checking
-     *
      * @return true if name follows proper formatting, false otherwise
      */
     public static boolean sanitizeNameInput(Context context, String input) {
@@ -45,7 +45,6 @@ public final class Util {
      * Returns button location in grid based on id
      *
      * @param id of button
-     *
      * @return button location
      */
     public static Pair<Integer, Integer> towerLocation(int id) {

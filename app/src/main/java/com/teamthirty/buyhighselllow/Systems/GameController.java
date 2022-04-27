@@ -4,9 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.widget.Button;
+
 import androidx.core.util.Pair;
 import androidx.gridlayout.widget.GridLayout;
-import com.teamthirty.buyhighselllow.Entities.Enemies.*;
+
+import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
+import com.teamthirty.buyhighselllow.Entities.Enemies.ElonMusk;
+import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
+import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.EndGameScreen;
@@ -68,7 +74,7 @@ public class GameController {
         }
         // hard-coded monument location
         Pair<Integer, Integer> monumentLocation =
-            gameScreen.getPath().get(gameScreen.getPath().size() - 2);
+                gameScreen.getPath().get(gameScreen.getPath().size() - 2);
         int monumentRow = monumentLocation.first;
         int monumentColumn = monumentLocation.second;
         gameScreen.getMapArray()[monumentRow][monumentColumn].setBackgroundColor(Color.MAGENTA);
@@ -165,7 +171,7 @@ public class GameController {
                         System.out.println("found cryptowhale, upgrading damage");
                         for (Tower otherTower : GameScreen.getTowerList()) {
                             otherTower.setDamage(otherTower.getDamage() + ((CryptoWhale) tower)
-                                .getDamageAdder());
+                                    .getDamageAdder());
                         }
                     }
                 }
@@ -182,12 +188,12 @@ public class GameController {
                     timer.purge();
                     timer.cancel();
                     GameScreen.setCash(GameScreen.getCash() + 400 + 10
-                        * gameScreen.getRoundCounter());
+                            * gameScreen.getRoundCounter());
                     gameScreen.setRoundCounter(gameScreen.getRoundCounter() + 1);
                     Util.setText(gameScreen, gameScreen.getRoundCounterText(),
-                                 "Round: " + gameScreen.getRoundCounter());
+                            "Round: " + gameScreen.getRoundCounter());
                     Util.setText(gameScreen, gameScreen.getCashText(),
-                                 "Player Cash: " + GameScreen.getCash());
+                            "Player Cash: " + GameScreen.getCash());
                 } else {
                     updateEnemies();
                 }
@@ -220,24 +226,24 @@ public class GameController {
                     gameScreen.getSpawnedList().remove(enemy);
                     i--;
                     gameScreen.setMonumentHealth(gameScreen.getMonumentHealth()
-                                                     - enemy.getDamage()
-                        * 10); //remove this post-demo
+                            - enemy.getDamage()
+                            * 10); //remove this post-demo
                     gameScreen.getMonumentHealthText()
-                        .setText("Monument HP: " + gameScreen.getMonumentHealth());
+                            .setText("Monument HP: " + gameScreen.getMonumentHealth());
 
                     if (gameScreen.getMonumentHealth() <= 0 && gameScreen.getHasNotFinished()) {
                         Intent intent = new Intent(gameScreen, EndGameScreen.class);
                         intent.putExtra("enemiesKilled",
-                                        gameScreen.getEnemiesKilled());
+                                gameScreen.getEnemiesKilled());
                         intent.putExtra("cashEarned",
-                                        GameScreen.getCash());
+                                GameScreen.getCash());
                         intent.putExtra("roundsPlayed",
-                                        gameScreen.getRoundCounter());
+                                gameScreen.getRoundCounter());
                         gameScreen.startActivity(intent);
                         gameScreen.setHasNotFinished(false);
                     }
                     Util.setText(gameScreen, gameScreen.getMonumentHealthText(),
-                                 "Monument HP: " + gameScreen.getMonumentHealth());
+                            "Monument HP: " + gameScreen.getMonumentHealth());
                 }
             } else {
                 enemy.updatePosition(gameScreen.getPath());
@@ -250,7 +256,7 @@ public class GameController {
             Enemy enemy = gameScreen.getUnspawnedList().remove(0);
             gameScreen.getSpawnedList().add(enemy);
             gameScreen.getSpawnedList().get(gameScreen.getSpawnedList().size() - 1)
-                .setPosition(gameScreen.getPath().get(0));
+                    .setPosition(gameScreen.getPath().get(0));
         }
     }
 
@@ -282,7 +288,7 @@ public class GameController {
             Color.colorToHSV(enemy.getColor(), hsv);
             System.out.println("Old HSV: " + Arrays.toString(hsv));
             System.out.println(
-                "cur health: " + enemy.getHealth() + ", max health: " + enemy.getMaxHealth());
+                    "cur health: " + enemy.getHealth() + ", max health: " + enemy.getMaxHealth());
             hsv[2] = (float) Math.pow((enemy.getHealth() * 1.0) / enemy.getMaxHealth(), 1.1);
             System.out.println("New HSV: " + Arrays.toString(hsv));
             enemy.setColor(Color.HSVToColor(hsv));
@@ -295,11 +301,11 @@ public class GameController {
         gameScreen.setEnemiesKilled(gameScreen.getEnemiesKilled() + 1);
         Intent intent = new Intent(gameScreen, WinScreen.class);
         intent.putExtra("enemiesKilled",
-                        gameScreen.getEnemiesKilled());
+                gameScreen.getEnemiesKilled());
         intent.putExtra("cashEarned",
-                        GameScreen.getCash());
+                GameScreen.getCash());
         intent.putExtra("roundsPlayed",
-                        gameScreen.getRoundCounter());
+                gameScreen.getRoundCounter());
         gameScreen.startActivity(intent);
     }
 }

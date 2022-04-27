@@ -1,6 +1,7 @@
 package com.teamthirty.buyhighselllow;
 
 import com.teamthirty.buyhighselllow.Utilities.Util;
+
 import org.junit.Assert;
 import org.junit.Test;
 

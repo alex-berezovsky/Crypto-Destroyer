@@ -1,16 +1,18 @@
 package com.teamthirty.buyhighselllow;
 
+import static org.junit.Assert.assertEquals;
+
 import androidx.core.util.Pair;
+
 import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
 import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class TowerTests {
 
@@ -197,7 +199,7 @@ public class TowerTests {
     @Test
     public void redditDudeDamage() {
         BitCoin coin = new BitCoin();
-        RedditDude redditDude = new RedditDude(new Pair<>(0,0));
+        RedditDude redditDude = new RedditDude(new Pair<>(0, 0));
         coin.takeDamage(redditDude.getDamage());
         Assert.assertEquals(20, coin.getHealth());
     }
@@ -208,7 +210,7 @@ public class TowerTests {
     @Test
     public void tradingChadDamage() {
         BitCoin coin = new BitCoin();
-        TradingChad tradingChad = new TradingChad(new Pair<>(0,0));
+        TradingChad tradingChad = new TradingChad(new Pair<>(0, 0));
         coin.takeDamage(tradingChad.getDamage());
         Assert.assertEquals(10, coin.getHealth());
     }
@@ -218,7 +220,7 @@ public class TowerTests {
      */
     @Test
     public void redditLevelUpDamage() {
-        Pair<Integer, Integer> location = new Pair<>(0,0);
+        Pair<Integer, Integer> location = new Pair<>(0, 0);
         RedditDude dude = new RedditDude(location);
         DogeCoin doge = new DogeCoin();
 
@@ -233,7 +235,7 @@ public class TowerTests {
      */
     @Test
     public void tradingLevelUpDamage() {
-        Pair<Integer, Integer> location = new Pair<>(0,0);
+        Pair<Integer, Integer> location = new Pair<>(0, 0);
         TradingChad chad = new TradingChad(location);
         DogeCoin doge = new DogeCoin();
 

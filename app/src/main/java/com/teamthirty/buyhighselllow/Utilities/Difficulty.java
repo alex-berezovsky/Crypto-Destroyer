@@ -50,12 +50,12 @@ public enum Difficulty {
         }
     };
 
+    private static final int DEFAULT_CASH = 1000;
+    private static final int DEFAULT_MONUMENT_HEALTH = 100;
+
     public abstract double getMultiplier();
 
     public abstract int getCash();
 
     public abstract int getMonumentHealth();
-
-    private static final int DEFAULT_CASH = 1000;
-    private static final int DEFAULT_MONUMENT_HEALTH = 100;
 }

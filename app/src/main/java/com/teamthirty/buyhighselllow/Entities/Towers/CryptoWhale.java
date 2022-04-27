@@ -1,10 +1,12 @@
 package com.teamthirty.buyhighselllow.Entities.Towers;
 
 import androidx.core.util.Pair;
+
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 
 public class CryptoWhale extends Tower {
     private int damageAdder;
+
     /**
      * Creates a new CryptoWhale Tower
      *
@@ -64,6 +66,7 @@ public class CryptoWhale extends Tower {
 
     /**
      * Returns damage adder
+     *
      * @return damage adder
      */
     public int getDamageAdder() {

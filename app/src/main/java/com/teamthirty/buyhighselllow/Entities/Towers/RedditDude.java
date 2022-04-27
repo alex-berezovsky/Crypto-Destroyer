@@ -1,6 +1,7 @@
 package com.teamthirty.buyhighselllow.Entities.Towers;
 
 import androidx.core.util.Pair;
+
 import com.teamthirty.buyhighselllow.Entities.Projectile.Projectile;
 
 public class RedditDude extends Tower {

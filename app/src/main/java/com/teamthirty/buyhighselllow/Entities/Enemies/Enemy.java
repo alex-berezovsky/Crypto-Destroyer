@@ -12,6 +12,7 @@ public class Enemy {
     protected boolean delete = false;
     protected boolean isDamaged = false;
     protected int maxHealth;
+    protected int color;
 
     public int getMaxHealth() {
         return maxHealth;
@@ -24,9 +25,6 @@ public class Enemy {
     public void setColor(int color) {
         this.color = color;
     }
-
-    protected int color;
-
 
     public boolean isDamaged() {
         return isDamaged;
@@ -42,12 +40,12 @@ public class Enemy {
         return position == path.get(path.size() - 1);
     }
 
-    public void setPosition(Pair<Integer, Integer> position) {
-        this.position = position;
-    }
-
     public Pair<Integer, Integer> getPosition() {
         return position;
+    }
+
+    public void setPosition(Pair<Integer, Integer> position) {
+        this.position = position;
     }
 
     public int getHealth() {

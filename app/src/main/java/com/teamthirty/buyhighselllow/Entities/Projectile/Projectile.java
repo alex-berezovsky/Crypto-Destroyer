@@ -3,9 +3,9 @@ package com.teamthirty.buyhighselllow.Entities.Projectile;
 import androidx.core.util.Pair;
 
 public class Projectile {
+    protected final int speed = 20;
     protected Pair<Integer, Integer> position;
     protected int damage;
-    protected final int speed = 20;
 
     /**
      * Constructor for a projectile

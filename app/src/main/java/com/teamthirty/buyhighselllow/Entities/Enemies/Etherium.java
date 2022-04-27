@@ -1,6 +1,7 @@
 package com.teamthirty.buyhighselllow.Entities.Enemies;
 
 import android.graphics.Color;
+
 import androidx.core.util.Pair;
 
 public class Etherium extends Enemy {

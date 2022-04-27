@@ -1,52 +1,57 @@
 package com.teamthirty.buyhighselllow;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import android.graphics.Color;
+
 import androidx.core.util.Pair;
+
 import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.ElonMusk;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
-import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
-import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
-import com.teamthirty.buyhighselllow.Systems.GameController;
-import org.junit.Assert;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class TowerCombatTests {
     /**
      * Tests that BitCoin takes damage properly
      */
     @Test
-    public void BitCoinDamage() {
+    public void bitCoinDamage() {
         BitCoin bitCoin = new BitCoin();
         bitCoin.takeDamage(5);
         assertEquals(bitCoin.getHealth(), 25);
     }
+
     /**
      * Tests that DogeCoin takes damage properly
      */
     @Test
-    public void DogeCoinDamage() {
+    public void dogeCoinDamage() {
         DogeCoin dogeCoin = new DogeCoin();
         dogeCoin.takeDamage(5);
         assertEquals(dogeCoin.getHealth(), 5);
     }
+
     /**
      * Tests that Ethereum takes damage properly
      */
     @Test
-    public void EthereumDamage() {
+    public void ethereumDamage() {
         Etherium etherium = new Etherium();
         etherium.takeDamage(5);
         assertEquals(etherium.getHealth(), 15);
     }
+
     /**
      * Tests that upon taking non-lethal damage, an enemy will not be flagged for deletion
      */
     @Test
-    public void EnemyNotDelete() {
+    public void enemyNotDelete() {
 
         Pair<Integer, Integer> location = new Pair<>(4, 4);
         RedditDude redditDude = new RedditDude(location);
@@ -66,7 +71,7 @@ public class TowerCombatTests {
      * Tests that upon taking lethal damage, an enemy will be flagged for deletion
      */
     @Test
-    public void EnemyDelete() {
+    public void enemyDelete() {
 
         Pair<Integer, Integer> location = new Pair<>(4, 4);
         RedditDude redditDude = new RedditDude(location);
@@ -83,8 +88,8 @@ public class TowerCombatTests {
      * Tests that checks for negative damage to an enemy, which is not intended and will result
      * in an unkillable enemy
      */
-    @Test (expected = RuntimeException.class)
-    public void EnemyTakeDamageNegative() {
+    @Test(expected = RuntimeException.class)
+    public void enemyTakeDamageNegative() {
 
         DogeCoin dogeCoin = new DogeCoin();
         dogeCoin.takeDamage(-5);
@@ -96,7 +101,7 @@ public class TowerCombatTests {
      * game will end.
      */
     @Test
-    public void BossTakeDamageKilled() {
+    public void bossTakeDamageKilled() {
 
         ElonMusk elonMusk = new ElonMusk(Color.WHITE);
 
@@ -111,7 +116,7 @@ public class TowerCombatTests {
      * which ensures that the game will NOT end until the boss is dead.
      */
     @Test
-    public void BossTakeDamageNotKilled() {
+    public void bossTakeDamageNotKilled() {
 
         ElonMusk elonMusk = new ElonMusk(Color.WHITE);
 

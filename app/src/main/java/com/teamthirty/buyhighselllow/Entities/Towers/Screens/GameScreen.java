@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
+
 import com.teamthirty.buyhighselllow.Entities.Enemies.Enemy;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
@@ -23,29 +25,38 @@ import com.teamthirty.buyhighselllow.Utilities.Util;
 import java.util.ArrayList;
 
 public class GameScreen extends AppCompatActivity implements View.OnClickListener {
+    private static Button[][] mapArray;
+    private static ArrayList<Enemy> spawnedList = new ArrayList<>();
+    private static int cash = 0;
+    private static ArrayList<Tower> towerList;
     private final GameController gameController = new GameController(this);
     private ArrayList<Pair<Integer, Integer>> path;
-    private static Button[][] mapArray;
     private TowerType towerType;
     private PlayerSystem playerSystem;
     private int roundCounter = 1;
     private ArrayList<Enemy> unspawnedList = new ArrayList<>();
-    private static ArrayList<Enemy> spawnedList = new ArrayList<>();
-    private static int cash = 0;
     private int monumentHealth = 0;
     private TextView monumentHealthText;
     private TextView roundCounterText;
     private TextView playerCashText;
     private Boolean hasNotFinished = true;
-
     private int enemiesKilled = 0;
 
     public static ArrayList<Tower> getTowerList() {
         return towerList;
     }
 
-    private static ArrayList<Tower> towerList;
+    public static ArrayList<Enemy> getSpawnedList() {
+        return spawnedList;
+    }
 
+    public static int getCash() {
+        return cash;
+    }
+
+    public static void setCash(int cashnew) {
+        cash = cashnew;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,24 +126,24 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
             Util.displayError(this, "Cannot place tower on path!");
         } else {
             if (towerType == null && ((ColorDrawable) mapArray[row][column].getBackground())
-                .getColor() == (Color.GREEN)) {
+                    .getColor() == (Color.GREEN)) {
                 Util.displayError(this, "Select a tower type to place!");
             } else if (towerType == null && ((ColorDrawable) mapArray[row][column].getBackground())
-                .getColor() != (Color.GREEN)) {
-                for (Tower tower: towerList) {
+                    .getColor() != (Color.GREEN)) {
+                for (Tower tower : towerList) {
                     if (tower.getPosition().first == row && tower.getPosition().second == column) {
                         if (tower.getUpgradeCost() <= cash) {
                             System.out.println(tower.getUpgradeCost());
                             cash -= tower.getUpgradeCost();
                             System.out.println(cash);
                             Util.setText(GameScreen.this, playerCashText, "Player Cash: "
-                                + cash);
+                                    + cash);
                             tower.levelUp();
                             Util.displayError(this, "Tower leveled up!");
 
                             float[] hsv = new float[3];
                             Color.colorToHSV(((ColorDrawable) mapArray[row][column].getBackground())
-                                                 .getColor(), hsv);
+                                    .getColor(), hsv);
                             hsv[2] = (float) (hsv[2] * .9);
                             mapArray[row][column].setBackgroundColor(Color.HSVToColor(hsv));
                         } else {
@@ -142,7 +153,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                 }
             } else {
                 if (((ColorDrawable) mapArray[row][column].getBackground()).getColor()
-                    != (Color.GREEN)) {
+                        != (Color.GREEN)) {
                     Util.displayError(this, "Cannot place tower on top of another tower!");
                 } else {
                     Tower tower = null;
@@ -164,11 +175,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-
-    public static ArrayList<Enemy> getSpawnedList() {
-        return spawnedList;
-    }
-
     public TextView getRoundCounterText() {
         return roundCounterText;
     }
@@ -177,20 +183,41 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         return hasNotFinished;
     }
 
+    public void setHasNotFinished(Boolean hasNotFinished) {
+        this.hasNotFinished = hasNotFinished;
+    }
+
     public int getMonumentHealth() {
         return monumentHealth;
+    }
+
+    public void setMonumentHealth(int monumentHealth) {
+        this.monumentHealth = monumentHealth;
     }
 
     public int getRoundCounter() {
         return roundCounter;
     }
 
+    public void setRoundCounter(int roundCounter) {
+        this.roundCounter = roundCounter;
+    }
+
     public ArrayList<Pair<Integer, Integer>> getPath() {
         return path;
     }
 
+    public void setPath(
+            ArrayList<Pair<Integer, Integer>> path) {
+        this.path = path;
+    }
+
     public Button[][] getMapArray() {
         return mapArray;
+    }
+
+    public void setMapArray(Button[][] mapArray) {
+        this.mapArray = mapArray;
     }
 
     public TextView getMonumentHealthText() {
@@ -207,35 +234,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
     public void setTowerType(TowerType towerType) {
         this.towerType = towerType;
-    }
-
-    public void setHasNotFinished(Boolean hasNotFinished) {
-        this.hasNotFinished = hasNotFinished;
-    }
-
-    public static void setCash(int cashnew) {
-        cash = cashnew;
-    }
-
-    public static int getCash() {
-        return cash;
-    }
-
-    public void setMonumentHealth(int monumentHealth) {
-        this.monumentHealth = monumentHealth;
-    }
-
-    public void setRoundCounter(int roundCounter) {
-        this.roundCounter = roundCounter;
-    }
-
-    public void setPath(
-        ArrayList<Pair<Integer, Integer>> path) {
-        this.path = path;
-    }
-
-    public void setMapArray(Button[][] mapArray) {
-        this.mapArray = mapArray;
     }
 
     public PlayerSystem getPlayerSystem() {

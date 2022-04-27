@@ -2,8 +2,8 @@ package com.teamthirty.buyhighselllow;
 
 import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Towers.Screens.GameScreen;
-import com.teamthirty.buyhighselllow.Systems.GameController;
 import com.teamthirty.buyhighselllow.Utilities.Difficulty;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -23,8 +23,8 @@ public class GameTests {
         GameScreen gameScreen = new GameScreen();
 
         Method setDifficultyMethod =
-            GameScreen.class.getDeclaredMethod("setDifficulty",
-                                               Difficulty.class);
+                GameScreen.class.getDeclaredMethod("setDifficulty",
+                        Difficulty.class);
         setDifficultyMethod.setAccessible(true);
 
         Field cashField = GameScreen.class.getDeclaredField("cash");
@@ -45,12 +45,14 @@ public class GameTests {
         Assert.assertEquals(600, (int) cashField.get(gameScreen));
         Assert.assertEquals(60, (int) monumentHealthField.get(gameScreen));
     }
+
     @Test
     public void addUnspawnedListTest() {
         GameScreen gameScreen = new GameScreen();
         gameScreen.getUnspawnedList().add(new BitCoin());
         Assert.assertTrue(gameScreen.getUnspawnedList().get(0) instanceof BitCoin);
     }
+
     @Test
     public void addSpawnedListTest() {
         GameScreen gameScreen = new GameScreen();

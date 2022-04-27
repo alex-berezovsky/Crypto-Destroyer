@@ -1,11 +1,14 @@
 package com.teamthirty.buyhighselllow;
 
-import androidx.core.util.Pair;
 import android.graphics.Color;
+
+import androidx.core.util.Pair;
+
 import com.teamthirty.buyhighselllow.Entities.Enemies.BitCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.DogeCoin;
 import com.teamthirty.buyhighselllow.Entities.Enemies.ElonMusk;
 import com.teamthirty.buyhighselllow.Entities.Enemies.Etherium;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -61,7 +64,6 @@ public class EnemyTests {
     }
 
 
-
     /**
      * M4 Test that checks if the enemy is correctly moved forward by one grid unit along the path
      */
@@ -80,7 +82,7 @@ public class EnemyTests {
         path.add(new Pair<>(null, null));
 
         Etherium coin = new Etherium();
-        coin.setPosition(new Pair<>(3,0));
+        coin.setPosition(new Pair<>(3, 0));
         coin.updatePosition(path);
         Assert.assertEquals(coin.getPosition().first, new Integer(3));
         Assert.assertEquals(coin.getPosition().second, new Integer(1));
@@ -104,7 +106,7 @@ public class EnemyTests {
         path.add(new Pair<>(null, null));
 
         Etherium coin = new Etherium();
-        coin.setPosition(new Pair<>(3,8));
+        coin.setPosition(new Pair<>(3, 8));
         Assert.assertTrue(coin.updatePosition(path));
     }
 

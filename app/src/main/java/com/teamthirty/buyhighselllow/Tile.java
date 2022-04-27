@@ -1,6 +1,7 @@
 package com.teamthirty.buyhighselllow;
 
 import android.graphics.Rect;
+
 import androidx.core.util.Pair;
 
 public class Tile {

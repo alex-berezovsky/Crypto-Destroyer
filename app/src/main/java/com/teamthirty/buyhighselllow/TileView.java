@@ -1,16 +1,17 @@
 package com.teamthirty.buyhighselllow;
 
 import android.graphics.Rect;
+
 import androidx.core.util.Pair;
 
 import java.util.HashMap;
 
 public class TileView {
 
-    private int tileWidth;
-    private int tileHeight;
     private final int rows = 12;
     private final int columns = 12;
+    private int tileWidth;
+    private int tileHeight;
     private int tileCount;
     private Tile[][] tiles;
     private HashMap<Pair<Integer, Integer>, Integer> occupied;
