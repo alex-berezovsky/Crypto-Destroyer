@@ -5,6 +5,8 @@ import androidx.core.util.Pair;
 import com.teamthirty.buyhighselllow.Entities.Enemies.ElonMusk;
 import com.teamthirty.buyhighselllow.Entities.Towers.CryptoWhale;
 import com.teamthirty.buyhighselllow.Entities.Towers.RedditDude;
+import com.teamthirty.buyhighselllow.Entities.Towers.TradingChad;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -48,4 +50,27 @@ public class UpgradeTests {
         assertEquals(1000, redditDude.getUpgradeCost());
 
     }
+
+    /**
+     * M6 test for increasing the price of a CryptoWhale object
+     */
+    @Test
+    public void tradingChadUpgradeCostIncrease() {
+        TradingChad tradingChad = new TradingChad(new Pair<>(0, 0));
+        assertEquals(250, tradingChad.getUpgradeCost());
+        tradingChad.levelUp();
+        assertEquals(1250, tradingChad.getUpgradeCost());
+    }
+
+    /**
+     * M6 test for increasing the price of a CryptoWhale object
+     */
+    @Test
+    public void cryptoWhaleUpgradeCostIncrease() {
+        CryptoWhale cryptoWhale = new CryptoWhale(new Pair<>(0, 0));
+        assertEquals(450, cryptoWhale.getUpgradeCost());
+        cryptoWhale.levelUp();
+        assertEquals(5400, cryptoWhale.getUpgradeCost());
+    }
+
 }
